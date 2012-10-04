@@ -1,10 +1,10 @@
 <?php
 /*
- * File name:user.php
+ * File name:term_taxonomy.php
  * Create by HungPV
  * Create date: 04/10/2012
  */
-class User extends DataMapper {
+class Term_taxonomy extends DataMapper {
  
     public function __construct()
     {

@@ -1,10 +1,10 @@
 <?php
 /*
- * File name:user.php
+ * File name:link.php
  * Create by HungPV
  * Create date: 04/10/2012
  */
-class User extends DataMapper {
+class Link extends DataMapper {
  
     public function __construct()
     {
