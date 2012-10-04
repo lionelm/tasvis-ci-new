@@ -20,7 +20,7 @@
         {         
             $user = new User();
             $data['lstUser'] = $user->get();
-            $this->load->view('view_demo', $data);        
+            $this->load->view('back_end/template', $data);        
         }   
     }
 ?>
