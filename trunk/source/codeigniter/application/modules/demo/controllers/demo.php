@@ -7,10 +7,8 @@
     class Demo extends MX_Controller
     {
         function __construct() {
-            parent::__construct();
-            $this->load->model('Student');
-            $this->load->model('Course');
-
+            parent::__construct();           
+            $this->load->model('User');
             // load url helper
             $this->load->helper('url');
 
@@ -20,23 +18,8 @@
         
         function index($offset=0)
         {         
-            $student_list = new Student();
-            $student = new Student();
-            $student->get_by_id(1);
-            $student->delete();
-            $total_rows = $student_list->count();
-
-            $student_list->order_by('name');            
-            $data['student_list'] = $student_list->get(5, $offset)->all;        
-
-            // pagination        
-
-            $config['base_url'] = site_url("demo/index/");
-            $config['total_rows'] = $total_rows;
-            $config['per_page'] = '5';
-            $config['uri_segment'] = 2;
-            $this->pagination->initialize($config);         
-
+            $user = new User();
+            $data['lstUser'] = $user->get();
             $this->load->view('view_demo', $data);        
         }   
     }
