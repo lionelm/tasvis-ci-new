@@ -20,6 +20,7 @@
         {         
             $user = new User();
             $data['lstUser'] = $user->get();
+            $data['view'] = 'back_end/content';
             $this->load->view('back_end/template', $data);        
         }   
     }
