@@ -63,5 +63,26 @@
         <?php $this->load->view('back_end/header');?>
     </div>
      <!-- END OF HEADER -->
+     
+    <!-- START OF MAIN CONTENT -->
+    <div class="mainwrapper">
+        <div class="mainwrapperinner">
+            <div class="mainleft">
+                <?php $this->load->view('back_end/left');?>
+            </div>
+            <div class="maincontent">
+                <div class="maincontentinner">
+                    <?php $this->load->view($view);?>
+                </div><!--maincontentinner-->       
+                <div class="footer">
+                    <?php $this->load->view('back_end/footer');?>
+                </div><!--footer-->
+            </div>
+            <div class="mainright">
+                <?php $this->load->view('back_end/right');?>
+            </div>
+        </div><!--mainwrapperinner-->
+    </div><!--mainwrapper-->
+    <!-- END OF MAIN CONTENT -->
 </body>
 </html>
