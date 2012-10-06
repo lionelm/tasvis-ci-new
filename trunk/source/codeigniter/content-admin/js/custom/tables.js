@@ -72,7 +72,7 @@ jQuery(document).ready(function(){
 			var id = jQuery(this).attr('id');
 			var p_methor = jQuery(this).attr('name');
 			jQuery.post(url,{method:p_methor,param:id},function(data) {
-				//alert(data);				
+                            
 			});			
 			jQuery(this).parents('tr').fadeOut(function(){ 
 				jQuery(this).remove();
