@@ -3,7 +3,7 @@
 <html xmlns:fb="http://ogp.me/ns/fb#">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Bút Danh | Quản Trị</title>
+<title>Order - Online | Quản Trị</title>
 <link rel="stylesheet" href="<?php echo base_url();?>content-admin/css/style.css" type="text/css" />
 <!--[if IE 9]>
     <link rel="stylesheet" media="screen" href="<?php echo base_url();?>content-admin/css/ie9.css"/>
