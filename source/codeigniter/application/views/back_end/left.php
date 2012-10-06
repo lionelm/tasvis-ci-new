@@ -1,9 +1,15 @@
 <div class="mainleftinner">
             
 <div class="leftmenu">
-        <ul>
-        <li class="current"><a href="./dashboard.html" class="dashboard"><span>Dashboard</span></a></li>
-        <li><a href="./widgets.html" class="widgets"><span>Widgets</span></a></li>
+    <ul>
+        <li class="current"><a href="<?php echo base_url();?>admin/index" class="dashboard"><span>Dashboard</span></a></li>
+        <li><a href="./widgets.html" class="widgets menudrop"><span>Bài viết</span></a>
+            <ul>                
+                <li><a href="<?php echo base_url();?>"><span>Tất cả bài viết</span></a></li>     
+                <li><a href="<?php echo base_url();?>"><span>Thêm mới bài viết</span></a></li>
+                <li><a href="<?php echo base_url();?>"><span>Danh mục bài viết</span></a></li>
+            </ul>
+        </li>
         <li><a href="./tables.html" class="tables"><span>Tables</span></a></li>
         <li><a href="./elements.html" class="elements"><span>Elements</span></a></li>
         <li><a href="./charts.html" class="charts"><span>Graphs &amp; Charts</span></a></li>
