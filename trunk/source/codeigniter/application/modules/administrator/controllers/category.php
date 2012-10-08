@@ -9,8 +9,7 @@
         function __construct() {
             parent::__construct();           
             
-            $this->load->model('Term');
-            $this->load->model('Term_taxonomy');    
+               
             // load session library
             $this->load->library('pagination');  
         }

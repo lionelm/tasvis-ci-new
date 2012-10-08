@@ -4,7 +4,7 @@
  * Create by HungPV
  * Create date: 04/10/2012
  */
-class Term_relationship extends DataMapper {
+class Term_taxonomy_post extends DataMapper {
     
     public function __construct()
     {
