@@ -5,10 +5,23 @@ class Posts extends MX_Controller
     public function __construct() {
         parent::__construct();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $this->load->library('pagination');
     }
     
-    public function index()
-    {        
+    public function index($row=0)
+    {           
+        $lstPost = new Post();
+        
+        //paging
+        include('paging.php');
+        $config['per_page'] = 10;		
+        $config['base_url']= base_url()."/administrator/posts/index/";        
+        $config['total_rows']= $lstPost->where('post_type','post')->count();        
+        $config['cur_page']= $row;		
+        $this->pagination->initialize($config);
+        $data['list_link'] = $this->pagination->create_links();	
+        
+        $data['lstPost'] = $lstPost->where('post_type','post')->limit($config['per_page'], $row)->get();
         $data['view'] = 'post_index';
         $this->load->view('back_end/template_noright',$data);
     }
@@ -41,6 +54,7 @@ class Posts extends MX_Controller
                 $post_meta->meta_key = 'featured_image';
                 $post_meta->meta_value = $l_featured_image;
                 $post_meta->save($post);
+                redirect('administrator/posts');
                 
             }
         }
@@ -52,6 +66,30 @@ class Posts extends MX_Controller
         }        
     }
     
+    function delete()
+    {
+        $id = $this->input->post('param');
+        $post = new Post();
+        $post_meta = new Postmeta();
+        
+        $post->where('id',$id)->get();        
+        $post_meta->where('post_id',$id)->get();
+        
+        $post_meta->delete_all($post);
+        $post->delete();
+    }
+
+    function edit($id)
+    {
+        $post = new Post();
+        $postmeta = new Postmeta();
+        $post->where_join_field('postmeta','meta_key','featured_image')->get_by_id($id);
+        echo $post->post_title;
+        $data['view'] = 'post_edit';
+        $this->load->view('back_end/template_noright',$data);
+    }
+
+
     public function excuteTerm()
     {
         $term_taxonomy = new Term_taxonomy();
