@@ -1180,7 +1180,14 @@ a.btn_table { background-position: -82px -480px; }
 .theme a.gray { background: #ccc; }
 p.linkadd{text-align:right;margin-top:10px;}
 .thembutdanh{text-align:right;}
-.thembutdanh p{margin:5px; 0px;}
+.thembutdanh p{margin:5px 0px;}
 #alert_link{ display: none;}
 .error_link{ color: red;}
 .standard_link{color: blue;}
+.message-box{ background: url("../images/notifications.png") no-repeat scroll 0 -58px #FFE9AD !important;height: 38px !important;margin-right: 10px;}
+.message-box p {margin: 10px 10px 0 75px !important;}
+#message-check .loaders{display: none;}
+#message-check .message-box{display: none;}
+.message-success{ background: url("../images/notifications.png") no-repeat scroll 0 -110px #EFFEB9 !important;height: 38px !important;margin-right: 10px;}
+.message-success p {margin: 10px 10px 0 75px !important;}
+#message-check .message-success{display: none;}

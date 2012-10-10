@@ -9,7 +9,7 @@
         function __construct() {
             parent::__construct();           
             
-               
+            
             // load session library
             $this->load->library('pagination');  
         }
@@ -40,7 +40,9 @@
             }
             
             $lstTerms = new Term();           
-            $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))->get();            
+            $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
+                                            ->where_in_join_field('term_taxonomy','taxonomy','category')
+                                            ->get();            
             
             $data['view'] = 'category_index';
             $this->load->view('back_end/template_noright',$data);
@@ -88,7 +90,9 @@
                 $data['term'] = $term;
                
                 $lstTerms = new Term();           
-                $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))->get();            
+                $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description')) 
+                        ->where_in_join_field('term_taxonomy','taxonomy','category')
+                        ->get();            
                 //$this->load->vars($data);
                 $data['view'] = 'category_edit';
                 $this->load->view('back_end/template_noright',$data);
