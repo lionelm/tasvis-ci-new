@@ -12,8 +12,35 @@
             <p><span class="field"><input name="txttitle" value="<?php echo $term->term_name;?>" id="txttitle" class="longinput validate[required]" type="text"></span></p>
             <br>
             <p><label>Đường dẫn:</label></p>
-            <p><span class="field"><input class="longinput validate[required]" value="<?php echo $term->term_slug;?>" name="txtslug" type="text"></span></p>
+            <p><span class="field"><input id="txtslug" urlload="<?php echo base_url();?>administrator/tags/checkSlugAjax" onkeyup="checkslug(this.value);" class="longinput validate[required]" value="<?php echo $term->term_slug;?>" name="txtslug" type="text"></span></p>
             <br>
+            <div id="message-check">
+                <input type="hidden" id="hdfCheckSlug" value="" >
+                <input type="hidden" id="hdfOldSlug" value="<?php echo $term->term_slug;?>">
+                <div class="loaders">
+                    <img alt="Loading..." src="<?php echo base_url();?>content-admin/images/loaders/loader4.gif">
+                    <span>Đang kiểm tra đường dẫn ...</span>
+                </div>
+                <div class="notification msgsuccess message-success">
+                    <a class="close"></a>
+                    <p>Bạn có thể sử dụng đường dẫn này.</p>
+                </div>
+                <div class="notification msgalert message-box">
+                    <a class="close"></a>
+                    <p>Đường dẫn đã tồn tại.</p>
+                </div>
+                <?php 
+                    if($this->session->flashdata('message')== 'loi')
+                    {
+                ?>
+                <div class="notification msgalert">
+                    <a class="close"></a>
+                    <p>Đường dẫn đã tồn tại.</p>
+                </div>
+                <?php
+                    }
+                ?>
+            </div>
             <p><label>Mô tả:</label></p>                            
             <p><span class="field"><textarea name="txtexcerpt"><?php echo $term->description;?></textarea></span></p>
             <br>            

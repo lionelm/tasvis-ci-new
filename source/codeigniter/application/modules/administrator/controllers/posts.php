@@ -6,6 +6,7 @@ class Posts extends MX_Controller
         parent::__construct();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->load->library('pagination');
+        $this->load->model('Common_model');
     }
     
     public function index($row=0)
@@ -35,14 +36,17 @@ class Posts extends MX_Controller
             $l_content = $this->input->post('txtcontent');	
             $l_arr_categories = $this->input->post('cbcategory');
             $l_featured_image = $this->input->post('hdffeatured_image');            
-            
+            $post_status = $this->input->post('ddlTrangThai');
+            $slug = $this->Common_model->makeSlugs($l_title,255);
+            $slug = $this->generateSlug($slug);
             $post = new Post();
             $post->post_date = date('Y-m-d H-i-s');
             $post->post_content = $l_content;
             $post->post_title = $l_title;
             $post->post_excerpt = $l_exerpt;
             $post->post_type = 'post';
-            
+            $post->post_status = $post_status;
+            $post->guid = $slug;
             //add term_taxonomy_post
             $term_taxonomy = new Term_taxonomy();
             $term_taxonomy->where_in('term_id',$l_arr_categories)->get();
@@ -144,7 +148,9 @@ class Posts extends MX_Controller
     public function excuteTerm()
     {
         $term_taxonomy = new Term_taxonomy();
-        $term_taxonomy->where('parent_term',0)->get();
+        $term_taxonomy->where('parent_term',0)
+                        ->where('taxonomy', 'category')
+                        ->get();
         $lstTerm = new SplObjectStorage();
         foreach ($term_taxonomy as $tt)
         {
@@ -165,6 +171,47 @@ class Posts extends MX_Controller
             
         }
         return $lstTerm;
+    }
+    
+    function checkSlug($slug)
+    {
+        $post = new Post();           
+        $check = $post->where('guid', $slug)->count();  
+        if($check>0)
+        {
+            return TRUE;
+        }
+        else{
+            return FALSE;
+        }
+    }
+
+    function checkSlugAjax()
+    {
+        $slug = $this->input->post('slug');
+        if($this->checkSlug($slug))
+        {
+            echo "exist";
+        }
+        else {
+            echo "not exist";
+        }
+    }
+
+
+    function generateSlug($slug)
+    {
+        if ($this->checkSlug($slug)==false)
+        {
+            return $slug;
+        }
+        $i = 0;
+        while (1)
+        {	
+            $i++;
+            $link_temp = $slug.'-'.$i;
+            if ($this->checkSlug($link_temp)==false) return $link_temp;
+        }
     }
 }
 ?>

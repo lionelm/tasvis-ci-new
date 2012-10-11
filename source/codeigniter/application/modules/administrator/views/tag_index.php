@@ -14,6 +14,7 @@
             <br>            
             <div id="message-check">
                 <input type="hidden" id="hdfCheckSlug" value="" >
+                <input type="hidden" id="hdfOldSlug" value="">
                 <div class="loaders">
                     <img alt="Loading..." src="<?php echo base_url();?>content-admin/images/loaders/loader4.gif">
                     <span>Đang kiểm tra đường dẫn ...</span>
