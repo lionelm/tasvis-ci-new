@@ -15,12 +15,24 @@
             <p><label>Nội dung:</label></p>                            
             <p><textarea name="txtcontent" id="editor_content" class="validate[required]"></textarea></p>            
             </br>
+            
         </div>
         <div class="edit-right">
             <div class="widgetbox">
                 <div class="title"><h2 class="general"><span>Xuất bản</span></h2></div>
                 <div class="widgetcontent" style="display: block;">
-
+                    <p class="status-ddl">
+                        Trạng thái:
+                        <select name="ddlTrangThai">
+                            <option value="publish">Publish</option>
+                            <option value="draft">Draft</option>
+                            <option value="pending">Pending</option>
+                        </select>                         
+                    </p>
+                    <p class="status-ddl">
+                        Thời gian xuất bản:
+                        <input type="text" id="txtDatePublish" name="txtDatePublish">
+                    </p>
                     <p class="stdformbutton">
                         <button class="submit radius2">Xuất bản</button>
                         <input type="reset" value="Hủy" class="reset radius2">
