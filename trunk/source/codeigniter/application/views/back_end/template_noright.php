@@ -5,6 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Order - Online | Quản Trị</title>
 <link rel="stylesheet" href="<?php echo base_url();?>content-admin/css/style.css" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url();?>content-admin/css/jquery-ui.css" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url();?>content-admin/css/jquery-ui-timepicker-addon.css" type="text/css" />
 <!--[if IE 9]>
     <link rel="stylesheet" media="screen" href="<?php echo base_url();?>content-admin/css/ie9.css"/>
 <![endif]-->
@@ -18,7 +20,11 @@
 <![endif]-->
 <script type="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-1.2.1.pack.js"></script>
 
-<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-ui-sliderAccess.js"></script>
+
 <link rel="stylesheet" media="screen" href="<?php echo base_url();?>content-admin/css/validationEngine.jquery.css"/>
 
 <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery.validationEngine-vi.js"></script>
@@ -53,6 +59,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/tables.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/dashboard.js"></script>
+
 <!--[if lt IE 9]>
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
