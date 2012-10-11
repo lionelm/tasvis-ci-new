@@ -17,13 +17,15 @@ jQuery(document).ready(function(){
 			width:950,
 			centerScreen:1
 	});
-	jQuery("#txtDatePublish").datetimepicker(
-            { 
-                addSliderAccess: true,
-                dateFormat: 'dd/mm/yy' ,
-                timeFormat: 'h:m:s'                
-            }
-        );
+        if(jQuery("#txtDatePublish").length>0){
+            jQuery("#txtDatePublish").datetimepicker(
+                { 
+                    dateFormat: 'dd/mm/yy',
+                    timeFormat: 'hh:mm',
+                    separator: ' '               
+                }
+            );
+        }
 	//search box of header
 	jQuery('#keyword').bind('focusin focusout', function(e){
 		var t = jQuery(this);
