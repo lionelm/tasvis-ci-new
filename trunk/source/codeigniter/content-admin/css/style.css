@@ -1191,3 +1191,6 @@ p.linkadd{text-align:right;margin-top:10px;}
 .message-success{ background: url("../images/notifications.png") no-repeat scroll 0 -110px #EFFEB9 !important;height: 38px !important;margin-right: 10px;}
 .message-success p {margin: 10px 10px 0 75px !important;}
 #message-check .message-success{display: none;}
+p.status-ddl{margin: 5px;}
+p.status-ddl select{width: 77%;}
+#txtDatePublish{width: 56%;}

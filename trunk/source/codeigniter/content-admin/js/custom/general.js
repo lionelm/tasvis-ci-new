@@ -17,27 +17,13 @@ jQuery(document).ready(function(){
 			width:950,
 			centerScreen:1
 	});
-	//Add butdanh ajax
-	jQuery('#btn_add_butdanh_ajax').click(function(){
-		var ten_but_danh = jQuery('#txtbutdanh').val();		
-		var magazine = jQuery('#slmagazine').val();
-		var url = jQuery('#hd_url_ajax_add_butdanh').val();
-		var display_name = jQuery('#txtLinhVuc').val();
-		//alert(url);
-		
-		jQuery.post(url,{txtnicename:ten_but_danh,slmagazine:magazine,display_name:display_name},function(data) {
-			jQuery('#author_load_ajax').html(data);
-			
-		});
-		jQuery('#inputString').val(ten_but_danh);
-		jQuery('.thembutdanh').hide('slow');
-		return false;
-	});
-	//link add
-	jQuery('#link-add').click(function(){
-		jQuery('.thembutdanh').show('slow');
-		return false;
-	});
+	jQuery("#txtDatePublish").datetimepicker(
+            { 
+                addSliderAccess: true,
+                dateFormat: 'dd/mm/yy' ,
+                timeFormat: 'h:m:s'                
+            }
+        );
 	//search box of header
 	jQuery('#keyword').bind('focusin focusout', function(e){
 		var t = jQuery(this);
@@ -374,26 +360,23 @@ jQuery(document).ready(function(){
 	
 });
 
+
 function checkslug(inputString)
 {
     jQuery("#message-check .loaders").css('display','inline');
     var slug = jQuery("#txtslug").attr('value');
     var url = jQuery("#txtslug").attr('urlload');    
-    
-    jQuery.post(url,{slug:slug},function(data) {
-        if(data == "exist")
-        {
-            //jQuery("#message-check .message-success").css('display','none');
-            jQuery("#message-check .message-box").css('display','list-item');
-            //jQuery("#hdfCheckSlug").val() = "false";
-            
-        }
-        else{
-            jQuery("#message-check .message-box").css('display','none');
-            //jQuery("#message-check .message-success").css('display','list-item');
-            //jQuery("#hdfCheckSlug").val() = "true";
-        }
-    });   
-    
+    var oldslug = jQuery("#hdfOldSlug").attr('value');
+    if(slug!=oldslug){
+        jQuery.post(url,{slug:slug},function(data) {
+            if(data == "exist")
+            {            
+                jQuery("#message-check .message-box").css('display','list-item');                        
+            }
+            else{
+                jQuery("#message-check .message-box").css('display','none');            
+            }
+        });   
+    }
     jQuery("#message-check .loaders").css('display','none');
 }
