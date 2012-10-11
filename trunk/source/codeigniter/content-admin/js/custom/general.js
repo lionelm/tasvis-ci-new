@@ -10,24 +10,29 @@ jQuery(document).ready(function(){
 	
 	
 	//Brow server image upload	
-	/*jQuery('#imageUpload').popupWindow({ 
+	jQuery('#imageUpload').popupWindow({ 
 			windowURL:'/codeigniter/elfinder/standalone-elfinder.php?mode=image', 
 			windowName:'Filebrowser',
 			height:490, 
 			width:950,
 			centerScreen:1
-	});*/
+	});
 	
 	if(jQuery(".datetimepicker").length>0){
 		//alert("fadfsdaf");
 		jQuery(".datetimepicker").datetimepicker(
 			{ 
-				dateFormat: 'dd/mm/yy',
-				timeFormat: 'hh:mm',
-				separator: ' '               
+                            dateFormat: 'dd/mm/yy',
+                            timeFormat: 'hh:mm',
+                            separator: ' '               
 			}
 		);
 	}
+        jQuery("#addTagLink").click(function(){
+            jQuery("#tag-list").toggle('slow');
+            return false;
+        });
+        
 	//search box of header
 	jQuery('#keyword').bind('focusin focusout', function(e){
 		var t = jQuery(this);

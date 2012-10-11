@@ -31,7 +31,7 @@
                     </p>
                     <p class="status-ddl">
                         Thời gian xuất bản:
-                        <input type="text" id="txtDatePublish" name="txtDatePublish">
+                        <input type="text" id="txtDatePublish" class="datetimepicker" name="txtDatePublish">
                     </p>
                     <p class="stdformbutton">
                         <button class="submit radius2">Xuất bản</button>
@@ -51,7 +51,26 @@
                     <?php }?>
                 </div>
             </div>
-
+            <div class="widgetbox">
+                <div class="title"><h2 class="general"><span>Tags</span></h2></div>
+                <div class="widgetcontent" style="display: block;">
+                    <input type="text" id="txtTag" name="txtTag">
+                    <button id="btnAddTag" class="submit radius2" >Add tag</button>
+                    <div>
+                        Danh sách tag đã chọn:
+                    </div>
+                    <div class="choose-tag">
+                        <a href="" id="addTagLink">Chọn trong danh sách tag phổ biến</a>
+                        <div id="tag-list">
+                            <a class="tag-link-18" style="font-size: 8pt;" title="1 topic" href="#">bảng giá email hosting</a>
+                            <a class="tag-link-16" style="font-size: 8pt;" title="1 topic" href="#">bảng giá hosting</a>
+                            <a class="tag-link-17" style="font-size: 8pt;" title="1 topic" href="#">email hosting</a>
+                            <a class="tag-link-12" style="font-size: 8pt;" title="1 topic" href="#">giám sát thiết kế website</a>
+                            <a class="tag-link-11" style="font-size: 8pt;" title="1 topic" href="#">tư vấn thiết kế website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="widgetbox">
                 <div class="title"><h2 class="general"><span>Ảnh đại diện</span></h2></div>
                 <div class="widgetcontent" style="display: block;">
