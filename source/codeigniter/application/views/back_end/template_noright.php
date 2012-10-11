@@ -21,9 +21,9 @@
 <script type="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-1.2.1.pack.js"></script>
 
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery.ui.core.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/ui.datetimepicker.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-ui-sliderAccess.js"></script>
 
 <link rel="stylesheet" media="screen" href="<?php echo base_url();?>content-admin/css/validationEngine.jquery.css"/>
 
