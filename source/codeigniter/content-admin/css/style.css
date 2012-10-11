@@ -1194,3 +1194,6 @@ p.linkadd{text-align:right;margin-top:10px;}
 p.status-ddl{margin: 5px;}
 p.status-ddl select{width: 77%;}
 #txtDatePublish{width: 56%;}
+.widgetcontent #txtTag{width: 65%;}
+.choose-tag a#addTagLink{text-decoration: underline;}
+#tag-list{-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;border-color: #CCCCCC;border-style: solid;border-width: 1px;line-height: 1.8em;margin: 5px 0 10px;padding: 8px;word-spacing: 3px;display: none;}
