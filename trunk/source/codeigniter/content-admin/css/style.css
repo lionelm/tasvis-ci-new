@@ -1202,3 +1202,9 @@ p.status-ddl select{width: 77%;}
 .tagchecklist span a, #bulk-titles div a {background: url("../images/xit.gif") no-repeat scroll 0 0 transparent;}
 .tagchecklist span a {cursor: pointer;display: block;float: left;height: 10px;margin: 6px 0 0 -9px;overflow: hidden;position: absolute;text-indent: -9999px;width: 10px;}
 .tagchecklist span a:hover{background: url("../images/xit.gif") no-repeat scroll -10px 0 transparent;}
+.seo-packages{margin-right: 15px;}
+.seo-packages label{width: 100px; float: left;}
+.seo-packages .contenttitle{}
+.small-form{}
+.small-desc{margin: 5px 0 0 10px !important;display: inline !important;}
+.length-count{margin: 5px 0 5px 120px;}
