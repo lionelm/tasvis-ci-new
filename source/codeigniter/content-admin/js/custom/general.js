@@ -42,6 +42,8 @@ jQuery(document).ready(function(){
                 var content = "<span><a class='ntdelbutton' valuetag='"+id+"' id='tag-stt-"+id+"'>X</a>&nbsp;"+text+"</span>";
                 jQuery('.tagchecklist').append(content);
                 jQuery(this).addClass('added');
+                var lstTag = jQuery('#lstTagAdded').attr('value');               
+                jQuery('#lstTagAdded').val(lstTag+id+',');                
             }            
             return false;
         });
@@ -51,6 +53,10 @@ jQuery(document).ready(function(){
             var select = '#tag-num-'+id;
             jQuery(select).removeClass('added');
             jQuery(this).parent().remove();
+            
+            var lstTag = jQuery('#lstTagAdded').attr('value');               
+            lstTag = lstTag.replace(','+id+',',',');
+            jQuery('#lstTagAdded').val(lstTag);   
             return false;
 	});
         
@@ -58,11 +64,13 @@ jQuery(document).ready(function(){
             var name = jQuery('#txtTag').val();
             var url = jQuery(this).attr('urllink');
             jQuery.post(url,{name:name},function(data) {
-                if(data!='')
+                if(data.mess1!='')
                 {
-                    jQuery('.tagchecklist').append(data);
+                    jQuery('.tagchecklist').append(data.mess1);
+                    var lstTag = jQuery('#lstTagAdded').attr('value');               
+                    jQuery('#lstTagAdded').val(lstTag+data.mess2+',');  
                 }
-            });
+            },'json');
             return false;
         });
         
@@ -421,4 +429,16 @@ function checkslug(inputString)
         });   
     }
     jQuery("#message-check .loaders").css('display','none');
+}
+
+function countCharactor(inputString)
+{
+    var count = inputString.length;
+    jQuery('#txtlength').val(count);
+}
+
+function countCharactors(inputString)
+{
+    var count = inputString.length;
+    jQuery('#txtlength2').val(count);
 }
