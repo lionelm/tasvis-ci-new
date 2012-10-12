@@ -2,6 +2,7 @@
     <li><a href="<?php echo base_url();?>administrator/posts">Tất cả bài viết</a></li>
     <li class="current"><a href="<?php echo base_url();?>administrator/posts/add">Thêm mới bài viết</a></li>
     <li><a href="<?php echo base_url();?>administrator/category">Danh mục bài viết</a></li>    
+    <li><a href="<?php echo base_url();?>administrator/tags">Danh mục tag</a></li>
 </ul>
 <div class="content">                	
     <form method="post" action="<?php echo base_url();?>administrator/posts/add" class="stdform" id="formID">
@@ -55,18 +56,22 @@
                 <div class="title"><h2 class="general"><span>Tags</span></h2></div>
                 <div class="widgetcontent" style="display: block;">
                     <input type="text" id="txtTag" name="txtTag">
-                    <button id="btnAddTag" class="submit radius2" >Add tag</button>
+                    <button id="btnAddTag" urllink="<?php echo base_url();?>administrator/tags/addTagAjax" class="submit radius2" >Add tag</button>
                     <div>
                         Danh sách tag đã chọn:
+                        <div class="tagchecklist">
+                                                       
+                        </div>
                     </div>
                     <div class="choose-tag">
                         <a href="" id="addTagLink">Chọn trong danh sách tag phổ biến</a>
-                        <div id="tag-list">
-                            <a class="tag-link-18" style="font-size: 8pt;" title="1 topic" href="#">bảng giá email hosting</a>
-                            <a class="tag-link-16" style="font-size: 8pt;" title="1 topic" href="#">bảng giá hosting</a>
-                            <a class="tag-link-17" style="font-size: 8pt;" title="1 topic" href="#">email hosting</a>
-                            <a class="tag-link-12" style="font-size: 8pt;" title="1 topic" href="#">giám sát thiết kế website</a>
-                            <a class="tag-link-11" style="font-size: 8pt;" title="1 topic" href="#">tư vấn thiết kế website</a>
+                        <div id="tag-list" class="toggleshow">
+                            <?php 
+                                foreach ($lstTag as $tag)
+                                {
+                            ?>
+                            <a style="font-size: 8pt;" href="" class="link-tag" valuetag="<?php echo $tag->term_id;?>" id="tag-num-<?php echo $tag->term_id;?>"><?php echo $tag->name;?></a>
+                            <?php }?>                            
                         </div>
                     </div>
                 </div>

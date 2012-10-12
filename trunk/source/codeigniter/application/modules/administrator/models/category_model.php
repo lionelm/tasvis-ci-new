@@ -1,11 +1,11 @@
 <?php
     class Temp
-        {
-            public $id;
-            public $name;
-            public $description;
-            public $depth;
-        }
+    {
+        public $id;
+        public $name;
+        public $description;
+        public $depth;
+    }
     class Category_model extends CI_Model
     {
         function __construct() {

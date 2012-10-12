@@ -2,6 +2,7 @@
     <li><a href="<?php echo base_url();?>administrator/posts">Tất cả bài viết</a></li>
     <li class="current"><a href="<?php echo base_url();?>administrator/posts/add">Cập nhật bài viết</a></li>
     <li><a href="<?php echo base_url();?>administrator/category">Danh mục bài viết</a></li>    
+    <li><a href="<?php echo base_url();?>administrator/tags">Danh mục tag</a></li>
 </ul>
 <div class="content">                	
     <form method="post" action="<?php echo base_url();?>administrator/posts/edit/<?php echo $post->id;?>" class="stdform" id="formID">
