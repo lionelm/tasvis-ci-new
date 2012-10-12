@@ -150,6 +150,9 @@
             $term = new Term();
             $term->name = $name;
             $term->slug = $slug;
+            
+            $mess1 = '';
+            $mess2 = '';
             if($this->checkSlug($slug))
             {
                 echo "";
@@ -166,8 +169,9 @@
                     $term_taxonomy->description = $name;
 
                     $term_taxonomy->save($term);
-                    $content = "<span><a class='ntdelbutton' valuetag='".$term->id."' id='tag-stt-".$term->id."'>X</a>&nbsp;".$term->name."</span>";
-                    echo $content;
+                    $mess1 = "<span><a class='ntdelbutton' valuetag='".$term->id."' id='tag-stt-".$term->id."'>X</a>&nbsp;".$term->name."</span>";
+                    
+                    echo json_encode(array('mess1'=>$mess1,'mess2'=>$term->id));  
                 }               
             }
             echo "";

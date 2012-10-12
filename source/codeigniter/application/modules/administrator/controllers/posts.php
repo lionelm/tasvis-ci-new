@@ -36,10 +36,17 @@ class Posts extends MX_Controller
             $l_exerpt = $this->input->post('txtexcerpt');		
             $l_content = $this->input->post('txtcontent');	
             $l_arr_categories = $this->input->post('cbcategory');
-            $l_featured_image = $this->input->post('hdffeatured_image');            
+            $lstTag = $this->input->post('lstTagAdded');
+            $l_featured_image = $this->input->post('hdffeatured_image');  
+            
+            $seo_title = $this->input->post('txtTitleSeo');
+            $seo_desc = $this->input->post('txtDescSeo');
+            $seo_keywords = $this->input->post('txtKeywordSeo');
+            
             $post_status = $this->input->post('ddlTrangThai');
             $slug = $this->Common_model->makeSlugs($l_title,255);
             $slug = $this->generateSlug($slug);
+            
             $post = new Post();
             $post->post_date = date('Y-m-d H-i-s');
             $post->post_content = $l_content;
@@ -48,9 +55,22 @@ class Posts extends MX_Controller
             $post->post_type = 'post';
             $post->post_status = $post_status;
             $post->guid = $slug;
+            
             //add term_taxonomy_post
+            $arrTag = explode(',',$lstTag);            
+            $countTag = count($arrTag);
+            if(count($arrTag)>2)
+            {
+                unset($arrTag[0]);
+                
+                unset($arrTag[$countTag-1]);
+                $arrTag = array_values($arrTag);
+                
+            }           
+            
+            $arrTag = array_merge($l_arr_categories,$arrTag);
             $term_taxonomy = new Term_taxonomy();
-            $term_taxonomy->where_in('term_id',$l_arr_categories)->get();
+            $term_taxonomy->where_in('term_id',$arrTag)->get();          
             
             if($post->save($term_taxonomy->all))
             {
@@ -59,6 +79,24 @@ class Posts extends MX_Controller
                 $post_meta->meta_key = 'featured_image';
                 $post_meta->meta_value = $l_featured_image;
                 $post_meta->save($post);
+                
+                //add seo title
+                $post_seo_title = new Postmeta();
+                $post_seo_title->meta_key = 'seo_title';
+                $post_seo_title->meta_value = $seo_title;
+                $post_seo_title->save($post);
+                
+                //add seo desciption
+                $post_seo_desc =  new Postmeta();
+                $post_seo_desc->meta_key = 'seo_description';
+                $post_seo_desc->meta_value = $seo_desc;
+                $post_seo_desc->save($post);
+                
+                //add seo keywords
+                $post_seo_key =  new Postmeta();
+                $post_seo_key->meta_key = 'seo_keyword';
+                $post_seo_key->meta_value = $seo_keywords;
+                $post_seo_key->save($post);
                 redirect('administrator/posts');
                 
             }
