@@ -5,9 +5,10 @@
         <li class="current"><a href="<?php echo base_url();?>admin/index" class="dashboard"><span>Dashboard</span></a></li>
         <li><a href="./widgets.html" class="widgets menudrop"><span>Bài viết</span></a>
             <ul>                
-                <li><a href="<?php echo base_url();?>"><span>Tất cả bài viết</span></a></li>     
-                <li><a href="<?php echo base_url();?>"><span>Thêm mới bài viết</span></a></li>
-                <li><a href="<?php echo base_url();?>"><span>Danh mục bài viết</span></a></li>
+                <li><a href="<?php echo base_url();?>administrator/posts"><span>Tất cả bài viết</span></a></li>     
+                <li><a href="<?php echo base_url();?>administrator/posts/add"><span>Thêm mới bài viết</span></a></li>
+                <li><a href="<?php echo base_url();?>administrator/category"><span>Danh mục bài viết</span></a></li>
+                <li><a href="<?php echo base_url();?>administrator/tags"><span>Danh mục tag</span></a></li>
             </ul>
         </li>
         <li><a href="./tables.html" class="tables"><span>Tables</span></a></li>
