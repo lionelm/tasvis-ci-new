@@ -1197,3 +1197,8 @@ p.status-ddl select{width: 77%;}
 .widgetcontent #txtTag{width: 65%;}
 .choose-tag a#addTagLink{text-decoration: underline;}
 #tag-list{-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;border-color: #CCCCCC;border-style: solid;border-width: 1px;line-height: 1.8em;margin: 5px 0 10px;padding: 8px;word-spacing: 3px;display: none;}
+.tagchecklist {font-size: 12px;margin-left: 14px;overflow: auto;}
+.tagchecklist span {cursor: default;display: block;float: left;font-size: 11px;line-height: 1.8em;margin-right: 25px;white-space: nowrap;}
+.tagchecklist span a, #bulk-titles div a {background: url("../images/xit.gif") no-repeat scroll 0 0 transparent;}
+.tagchecklist span a {cursor: pointer;display: block;float: left;height: 10px;margin: 6px 0 0 -9px;overflow: hidden;position: absolute;text-indent: -9999px;width: 10px;}
+.tagchecklist span a:hover{background: url("../images/xit.gif") no-repeat scroll -10px 0 transparent;}

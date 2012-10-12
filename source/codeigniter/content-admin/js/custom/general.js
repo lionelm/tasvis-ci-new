@@ -28,8 +28,41 @@ jQuery(document).ready(function(){
 			}
 		);
 	}
-        jQuery("#addTagLink").click(function(){
-            jQuery("#tag-list").toggle('slow');
+        
+        jQuery('#addTagLink').click(function(){
+            jQuery('#tag-list').toggle('slow');
+            return false;
+        });
+        
+        jQuery('.link-tag').click(function(){
+            if(!jQuery(this).hasClass('added'))
+            {
+                var id = jQuery(this).attr('valuetag');
+                var text = jQuery(this).text();
+                var content = "<span><a class='ntdelbutton' valuetag='"+id+"' id='tag-stt-"+id+"'>X</a>&nbsp;"+text+"</span>";
+                jQuery('.tagchecklist').append(content);
+                jQuery(this).addClass('added');
+            }            
+            return false;
+        });
+        
+        jQuery(document).on("click",".ntdelbutton",function(){
+            var id = jQuery(this).attr('valuetag');
+            var select = '#tag-num-'+id;
+            jQuery(select).removeClass('added');
+            jQuery(this).parent().remove();
+            return false;
+	});
+        
+        jQuery('#btnAddTag').click(function(){
+            var name = jQuery('#txtTag').val();
+            var url = jQuery(this).attr('urllink');
+            jQuery.post(url,{name:name},function(data) {
+                if(data!='')
+                {
+                    jQuery('.tagchecklist').append(data);
+                }
+            });
             return false;
         });
         
