@@ -1,4 +1,17 @@
 jQuery(document).ready(function(){
+    jQuery("#addTagLink").click(function(){
+            if(jQuery("#tag-list").hasClass('toggleshow'))
+            {
+                jQuery("#tag-list").show('slow');
+                jQuery("#tag-list").removeClass('toggleshow');
+            }
+            else
+            {
+                jQuery("#tag-list").hide('slow');
+                jQuery("#tag-list").addClass('toggleshow');
+            }
+            return false;
+        });
 
 	jQuery('.stdtablecb .checkall').click(function(){
 		var parentTable = jQuery(this).parents('table');										   
