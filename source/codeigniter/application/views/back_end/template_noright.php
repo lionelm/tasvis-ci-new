@@ -53,7 +53,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.flot.resize.min.js"></script>
 
 <script src="<?php echo base_url();?>content-admin/js/jquery.popupWindow.js"></script> 
-<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/general.js"></script>
+
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/tables.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/dashboard.js"></script>

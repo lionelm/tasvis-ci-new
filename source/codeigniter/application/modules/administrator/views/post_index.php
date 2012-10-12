@@ -1,7 +1,8 @@
 <ul class="maintabmenu multipletabmenu">        
     <li class="current"><a href="<?php echo base_url();?>adminitrator/posts">Tất cả bài viết</a></li>
     <li><a href="<?php echo base_url();?>administrator/posts/add">Thêm mới bài viết</a></li>
-    <li><a href="<?php echo base_url();?>administrator/category">Danh mục bài viết</a></li>    
+    <li><a href="<?php echo base_url();?>administrator/category">Danh mục bài viết</a></li>   
+    <li><a href="<?php echo base_url();?>administrator/tags">Danh mục tag</a></li>
 </ul>               
 <div class="content">
         <h1 id="ajaxtitle"></h1>                       	                            

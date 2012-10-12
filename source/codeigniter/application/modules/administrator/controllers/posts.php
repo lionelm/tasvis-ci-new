@@ -7,6 +7,7 @@ class Posts extends MX_Controller
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->load->library('pagination');
         $this->load->model('Common_model');
+        $this->load->model('Tag_model');
     }
     
     public function index($row=0)
@@ -64,7 +65,7 @@ class Posts extends MX_Controller
         }
         else{
             $data['lstTerm'] = $this->excuteTerm();
-        
+            $data['lstTag'] = $this->Tag_model->ListPopularTag(20);
             $data['view'] = 'post_add';
             $this->load->view('back_end/template_noright',$data);
         }        
@@ -212,6 +213,13 @@ class Posts extends MX_Controller
             $link_temp = $slug.'-'.$i;
             if ($this->checkSlug($link_temp)==false) return $link_temp;
         }
+    }
+    
+    function demo()
+    {
+        $data['view'] = 'demo';
+        $this->Tag_model->ListPopularTag();
+        $this->load->view('back_end/template_noright',$data);
     }
 }
 ?>

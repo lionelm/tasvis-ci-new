@@ -37,8 +37,8 @@
                 else {
                     if($term->save())
                     {    
-                        $last_term = new Term();
-                        $last_term->where('name',$name)->get();
+                        //$last_term = new Term();
+                        //$last_term->where('name',$name)->get();
 
                         //add Term_taxonomy
                         $term_taxonomy = new Term_taxonomy();
@@ -140,7 +140,38 @@
                 echo "not exist";
             }
         }
+        
+        function addTagAjax()
+        {
+            $name = $this->input->post('name');
+            $slug = $this->Common_model->makeSlugs($name,255);
+            $slug = $this->generateSlug($slug);
+            
+            $term = new Term();
+            $term->name = $name;
+            $term->slug = $slug;
+            if($this->checkSlug($slug))
+            {
+                echo "";
+            }
+            else {
+                if($term->save())
+                {                 
 
+                    //add Term_taxonomy
+                    $term_taxonomy = new Term_taxonomy();
+
+                    //$term_taxonomy->term_id=$last_term->term_id;
+                    $term_taxonomy->taxonomy = 'tag';
+                    $term_taxonomy->description = $name;
+
+                    $term_taxonomy->save($term);
+                    $content = "<span><a class='ntdelbutton' valuetag='".$term->id."' id='tag-stt-".$term->id."'>X</a>&nbsp;".$term->name."</span>";
+                    echo $content;
+                }               
+            }
+            echo "";
+        }
 
         function generateSlug($slug)
         {
