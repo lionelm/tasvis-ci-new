@@ -3,13 +3,7 @@
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
- */class Temp
-        {
-            public $id;
-            public $name;
-            public $description;
-            public $depth;
-        }
+ */
     class Category extends MX_Controller
     {   
         function __construct() {
@@ -64,10 +58,16 @@
         
         function delete()
         {
-            $id = $this->input->post('param');
+            $id = $this->input->post('param');            
+            $list_child = $this->Category_model->get($id,1);
             
             $term_taxonomy = new Term_taxonomy();
             $term_taxonomy->where('term_id',$id)->get();
+            
+            foreach( $list_child as $child)
+            {
+                
+            }
             $term_taxonomy->delete();
             
             $term = new Term();
@@ -88,8 +88,7 @@
                 $term->where('id',$id)->get();
                 $term->name = $name;
                 $term->slug = $slug;                
-                $term->save();
-                
+                $term->save();                
                 $term_taxonomy =  new Term_taxonomy();
                 $term_taxonomy->where('term_id', $id)->get();
                 $term_taxonomy->description = $description;
