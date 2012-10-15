@@ -22,12 +22,31 @@ jQuery(document).ready(function(){
 		//alert("fadfsdaf");
 		jQuery(".datetimepicker").datetimepicker(
 			{ 
-                            dateFormat: 'dd/mm/yy',
-                            timeFormat: 'hh:mm',
+                            dateFormat: 'dd-mm-yy',
+                            timeFormat: 'hh:mm:ss',
                             separator: ' '               
 			}
 		);
 	}
+        
+        /******************************/
+        var now = new Date();       
+        var month=new Array();
+        month[0]="01";
+        month[1]="02";
+        month[2]="03";
+        month[3]="04";
+        month[4]="05";
+        month[5]="06";
+        month[6]="07";
+        month[7]="08";
+        month[8]="09";
+        month[9]="10";
+        month[10]="11";
+        month[11]="12";
+        var n = month[now.getMonth()];
+        jQuery('#txtDatePublish').val(now.getDate()+'-'+n+'-'+now.getFullYear()+' '+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds());
+        /*******************************/
         
         jQuery('#addTagLink').click(function(){
             jQuery('#tag-list').toggle('slow');
@@ -68,7 +87,8 @@ jQuery(document).ready(function(){
                 {
                     jQuery('.tagchecklist').append(data.mess1);
                     var lstTag = jQuery('#lstTagAdded').attr('value');               
-                    jQuery('#lstTagAdded').val(lstTag+data.mess2+',');  
+                    jQuery('#lstTagAdded').val(lstTag+data.mess2+','); 
+                    jQuery('#txtTag').val('');
                 }
             },'json');
             return false;
