@@ -21,5 +21,14 @@ class Post extends DataMapper {
         // model constructor
         parent::__construct();
     }   
+    
+    function getPostMeta($post_id,$meta_key = '')
+    {
+        $postmeta = new Postmeta();
+        $postmeta->where('post_id', $post_id)
+                ->where('meta_key', $meta_key)
+                ->get();
+        return $postmeta->meta_value;
+    }
 }
 ?>

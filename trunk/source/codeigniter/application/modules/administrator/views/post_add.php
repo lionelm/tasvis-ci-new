@@ -63,7 +63,7 @@
                     </p>
                     <p class="status-ddl">
                         Thời gian xuất bản:
-                        <input type="text" id="txtDatePublish" class="datetimepicker" name="txtDatePublish">
+                        <input type="text" id="txtDatePublish" class="datetimepicker validate[required]" name="txtDatePublish">
                     </p>
                     <p class="stdformbutton">
                         <button class="submit radius2">Xuất bản</button>
@@ -76,10 +76,10 @@
                 <div class="title"><h2 class="general"><span>Danh mục bài viết</span></h2></div>
                 <div class="widgetcontent" style="display: block;">
                     <?php 
-                    foreach ($lstTerm as $term_item)
+                    foreach ($term_option as $term)
                     {
                     ?>     
-                    <input type="checkbox" name="cbcategory[]" value="<?php echo $term_item->id; ?>">&nbsp;&nbsp;&nbsp;<?php if($term_item->is_child) echo "----";?><?php echo $term_item->name;?><br>
+                    <input type="checkbox" name="cbcategory[]" value="<?php echo $term->id; ?>">&nbsp;&nbsp;&nbsp;<?php echo $term->name;?><br>
                     <?php }?>
                 </div>
             </div>

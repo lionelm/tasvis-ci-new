@@ -18,8 +18,9 @@
     <link rel="stylesheet" media="screen" href="<?php echo base_url();?>content-admin/css/ie7.css"/>
 <![endif]-->
 <script type="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-1.2.1.pack.js"></script>
-<script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-<script language="javascript" type="text/javascript" src="http://code.jquery.com/ui/1.8.24/jquery-ui.min.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-1.8.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-ui.min.js"></script>
+
 
 <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-ui-timepicker-addon.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/general.js"></script>
