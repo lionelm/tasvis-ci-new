@@ -5,6 +5,7 @@
         public $name;
         public $description;
         public $depth;
+        public $slug;
     }
     class Category_model extends CI_Model
     {
@@ -82,6 +83,7 @@
                         $term_taxonomy->where('term_id', $temp->id)->get();
                         
                         $temp->description = $term_taxonomy->description;
+                        $temp->slug = $term->slug;
                         $lstTerms[] = $temp;
                         if ($sl >= $offset+$limit) break;
                     } else
