@@ -8,6 +8,7 @@ class Posts extends MX_Controller
         $this->load->library('pagination');
         $this->load->model('Common_model');
         $this->load->model('Tag_model');
+        $this->load->model('Category_model');
     }
     
     public function index($row=0)
@@ -23,7 +24,10 @@ class Posts extends MX_Controller
         $this->pagination->initialize($config);
         $data['list_link'] = $this->pagination->create_links();	
         
-        $data['lstPost'] = $lstPost->where('post_type','post')->limit($config['per_page'], $row)->get();
+        $data['lstPost'] = $lstPost->where('post_type','post')
+                                    ->limit($config['per_page'], $row)
+                                    ->order_by('post_date','DESC')
+                                    ->get();
         $data['view'] = 'post_index';
         $this->load->view('back_end/template_noright',$data);
     }
@@ -38,6 +42,10 @@ class Posts extends MX_Controller
             $l_arr_categories = $this->input->post('cbcategory');
             $lstTag = $this->input->post('lstTagAdded');
             $l_featured_image = $this->input->post('hdffeatured_image');  
+            $post_date_publish = $this->input->post('txtDatePublish');
+            $format = 'd-m-Y H:i:s';
+            $date_publish = DateTime::createFromFormat($format, $post_date_publish);
+            $date_publish = $date_publish->format('Y-m-d H:i:s');
             
             $seo_title = $this->input->post('txtTitleSeo');
             $seo_desc = $this->input->post('txtDescSeo');
@@ -48,7 +56,8 @@ class Posts extends MX_Controller
             $slug = $this->generateSlug($slug);
             
             $post = new Post();
-            $post->post_date = date('Y-m-d H-i-s');
+            $post->post_date = date('Y-m-d H:i:s');
+            $post->post_date_gmt = $date_publish;
             $post->post_content = $l_content;
             $post->post_title = $l_title;
             $post->post_excerpt = $l_exerpt;
@@ -102,7 +111,8 @@ class Posts extends MX_Controller
             }
         }
         else{
-            $data['lstTerm'] = $this->excuteTerm();
+            //$data['lstTerm'] = $this->excuteTerm();
+            $data['term_option'] = $this->Category_model->get_categories(0,5,0,$this->Category_model->get_count_category(0,5) );
             $data['lstTag'] = $this->Tag_model->ListPopularTag(20);
             $data['view'] = 'post_add';
             $this->load->view('back_end/template_noright',$data);
@@ -132,32 +142,104 @@ class Posts extends MX_Controller
             $l_exerpt = $this->input->post('txtexcerpt');		
             $l_content = $this->input->post('txtcontent');	
             $l_arr_categories = $this->input->post('cbcategory');
+            $lstTag = $this->input->post('lstTagAdded');
             $l_featured_image = $this->input->post('hdffeatured_image');            
+            $post_date_publish = $this->input->post('txtDatePublish');
+            $post_status = $this->input->post('ddlTrangThai');
+            $format = 'd-m-Y H:i:s';
+            $date_publish = DateTime::createFromFormat($format, $post_date_publish);
+            $date_publish = $date_publish->format('Y-m-d H:i:s');
+            $seo_title = $this->input->post('txtTitleSeo');
+            $seo_desc = $this->input->post('txtDescSeo');
+            $seo_keywords = $this->input->post('txtKeywordSeo');
             
             $post = new Post();
             $post->where('id', $id)->get();
-            $post->post_modified = date('Y-m-d H-i-s');
+            $post->post_modified = date('Y-m-d H:i:s');
+            $post->post_date_gmt = $date_publish;
             $post->post_content = $l_content;
             $post->post_title = $l_title;
             $post->post_excerpt = $l_exerpt;
             $post->post_type = 'post';
+            $post->post_status = $post_status;
             
             //add term_taxonomy_post
+            $arrTag = explode(',',$lstTag);            
+            $countTag = count($arrTag);
+            if(count($arrTag)>2)
+            {
+                unset($arrTag[0]);
+                
+                unset($arrTag[$countTag-1]);
+                $arrTag = array_values($arrTag);
+                
+            }           
+            
+            $arrTag = array_merge($l_arr_categories,$arrTag);
+            
             $term_taxonomy_post = new Term_taxonomy_post();
             $term_taxonomy_post->where('post_id', $id)->get();
             $term_taxonomy_post->delete_all();
             
             $term_taxonomy = new Term_taxonomy();
-            $term_taxonomy->where_in('term_id',$l_arr_categories)->get();
+            $term_taxonomy->where_in('term_id',$arrTag)->get();
             
             if($post->save($term_taxonomy->all))
             {
                 //add featured images
                 $post_meta = new Postmeta();
-                $post_meta->where('post_id', $id)->get();
+                $post_meta->where('post_id', $id)
+                        ->where('meta_key', 'featured_image')
+                        ->get();  
+                if(count($post_meta)==0)
+                {
+                    $post_meta = new Postmeta();    
+                    
+                }
                 $post_meta->meta_key = 'featured_image';
                 $post_meta->meta_value = $l_featured_image;
                 $post_meta->save($post);
+                
+                //add seo title
+                
+                $post_seo_title = new Postmeta();
+                $post_seo_title->where('post_id', $id)
+                        ->where('meta_key', 'seo_title')
+                        ->get();   
+                
+                if(count($post_seo_title)==0)
+                {
+                    $post_seo_title = new Postmeta();                    
+                }
+                $post_seo_title->meta_key = 'seo_title';
+                $post_seo_title->meta_value = $seo_title;
+                $post_seo_title->save($post);
+                
+                //add seo desciption
+                $post_seo_desc =  new Postmeta();
+                $post_seo_desc->where('post_id', $id)
+                        ->where('meta_key', 'seo_description')
+                        ->get();   
+                if(count($post_seo_desc)==0)
+                {
+                    $post_seo_desc = new Postmeta();                    
+                }
+                $post_seo_desc->meta_key = 'seo_description';
+                $post_seo_desc->meta_value = $seo_desc;
+                $post_seo_desc->save($post);
+                
+                //add seo keywords
+                $post_seo_key =  new Postmeta();
+                $post_seo_key->where('post_id', $id)
+                        ->where('meta_key', 'seo_keyword')
+                        ->get();     
+                if(count($post_seo_desc)==0)
+                {
+                    $post_seo_key = new Postmeta();                    
+                }
+                $post_seo_key->meta_key = 'seo_keyword';
+                $post_seo_key->meta_value = $seo_keywords;
+                $post_seo_key->save($post);
                 redirect('administrator/posts');
                 
             }
@@ -165,18 +247,29 @@ class Posts extends MX_Controller
         else {
             $post = new Post();
         
-            $post->include_related('postmeta', array('meta_key','meta_value'))
-                    ->where_join_field('postmeta','meta_key','featured_image')
-                    ->get_by_id($id);
-
+            $post->get_by_id($id);            
+           
             $term_taxonomy = new Term_taxonomy();
             $term_post = $term_taxonomy->include_related('post',array('id'))
                     ->where_in_join_field('post', 'post_id', $id)
                     ->get_by_term_id();
-
-            $data['lstTerm'] = $this->excuteTerm();
+            
+            $post_tag =  new $term_taxonomy();
+            $lst_post_tag = $post_tag->include_related('post',array('id'))
+                    ->where_in_join_field('post', 'post_id', $id)
+                    ->include_related('term',array('id','name'))
+                    ->where('taxonomy','tag')
+                    ->get();
+            
+            $data['lst_post_tag'] = $lst_post_tag;
+            $data['featured_image'] = $post->getPostMeta($id,'featured_image');
+            $data['seoTitle'] = $post->getPostMeta($id, 'seo_title');
+            $data['seoDesc'] = $post->getPostMeta($id,'seo_description');
+            $data['seoKey'] = $post->getPostMeta($id,'seo_keyword');
+            $data['term_option'] = $this->Category_model->get_categories(0,5,0,$this->Category_model->get_count_category(0,5) );
             $data['post'] = $post;
             $data['term_post'] = $term_post;
+            $data['lstTag'] = $this->Tag_model->ListPopularTag(20);
             $data['view'] = 'post_edit';
             $this->load->view('back_end/template_noright',$data);
         }
