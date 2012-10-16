@@ -86,15 +86,19 @@ jQuery(document).ready(function(){
         jQuery('#btnAddTag').click(function(){
             var name = jQuery('#txtTag').val();
             var url = jQuery(this).attr('urllink');
-            jQuery.post(url,{name:name},function(data) {
-                if(data.mess1!='')
-                {
-                    jQuery('.tagchecklist').append(data.mess1);
-                    var lstTag = jQuery('#lstTagAdded').attr('value');               
-                    jQuery('#lstTagAdded').val(lstTag+data.mess2+','); 
-                    jQuery('#txtTag').val('');
-                }
-            },'json');
+            if(name!='')
+            {
+                jQuery.post(url,{name:name},function(data) {
+                    if(data.mess1!='')
+                    {
+                        jQuery('.tagchecklist').append(data.mess1);
+                        var lstTag = jQuery('#lstTagAdded').attr('value');               
+                        jQuery('#lstTagAdded').val(lstTag+data.mess2+','); 
+                        jQuery('#txtTag').val('');
+                    }
+                },'json');
+            }
+            
             return false;
         });
         

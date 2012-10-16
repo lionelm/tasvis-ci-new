@@ -11,6 +11,7 @@ class Posts extends MX_Controller
         $this->load->model('Category_model');
     }
     
+    
     public function index($term='~',$keyword='~',$row=0)
     {           
         $lstPost = new Post();
