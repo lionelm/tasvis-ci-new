@@ -13,7 +13,7 @@
             $this->load->model('Category_model');  
         }
         
-        function index($row = 0)
+        function index($row = 0)//+add category
         {   
             if($this->input->post('txttitle'))
             {
@@ -46,7 +46,7 @@
     		$data['list_link'] = $this->pagination->create_links();	
                       
             $data['lstTerms'] = $this->Category_model->get_categories(0,5,$row,$config['per_page']);
-            $data['term_option'] = $this->Category_model->get_categories(0,5,0,$this->Category_model->get_count_category(0,5) );
+            $data['term_option'] = $this->Category_model->get_categories(0,5,0,$config['total_rows'] );
            // $lstTerms = new Term();           
             //$data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
               //                              ->where_in_join_field('term_taxonomy','taxonomy','category')
@@ -58,15 +58,16 @@
         
         function delete()
         {
-            $id = $this->input->post('param');            
-            $list_child = $this->Category_model->get($id,1);
-            
+            $id = $this->input->post('param');                                    
             $term_taxonomy = new Term_taxonomy();
             $term_taxonomy->where('term_id',$id)->get();
-            
+            $list_child = $this->Category_model->get($id,1);
             foreach( $list_child as $child)
             {
-                
+               $temp_term =  new Term_taxonomy();
+               $temp_term->where('term_id', $child->id)->get();
+               $temp_term->parent_term = $term_taxonomy->parent_term;
+               $temp_term->save();
             }
             $term_taxonomy->delete();
             
@@ -76,7 +77,7 @@
             
         }
         
-        function edit($id=0)
+        function edit($id = 0,$row = 0)
         {
             $name = $this->input->post('txttitle');
             $slug = $this->input->post('txtslug');		
@@ -102,13 +103,32 @@
                 $term->include_related('term', array('id', 'name','slug'))->get_by_term_id($id);
                 $data['term'] = $term;
                
-                $lstTerms = new Term();           
-                $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description')) 
-                        ->where_in_join_field('term_taxonomy','taxonomy','category')
-                        ->get();            
-                //$this->load->vars($data);
-                $data['view'] = 'category_edit';
-                $this->load->view('back_end/template_noright',$data);
+                /**
+ * $lstTerms = new Term();           
+ *                 $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description')) 
+ *                         ->where_in_join_field('term_taxonomy','taxonomy','category')
+ *                         ->get();            
+ *                 //$this->load->vars($data);
+ *                 $data['view'] = 'category_edit';
+ *                 $this->load->view('back_end/template_noright',$data);
+ */
+            include('paging.php');
+            $config['base_url']= base_url()."administrator/category/edit/".$id."/";
+            $config['total_rows']=$this->Category_model->get_count_category(0,5);           		
+    		$config['cur_page']= $row;
+            $config['num_links'] = 3;		
+    		$this->pagination->initialize($config);
+    		$data['list_link'] = $this->pagination->create_links();	
+                      
+            $data['lstTerms'] = $this->Category_model->get_categories(0,5,$row,$config['per_page']);
+            $data['term_option'] = $this->Category_model->get_categories(0,5,0,$config['total_rows'] );
+           // $lstTerms = new Term();           
+            //$data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
+              //                              ->where_in_join_field('term_taxonomy','taxonomy','category')
+                //                            ->get();            
+
+            $data['view'] = 'category_edit';
+            $this->load->view('back_end/template_noright',$data);
             }
         }
     }
