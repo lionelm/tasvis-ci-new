@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 16, 2012 at 11:54 AM
+-- Generation Time: Oct 16, 2012 at 11:57 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -158,11 +158,11 @@ INSERT INTO `hd_links` (`link_id`, `link_url`, `link_name`, `link_image`, `link_
 
 DROP TABLE IF EXISTS `hd_options`;
 CREATE TABLE IF NOT EXISTS `hd_options` (
-  `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `option_name` varchar(64) NOT NULL DEFAULT '',
   `option_value` longtext NOT NULL,
   `autoload` varchar(20) NOT NULL DEFAULT 'yes',
-  PRIMARY KEY (`option_id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `option_name` (`option_name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=104 ;
 
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `hd_options` (
 -- Dumping data for table `hd_options`
 --
 
-INSERT INTO `hd_options` (`option_id`, `option_name`, `option_value`, `autoload`) VALUES
+INSERT INTO `hd_options` (`id`, `option_name`, `option_value`, `autoload`) VALUES
 (1, 'siteurl', 'http://localhost/wordpress', 'yes'),
 (2, 'blogname', 'Gọi đồ ăn trực tuyến', 'yes'),
 (3, 'blogdescription', 'Just another WordPress site', 'yes'),
