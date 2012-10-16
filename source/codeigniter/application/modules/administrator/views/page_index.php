@@ -1,27 +1,16 @@
 <ul class="maintabmenu multipletabmenu">        
-    <li class="current"><a href="<?php echo base_url();?>administrator/posts">Tất cả bài viết</a></li>
-    <li><a href="<?php echo base_url();?>administrator/posts/add">Thêm mới bài viết</a></li>
-    <li><a href="<?php echo base_url();?>administrator/category">Danh mục bài viết</a></li>   
-    <li><a href="<?php echo base_url();?>administrator/tags">Danh mục tag</a></li>
+    <li class="current"><a href="<?php echo base_url();?>administrator/pages">Tất cả trang</a></li>
+    <li><a href="<?php echo base_url();?>administrator/pages/add">Thêm mới trang</a></li>    
 </ul>               
 <div class="content">
         <h1 id="ajaxtitle"></h1>                       	                            
     <div class="contenttitle radiusbottom0">
-        <h2 class="table"><span>Danh sách bài viết</span></h2>
+        <h2 class="table"><span>Danh sách trang</span></h2>
     </div><!--contenttitle-->
     <div class="tableoptions">
-        <form name="frmfilter" method="post" action="<?php echo base_url();?>administrator/posts/index/" >                        	
-            <button class="deletebutton radius3" title="table2" name="delete_post" value="<?php echo base_url();?>admin/posts/delete">Delete Selected</button> &nbsp;               
-                
-            <select name="ddlTerm">
-                    <option value="0">-- Tất cả --</option>
-                    <?php 
-                        foreach ($term_option as $term)
-                        {
-                    ?>
-                    <option value="<?php echo $term->slug;?>" <?php if($term->slug == $category) echo "selected='selected'";?>><?php echo $term->name;?></option>
-                    <?php }?>                    
-            </select> &nbsp;
+        <form name="frmfilter" method="post" action="<?php echo base_url();?>administrator/pages/index/" >                        	
+            <button class="deletebutton radius3" title="table2" name="delete_post" value="<?php echo base_url();?>admin/pages/delete">Delete Selected</button> &nbsp;               
+                       
             <input type="text" value="<?php if($key_word!='~')echo $key_word;?>" name="txtKeyWord" class="input-keyword">&nbsp;
            
             <input type="submit" class="btn" value="Tìm kiếm"/>
@@ -76,8 +65,8 @@
                 }
                 ?></td>
                 <td class="center">
-                    <a class="edit" href="<?php echo base_url();?>administrator/posts/edit/<?php echo $post->id;?>">Sửa</a> &nbsp; 
-                    <a class="delete" name="delete_post" id="<?php echo $post->id;?>" href="<?php echo base_url();?>administrator/posts/delete">Xóa</a>
+                    <a class="edit" href="<?php echo base_url();?>administrator/pages/edit/<?php echo $post->id;?>">Sửa</a> &nbsp; 
+                    <a class="delete" name="delete_post" id="<?php echo $post->id;?>" href="<?php echo base_url();?>administrator/pages/delete">Xóa</a>
                 </td>
             </tr>
             <?php

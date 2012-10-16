@@ -1208,3 +1208,9 @@ p.status-ddl select{width: 77%;}
 .small-form{}
 .small-desc{margin: 5px 0 0 10px !important;display: inline !important;}
 .length-count{margin: 5px 0 5px 120px;}
+.input-keyword{background: none repeat scroll 0 0 #FCFCFC;border: 1px solid #CCCCCC;border-radius: 2px 2px 2px 2px;box-shadow: 1px 1px 2px #DDDDDD inset;color: #666666;padding: 8px 5px;}
+.post-lang .tabbedmenu{margin-right: 25px;}
+.post-lang .content p{border: none !important;}
+.stepContainer{height: auto !important;}
+.post-lang .actionBar{margin-right: 15px;}
+.wizard .tabbedmenu li a.sel {background: none repeat scroll 0 0 #FFFFFF;border-bottom: 1px solid #FFFFFF;color: #333333;}

@@ -1,3 +1,4 @@
+
 <ul class="maintabmenu multipletabmenu">        
     <li><a href="<?php echo base_url();?>administrator/posts">Tất cả bài viết</a></li>
     <li class="current"><a href="<?php echo base_url();?>administrator/posts/add">Thêm mới bài viết</a></li>
@@ -6,46 +7,156 @@
 </ul>
 <div class="content">                	
     <form method="post" action="<?php echo base_url();?>administrator/posts/add" class="stdform" id="formID">
-        <div class="edit-main">                    	                    	                            
-            <p><label>Tiêu đề:</label></p>
-            <p><span class="field"><input type="text" class="longinput validate[required]" name="txttitle"></span></p>
-            </br>
-            <p><label>Tóm tắt:</label></p>                            
-            <p><span class="field"><textarea name="txtexcerpt" class="validate[required]"></textarea></span></p>
-            </br>
-            <p><label>Nội dung:</label></p>                            
-            <p><textarea name="txtcontent" id="editor_content" class="validate[required]"></textarea></p>            
-            </br>
-            
-            <div class="seo-packages widgetbox">
-                <div class="contenttitle">
-                    <h2 class="form">
-                        <span>All in One SEO Pack</span>
-                    </h2>
-                </div>                
-                <div class="widgetcontent">
-                    <p>
-                        <label>Title</label>
-                        <span class="field small-form">
-                            <input class="mediuminput" type="text" name="txtTitleSeo" onkeyup="countCharactor(this.value);">
-                        </span>
-                        <input type="text" id="txtlength" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
-                        <small class="desc small-desc"> Most search engines use a maximum of 60 chars for the title.</small>
-                    </p>
-                    <p>
-                        <label>Description</label>
-                        <span class="field small-form">
-                            <textarea id="location" class="mediuminput" name="txtDescSeo" rows="5" cols="80" onkeyup="countCharactors(this.value);"></textarea>
-                        </span>
-                        <input type="text" id="txtlength2" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
-                        <small class="desc small-desc"> Most search engines use a maximum of 160 chars for the description.</small>
-                    </p>
-                    <p>
-                        <label>Keywords</label>
-                        <span class="field small-form">
-                            <input class="mediuminput" type="text" name="txtKeywordSeo">
-                        </span>                        
-                    </p>
+        <div class="edit-main"> 
+            <div id="wizard" class="wizard post-lang">
+                <ul class="tabbedmenu anchor">
+                    <li>
+                        <a href="#wiz1step2_1" class="sel" isdone="1" rel="1">                            
+                            <span class="label">Tiếng việt</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#wiz1step2_2" isdone="1" rel="2">                            
+                            <span class="label">English</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#wiz1step2_3"  isdone="1" rel="3">                            
+                            <span class="label">Deutsch</span>
+                        </a>
+                    </li>
+                </ul>
+                <br>
+                <div class="stepContainer">
+                    <div id="wiz1step2_1" style="display: block;">
+                        <p><label>Tiêu đề:</label></p>
+                        <p><span class="field"><input type="text" class="longinput validate[required]" name="txttitle"></span></p>
+                        </br>
+                        <p><label>Tóm tắt:</label></p>                            
+                        <p><span class="field"><textarea name="txtexcerpt" class="validate[required]"></textarea></span></p>
+                        </br>
+                        <p><label>Nội dung:</label></p>                            
+                        <p><textarea name="txtcontent" id="editor_content" class="validate[required]"></textarea></p>            
+                        </br>
+
+                        <div class="seo-packages widgetbox">
+                            <div class="contenttitle">
+                                <h2 class="form">
+                                    <span>All in One SEO Pack</span>
+                                </h2>
+                            </div>                
+                            <div class="widgetcontent">
+                                <p>
+                                    <label>Title</label>
+                                    <span class="field small-form">
+                                        <input class="mediuminput" type="text" name="txtTitleSeo" onkeyup="countCharactor(this.value);">
+                                    </span>
+                                    <input type="text" id="txtlength" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <small class="desc small-desc"> Most search engines use a maximum of 60 chars for the title.</small>
+                                </p>
+                                <p>
+                                    <label>Description</label>
+                                    <span class="field small-form">
+                                        <textarea id="location" class="mediuminput" name="txtDescSeo" rows="5" cols="80" onkeyup="countCharactors(this.value);"></textarea>
+                                    </span>
+                                    <input type="text" id="txtlength2" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <small class="desc small-desc"> Most search engines use a maximum of 160 chars for the description.</small>
+                                </p>
+                                <p>
+                                    <label>Keywords</label>
+                                    <span class="field small-form">
+                                        <input class="mediuminput" type="text" name="txtKeywordSeo">
+                                    </span>                        
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="wiz1step2_2" style="display: none;">
+                        <p><label>abc:</label></p>
+                        <p><span class="field"><input type="text" class="longinput validate[required]" name="txttitle"></span></p>
+                        </br>
+                        <p><label>Tóm tắt:</label></p>                            
+                        <p><span class="field"><textarea name="txtexcerpt" class="validate[required]"></textarea></span></p>
+                        </br>
+                        <p><label>Nội dung:</label></p>                            
+                        <p><textarea name="txtcontent" id="editor_content" class="validate[required]"></textarea></p>            
+                        </br>
+
+                        <div class="seo-packages widgetbox">
+                            <div class="contenttitle">
+                                <h2 class="form">
+                                    <span>All in One SEO Pack</span>
+                                </h2>
+                            </div>                
+                            <div class="widgetcontent">
+                                <p>
+                                    <label>Title</label>
+                                    <span class="field small-form">
+                                        <input class="mediuminput" type="text" name="txtTitleSeo" onkeyup="countCharactor(this.value);">
+                                    </span>
+                                    <input type="text" id="txtlength" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <small class="desc small-desc"> Most search engines use a maximum of 60 chars for the title.</small>
+                                </p>
+                                <p>
+                                    <label>Description</label>
+                                    <span class="field small-form">
+                                        <textarea id="location" class="mediuminput" name="txtDescSeo" rows="5" cols="80" onkeyup="countCharactors(this.value);"></textarea>
+                                    </span>
+                                    <input type="text" id="txtlength2" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <small class="desc small-desc"> Most search engines use a maximum of 160 chars for the description.</small>
+                                </p>
+                                <p>
+                                    <label>Keywords</label>
+                                    <span class="field small-form">
+                                        <input class="mediuminput" type="text" name="txtKeywordSeo">
+                                    </span>                        
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="wiz1step2_3" style="display: none;">
+                        <p><label>cde:</label></p>
+                        <p><span class="field"><input type="text" class="longinput validate[required]" name="txttitle"></span></p>
+                        </br>
+                        <p><label>Tóm tắt:</label></p>                            
+                        <p><span class="field"><textarea name="txtexcerpt" class="validate[required]"></textarea></span></p>
+                        </br>
+                        <p><label>Nội dung:</label></p>                            
+                        <p><textarea name="txtcontent" id="editor_content" class="validate[required]"></textarea></p>            
+                        </br>
+
+                        <div class="seo-packages widgetbox">
+                            <div class="contenttitle">
+                                <h2 class="form">
+                                    <span>All in One SEO Pack</span>
+                                </h2>
+                            </div>                
+                            <div class="widgetcontent">
+                                <p>
+                                    <label>Title</label>
+                                    <span class="field small-form">
+                                        <input class="mediuminput" type="text" name="txtTitleSeo" onkeyup="countCharactor(this.value);">
+                                    </span>
+                                    <input type="text" id="txtlength" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <small class="desc small-desc"> Most search engines use a maximum of 60 chars for the title.</small>
+                                </p>
+                                <p>
+                                    <label>Description</label>
+                                    <span class="field small-form">
+                                        <textarea id="location" class="mediuminput" name="txtDescSeo" rows="5" cols="80" onkeyup="countCharactors(this.value);"></textarea>
+                                    </span>
+                                    <input type="text" id="txtlength2" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <small class="desc small-desc"> Most search engines use a maximum of 160 chars for the description.</small>
+                                </p>
+                                <p>
+                                    <label>Keywords</label>
+                                    <span class="field small-form">
+                                        <input class="mediuminput" type="text" name="txtKeywordSeo">
+                                    </span>                        
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

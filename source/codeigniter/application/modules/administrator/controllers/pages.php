@@ -1,5 +1,5 @@
 <?php
-class Posts extends MX_Controller
+class Pages extends MX_Controller
 {
     
     public function __construct() {
@@ -11,26 +11,10 @@ class Posts extends MX_Controller
         $this->load->model('Category_model');
     }
     
-    public function index($term='~',$keyword='~',$row=0)
+    public function index($keyword='~',$row=0)
     {           
         $lstPost = new Post();
-        $data['category'] = $term;      
-        if($this->input->post('ddlTerm'))
-        {
-            $data['category'] = $this->input->post('ddlTerm');
-        }  
-        
-        if($data['category'] == '~')
-        {
-            $term_id = 0;
-        }
-        else
-        {
-            $cat = new Term();
-            $cat->where('slug',$data['category'])->get();
-            $term_id = $cat->id;
-        }
-        
+                
         $data['key_word'] = urldecode($keyword);
         if($this->input->post('txtKeyWord'))
         {
@@ -40,15 +24,9 @@ class Posts extends MX_Controller
         //paging
         include('paging.php');
         $config['per_page'] = 10;		
-        $config['base_url']= base_url()."/administrator/posts/index/".$data['category'].'/'.$data['key_word'].'/'; 
-        $lstPost->where('post_type','post');
-        if($term_id>0)
-        {
-            $lstPost->include_related('term_taxonomy',array('id,term_id','taxonomy'))
-                    ->where_related('term_taxonomy', 'taxonomy', 'category')
-                    ->where_related('term_taxonomy', 'term_id', $term_id);
-            
-        }
+        $config['base_url']= base_url()."/administrator/pages/index/".$data['key_word'].'/'; 
+        $lstPost->where('post_type','page');
+        
         if($data['key_word']!='~')
         {
             $lstPost->like('post_title', $data['key_word']);
@@ -59,23 +37,17 @@ class Posts extends MX_Controller
         $data['list_link'] = $this->pagination->create_links();	
         
         $lstPost = new Post();
-        $lstPost->where('post_type','post')
+        $lstPost->where('post_type','page')
                 ->limit($config['per_page'], $row)
                 ->order_by('id','DESC');
-        if($term_id>0)
-        {
-            $lstPost->include_related('term_taxonomy',array('id,term_id','taxonomy'))
-                    ->where_related('term_taxonomy', 'taxonomy', 'category')
-                    ->where_related('term_taxonomy', 'term_id', $term_id);            
-        }
+        
         if($data['key_word']!='~')
         {
             $lstPost->like('post_title', $data['key_word']);
         }
-        $data['lstPost'] = $lstPost->get();
+        $data['lstPost'] = $lstPost->get();   
         
-        $data['term_option'] = $this->Category_model->get_categories(0,5,0,$this->Category_model->get_count_category(0,5) );
-        $data['view'] = 'post_index';
+        $data['view'] = 'page_index';
         $this->load->view('back_end/template_noright',$data);
     }
     
@@ -85,9 +57,7 @@ class Posts extends MX_Controller
         if($l_title)
         {
             $l_exerpt = $this->input->post('txtexcerpt');		
-            $l_content = $this->input->post('txtcontent');	
-            $l_arr_categories = $this->input->post('cbcategory');
-            $lstTag = $this->input->post('lstTagAdded');
+            $l_content = $this->input->post('txtcontent');                       
             $l_featured_image = $this->input->post('hdffeatured_image');  
             $post_date_publish = $this->input->post('txtDatePublish');
             if($post_date_publish)
@@ -99,7 +69,7 @@ class Posts extends MX_Controller
             else {
                 $post_date_publish = date('Y-m-d H:i:s');
             }
-            
+            $page_parent = $this->input->post('ddlPageParent');
             $seo_title = $this->input->post('txtTitleSeo');
             $seo_desc = $this->input->post('txtDescSeo');
             $seo_keywords = $this->input->post('txtKeywordSeo');
@@ -108,33 +78,20 @@ class Posts extends MX_Controller
             $slug = $this->Common_model->makeSlugs($l_title,255);
             $slug = $this->generateSlug($slug);
             
+            
             $post = new Post();
             $post->post_date = date('Y-m-d H:i:s');
             $post->post_date_gmt = $date_publish;
             $post->post_content = $l_content;
             $post->post_title = $l_title;
             $post->post_excerpt = $l_exerpt;
-            $post->post_type = 'post';
+            $post->post_type = 'page';
             $post->post_status = $post_status;
             $post->guid = $slug;
+            $post->post_parent = $page_parent;
+                  
             
-            //add term_taxonomy_post
-            $arrTag = explode(',',$lstTag);            
-            $countTag = count($arrTag);
-            if(count($arrTag)>2)
-            {
-                unset($arrTag[0]);
-                
-                unset($arrTag[$countTag-1]);
-                $arrTag = array_values($arrTag);
-                
-            }           
-            
-            $arrTag = array_merge($l_arr_categories,$arrTag);
-            $term_taxonomy = new Term_taxonomy();
-            $term_taxonomy->where_in('term_id',$arrTag)->get();          
-            
-            if($post->save($term_taxonomy->all))
+            if($post->save())
             {
                 //add featured images
                 $post_meta = new Postmeta();
@@ -159,15 +116,15 @@ class Posts extends MX_Controller
                 $post_seo_key->meta_key = 'seo_keyword';
                 $post_seo_key->meta_value = $seo_keywords;
                 $post_seo_key->save($post);
-                redirect('administrator/posts');
+                redirect('administrator/pages');
                 
             }
         }
-        else{
-            //$data['lstTerm'] = $this->excuteTerm();
-            $data['term_option'] = $this->Category_model->get_categories(0,5,0,$this->Category_model->get_count_category(0,5) );
-            $data['lstTag'] = $this->Tag_model->ListPopularTag(20);
-            $data['view'] = 'post_add';
+        else{           
+            $page = new Post();
+            $page->where('post_type', 'page')->get();
+            $data['lstPage'] = $page;
+            $data['view'] = 'page_add';
             $this->load->view('back_end/template_noright',$data);
         }        
     }
@@ -213,7 +170,7 @@ class Posts extends MX_Controller
             $post->post_content = $l_content;
             $post->post_title = $l_title;
             $post->post_excerpt = $l_exerpt;
-            $post->post_type = 'post';
+            $post->post_type = 'page';
             $post->post_status = $post_status;
             
             //add term_taxonomy_post
@@ -293,7 +250,7 @@ class Posts extends MX_Controller
                 $post_seo_key->meta_key = 'seo_keyword';
                 $post_seo_key->meta_value = $seo_keywords;
                 $post_seo_key->save($post);
-                redirect('administrator/posts');
+                redirect('administrator/pages');
                 
             }
         }
@@ -318,12 +275,13 @@ class Posts extends MX_Controller
             $data['featured_image'] = $post->getPostMeta($id,'featured_image');
             $data['seoTitle'] = $post->getPostMeta($id, 'seo_title');
             $data['seoDesc'] = $post->getPostMeta($id,'seo_description');
-            $data['seoKey'] = $post->getPostMeta($id,'seo_keyword');
-            $data['term_option'] = $this->Category_model->get_categories(0,5,0,$this->Category_model->get_count_category(0,5) );
+            $data['seoKey'] = $post->getPostMeta($id,'seo_keyword');            
             $data['post'] = $post;
             $data['term_post'] = $term_post;
-            $data['lstTag'] = $this->Tag_model->ListPopularTag(20);
-            $data['view'] = 'post_edit';
+            $lstpage = new Post();
+            $lstpage->where('post_type', 'page')->get();
+            $data['lstPage'] = $lstpage;           
+            $data['view'] = 'page_edit';
             $this->load->view('back_end/template_noright',$data);
         }
         
@@ -398,5 +356,6 @@ class Posts extends MX_Controller
             if ($this->checkSlug($link_temp)==false) return $link_temp;
         }
     }  
+    
 }
 ?>
