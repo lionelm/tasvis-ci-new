@@ -8,6 +8,10 @@ jQuery(document).ready(function(){
 	    }
 	  });
 	
+        jQuery('#wizard').smartTab();
+        function onFinishCallback(){
+            alert('Finish Clicked');
+        }
 	
 	//Brow server image upload	
 	jQuery('#imageUpload').popupWindow({ 

@@ -50,6 +50,7 @@
 			}
 		}
 </script>
+<script src="<?php echo base_url();?>content-admin/js/jquery.smartTab.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.flot.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.flot.resize.min.js"></script>
 
