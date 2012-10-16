@@ -73,7 +73,7 @@
                         $pre = '';
                         for($i = 1; $i<=$category[0];$i++)
                         {
-                            $pre .= '-  ';
+                            $pre .= '— ';
                         }
                         $term = new Term();
                         $term->get_by_id($temp->id);
