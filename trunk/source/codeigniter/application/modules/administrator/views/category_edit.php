@@ -22,7 +22,7 @@
                 <select name="ddlTerm">                    
                     <option value="0">-- Không có danh mục cha --</option>
                     <?php                     
-                        foreach ($lstTerms as $t)
+                        foreach ($term_option as $t)
                         {
                             if($t->id == $term->parent_term)
                             {
@@ -88,11 +88,12 @@
                             echo $item->name;
                         ?>
                         </td>
-                        <td><?php echo $item->term_taxonomy_description;?></td>
+                        <td><?php echo $item->description;?></td>
                         <td class="center"><a class="edit" title="Sửa" href="<?php echo base_url();?>administrator/category/edit/<?php echo $item->id;?>">Sửa</a> &nbsp; <a class="delete" id="<?php echo $item->id;?>" name="delete" title="Xóa danh mục" href="<?php echo base_url();?>administrator/category/delete">Xóa</a></td>
                     </tr>   
                 <?php }?>
             </tbody>
         </table>
+        <?php echo $list_link; ?>
     </div>                                  
 </div><!--content-->                
