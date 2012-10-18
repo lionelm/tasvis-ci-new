@@ -7,8 +7,22 @@ jQuery(document).ready(function(){
 	      return false;
 	    }
 	  });
-	
-        jQuery('#wizard').smartTab();
+	var lang_num = 0;
+        if(jQuery('#txtLangNum').length>0)
+        {
+            $lang_num = jQuery('#txtLangNum').attr('value');
+        }
+        
+        jQuery('#wizard').smartTab({
+                selected: 0,  // Selected Tab, 0 = first step   
+                keyNavigation:true, // Enable/Disable key navigation
+                autoProgress:false, // Auto navigate tabs on interval
+                progressInterval: 3500, // Auto navigate Interval
+                stopOnFocus:false, // Stops autoProgress on mouse hover and restarts when not
+                transitionEffect:'none' // Effect on navigation, none/fade/slide
+                
+            }            
+        );
         function onFinishCallback(){
             alert('Finish Clicked');
         }
