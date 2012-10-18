@@ -16,6 +16,9 @@ class Post extends DataMapper {
             'join_table' => 'hd_term_taxonomies_posts'
         )	
     );
+    
+    public $has_one = array("language");
+    
     public function __construct()
     {
         // model constructor
@@ -29,6 +32,20 @@ class Post extends DataMapper {
                 ->where('meta_key', $meta_key)
                 ->get();
         return $postmeta->meta_value;
+    }
+    
+    function getPostLang($post_id)
+    {
+        $post = new Post();
+        $post->where('id', $post_id)->get();
+        $root_lang = $post->root_lang;
+        
+        $lstPost = new Post();
+        $lstPost->where("root_lang", $root_lang)
+                ->include_related('language',array('id','name'))                
+                ->get();
+        return $lstPost;
+        
     }
 }
 ?>
