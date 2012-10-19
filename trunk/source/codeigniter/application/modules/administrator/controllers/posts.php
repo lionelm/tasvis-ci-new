@@ -204,14 +204,20 @@ class Posts extends MX_Controller
     function delete()
     {
         $id = $this->input->post('param');
-        $post = new Post();
-        $post_meta = new Postmeta();
+        $lstPost = new Post();
+        $lstPostLang = $lstPost->getPostLang($id);
+        foreach ($lstPostLang as $p)
+        {
+            $post = new Post();
+            $post_meta = new Postmeta();
+
+            $post->where('id',$p->id)->get();        
+            $post_meta->where('post_id',$p->id)->get();
+
+            $post_meta->delete_all($post);
+            $post->delete();
+        }
         
-        $post->where('id',$id)->get();        
-        $post_meta->where('post_id',$id)->get();
-        
-        $post_meta->delete_all($post);
-        $post->delete();
     }
 
     function edit($id=0)
@@ -219,116 +225,152 @@ class Posts extends MX_Controller
         $language = new Language();        
         $lstLang = $language->where('status','enable')->get();
         
-        $l_title = $this->input->post('txttitle');
-        if($l_title)
-        {            
-            $id = $this->input->post('hdfPostID');
-            
-            $l_exerpt = $this->input->post('txtexcerpt');		
-            $l_content = $this->input->post('txtcontent');	
-            $l_arr_categories = $this->input->post('cbcategory');
-            $lstTag = $this->input->post('lstTagAdded');
-            $l_featured_image = $this->input->post('hdffeatured_image');            
-            $post_date_publish = $this->input->post('txtDatePublish');
-            $post_status = $this->input->post('ddlTrangThai');
-            $format = 'd-m-Y H:i:s';
-            $date_publish = DateTime::createFromFormat($format, $post_date_publish);
-            $date_publish = $date_publish->format('Y-m-d H:i:s');
-            $seo_title = $this->input->post('txtTitleSeo');
-            $seo_desc = $this->input->post('txtDescSeo');
-            $seo_keywords = $this->input->post('txtKeywordSeo');
-            
-            $post = new Post();
-            $post->where('id', $id)->get();
-            $post->post_modified = date('Y-m-d H:i:s');
-            $post->post_date_gmt = $date_publish;
-            $post->post_content = $l_content;
-            $post->post_title = $l_title;
-            $post->post_excerpt = $l_exerpt;
-            $post->post_type = 'post';
-            $post->post_status = $post_status;
-            
-            //add term_taxonomy_post
-            $arrTag = explode(',',$lstTag);            
-            $countTag = count($arrTag);
-            if(count($arrTag)>2)
+        $flag = FALSE;
+        foreach ($language as $lang)
+        {
+            if($this->input->post('txttitle'.$lang->code))
             {
-                unset($arrTag[0]);
-                
-                unset($arrTag[$countTag-1]);
-                $arrTag = array_values($arrTag);
-                
-            }           
-            
-            $arrTag = array_merge($l_arr_categories,$arrTag);
-            
-            $term_taxonomy_post = new Term_taxonomy_post();
-            $term_taxonomy_post->where('post_id', $id)->get();
-            $term_taxonomy_post->delete_all();
-            
-            $term_taxonomy = new Term_taxonomy();
-            $term_taxonomy->where_in('term_id',$arrTag)->get();
-            
-            if($post->save($term_taxonomy->all))
-            {
-                //add featured images
-                $post_meta = new Postmeta();
-                $post_meta->where('post_id', $id)
-                        ->where('meta_key', 'featured_image')
-                        ->get();  
-                if(count($post_meta)==0)
-                {
-                    $post_meta = new Postmeta();    
-                    
-                }
-                $post_meta->meta_key = 'featured_image';
-                $post_meta->meta_value = $l_featured_image;
-                $post_meta->save($post);
-                
-                //add seo title
-                
-                $post_seo_title = new Postmeta();
-                $post_seo_title->where('post_id', $id)
-                        ->where('meta_key', 'seo_title')
-                        ->get();   
-                
-                if(count($post_seo_title)==0)
-                {
-                    $post_seo_title = new Postmeta();                    
-                }
-                $post_seo_title->meta_key = 'seo_title';
-                $post_seo_title->meta_value = $seo_title;
-                $post_seo_title->save($post);
-                
-                //add seo desciption
-                $post_seo_desc =  new Postmeta();
-                $post_seo_desc->where('post_id', $id)
-                        ->where('meta_key', 'seo_description')
-                        ->get();   
-                if(count($post_seo_desc)==0)
-                {
-                    $post_seo_desc = new Postmeta();                    
-                }
-                $post_seo_desc->meta_key = 'seo_description';
-                $post_seo_desc->meta_value = $seo_desc;
-                $post_seo_desc->save($post);
-                
-                //add seo keywords
-                $post_seo_key =  new Postmeta();
-                $post_seo_key->where('post_id', $id)
-                        ->where('meta_key', 'seo_keyword')
-                        ->get();     
-                if(count($post_seo_desc)==0)
-                {
-                    $post_seo_key = new Postmeta();                    
-                }
-                $post_seo_key->meta_key = 'seo_keyword';
-                $post_seo_key->meta_value = $seo_keywords;
-                $post_seo_key->save($post);
-                redirect('administrator/posts');
-                
+                $flag = TRUE;
             }
         }
+        
+        if($flag)
+        {
+            $langpost = new Post();
+           
+            $langpost->where('id',$id)->get();
+            $root = $langpost->root_lang;
+            
+            foreach ($language as $lang)
+            {
+                if($this->input->post('txttitle'.$lang->code))
+                {
+                    $l_id = $this->input->post('postlang_id_'.$lang->code);
+                    $l_title = $this->input->post('txttitle'.$lang->code);
+                    $l_exerpt = $this->input->post('txtexcerpt'.$lang->code);		
+                    $l_content = $this->input->post('txtcontent'.$lang->code);	
+                    $l_arr_categories = $this->input->post('cbcategory');
+                    $lstTag = $this->input->post('lstTagAdded');
+                    $l_featured_image = $this->input->post('hdffeatured_image');            
+                    $post_date_publish = $this->input->post('txtDatePublish');
+                    $post_status = $this->input->post('ddlTrangThai');
+                    
+                    
+                    $format = 'd-m-Y H:i:s';
+                    $date_publish = DateTime::createFromFormat($format, $post_date_publish);
+                    $date_publish = $date_publish->format('Y-m-d H:i:s');
+                    $seo_title = $this->input->post('txtTitleSeo'.$lang->code);
+                    $seo_desc = $this->input->post('txtDescSeo'.$lang->code);
+                    $seo_keywords = $this->input->post('txtKeywordSeo'.$lang->code);
+            
+                    $post = new Post();
+                    if($post->where('id', $l_id)->count()>0)
+                    {
+                        $post->where('id', $l_id)->get();
+                        if($post->post_title != trim($l_title))
+                        {
+                            $slug = $this->Common_model->makeSlugs($l_title,255);
+                            $slug = $this->generateSlug($slug);
+                            $post->guid = $slug;
+                        }
+                    }
+                    else {
+                        $slug = $this->Common_model->makeSlugs($l_title,255);
+                        $slug = $this->generateSlug($slug);
+                        $post->guid = $slug;
+                    }
+                    $post->post_modified = date('Y-m-d H:i:s');
+                    $post->post_date_gmt = $date_publish;
+                    $post->post_content = $l_content;
+                    $post->post_title = $l_title;
+                    $post->post_excerpt = $l_exerpt;
+                    $post->post_type = 'post';
+                    $post->post_status = $post_status;
+                    $post->language_id = $lang->id;
+                    $post->root_lang = $root;
+                    //add term_taxonomy_post
+                    $arrTag = explode(',',$lstTag);            
+                    $countTag = count($arrTag);
+                    if(count($arrTag)>2)
+                    {
+                        unset($arrTag[0]);
+
+                        unset($arrTag[$countTag-1]);
+                        $arrTag = array_values($arrTag);
+
+                    }           
+            
+                    $arrTag = array_merge($l_arr_categories,$arrTag);
+                    if($post->where('id', $l_id)->count()>0)
+                    {
+                        $term_taxonomy_post = new Term_taxonomy_post();
+                        $term_taxonomy_post->where('post_id', $l_id)->get();
+                        $term_taxonomy_post->delete_all();
+                    }
+                    $term_taxonomy = new Term_taxonomy();
+                    $term_taxonomy->where_in('term_id',$arrTag)->get();
+            
+                    if($post->save($term_taxonomy->all))
+                    {
+                        //add featured images
+                        $post_meta = new Postmeta();
+                        $post_meta->where('post_id', $l_id)
+                                ->where('meta_key', 'featured_image')
+                                ->get();  
+                        if($post_meta->where('post_id', $l_id)->where('meta_key', 'featured_image')->count()==0)
+                        {
+                            $post_meta = new Postmeta();    
+
+                        }
+                        $post_meta->meta_key = 'featured_image';
+                        $post_meta->meta_value = $l_featured_image;
+                        $post_meta->save($post);
+
+                        //add seo title
+
+                        $post_seo_title = new Postmeta();
+                        $post_seo_title->where('post_id', $l_id)
+                                ->where('meta_key', 'seo_title')
+                                ->get();   
+
+                        if($post_seo_title->where('post_id', $l_id)->where('meta_key', 'seo_title')->count()==0)
+                        {
+                            $post_seo_title = new Postmeta();                    
+                        }
+                        $post_seo_title->meta_key = 'seo_title';
+                        $post_seo_title->meta_value = $seo_title;
+                        $post_seo_title->save($post);
+
+                        //add seo desciption
+                        $post_seo_desc =  new Postmeta();
+                        $post_seo_desc->where('post_id', $l_id)
+                                ->where('meta_key', 'seo_description')
+                                ->get();   
+                        if($post_seo_desc->where('post_id', $l_id)->where('meta_key', 'seo_description')->count()==0)
+                        {
+                            $post_seo_desc = new Postmeta();                    
+                        }
+                        $post_seo_desc->meta_key = 'seo_description';
+                        $post_seo_desc->meta_value = $seo_desc;
+                        $post_seo_desc->save($post);
+
+                        //add seo keywords
+                        $post_seo_key =  new Postmeta();
+                        $post_seo_key->where('post_id', $l_id)
+                                ->where('meta_key', 'seo_keyword')
+                                ->get();     
+                        if($post_seo_key->where('post_id', $l_id)->where('meta_key', 'seo_keyword')->count()==0)
+                        {
+                            $post_seo_key = new Postmeta();                    
+                        }
+                        $post_seo_key->meta_key = 'seo_keyword';
+                        $post_seo_key->meta_value = $seo_keywords;
+                        $post_seo_key->save($post);
+                    }
+                }
+            }
+            redirect('administrator/posts');
+        }        
         else {
             $post = new Post();
         
@@ -359,11 +401,10 @@ class Posts extends MX_Controller
             
             $data['lst_post_tag'] = $lst_post_tag;
             $data['featured_image'] = $post->getPostMeta($id,'featured_image');
-            $data['seoTitle'] = $post->getPostMeta($id, 'seo_title');
-            $data['seoDesc'] = $post->getPostMeta($id,'seo_description');
-            $data['seoKey'] = $post->getPostMeta($id,'seo_keyword');
+            
             $data['term_option'] = $this->Category_model->get_categories(0,5,0,$this->Category_model->get_count_category(0,5) );
             $data['post'] = $post;
+            $data['lstPost'] = $post->getPostLang($post->id);
             $data['term_post'] = $term_post;
             $data['lstTag'] = $this->Tag_model->ListPopularTag(20);
             $data['lstLang'] = $lstLang;

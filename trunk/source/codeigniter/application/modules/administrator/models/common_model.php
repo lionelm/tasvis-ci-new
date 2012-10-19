@@ -36,6 +36,7 @@
         function makeSlugs($string, $maxlen=0)
         {
            $newStringTab=array();
+           $string = trim($string);
            $string=strtolower($this->noDiacritics($string));
            if(function_exists('str_split'))
            {

@@ -41,14 +41,53 @@
                         {
                     ?>
                     <div id="divlang_<?php echo $lang->code;?>">
+                        <input type="hidden" name="postlang_id_<?php echo $lang->code;?>" value="<?php 
+                                                            foreach ($lstPost as $post_item) 
+                                                            {
+                                                                if($lang->id == $post_item->language_id)
+                                                                {
+                                                                    echo $post_item->id;
+                                                                }
+                                                            }
+                                                        ?>">
                         <p><label>Tiêu đề <strong>(<?php echo $lang->name;?>)</strong>:</label></p>
-                        <p><span class="field"><input type="text" class="longinput validate[required]" name="txttitle<?php echo $lang->code;?>"></span></p>
+                        <p><span class="field">
+                                <input type="text" value="<?php 
+                                                            foreach ($lstPost as $post_item) 
+                                                            {
+                                                                if($lang->id == $post_item->language_id)
+                                                                {
+                                                                    echo $post_item->post_title;
+                                                                }
+                                                            }
+                                                        ?>" 
+                                        class="longinput validate[required]" name="txttitle<?php echo $lang->code;?>">
+                            </span></p>
                         </br>
                         <p><label>Tóm tắt <strong>(<?php echo $lang->name;?>)</strong>:</label></p>                            
-                        <p><span class="field"><textarea name="txtexcerpt<?php echo $lang->code;?>" class="validate[required]"></textarea></span></p>
+                        <p><span class="field"><textarea name="txtexcerpt<?php echo $lang->code;?>" class="validate[required]"><?php 
+                                                            foreach ($lstPost as $post_item) 
+                                                            {
+                                                                if($lang->id == $post_item->language_id)
+                                                                {
+                                                                    echo $post_item->post_excerpt;
+                                                                }
+                                                            }
+                                                        ?></textarea></span></p>
                         </br>
                         <p><label>Nội dung <strong>(<?php echo $lang->name;?>)</strong>:</label></p>                            
-                        <p><textarea name="txtcontent<?php echo $lang->code;?>" id="editor_content<?php echo $lang->code;?>" class="validate[required]"></textarea></p>            
+                        <p><textarea name="txtcontent<?php echo $lang->code;?>" id="editor_content<?php echo $lang->code;?>" class="validate[required]">
+                                <?php 
+                                    foreach ($lstPost as $post_item) 
+                                    {
+                                        if($lang->id == $post_item->language_id)
+                                        {
+                                            echo $post_item->post_content;
+                                        }
+                                    }
+                                ?>
+                            </textarea>
+                        </p>            
                         </br>
 
                         <div class="seo-packages widgetbox">
@@ -61,23 +100,56 @@
                                 <p>
                                     <label>Title</label>
                                     <span class="field small-form">
-                                        <input class="mediuminput" type="text" name="txtTitleSeo<?php echo $lang->code;?>" onkeyup="countCharactor(this.value);">
+                                        <input class="mediuminput" type="text" name="txtTitleSeo<?php echo $lang->code;?>" onkeyup="countCharactor(this.value);"
+                                               value="<?php 
+                                                            $seotitle = '';
+                                                            foreach ($lstPost as $post_item) 
+                                                            {
+                                                                if($lang->id == $post_item->language_id)
+                                                                {
+                                                                    $seotitle = $post_item->getPostMeta($post_item->id, 'seo_title');
+                                                                    echo $post_item->getPostMeta($post_item->id, 'seo_title');
+                                                                }
+                                                            }
+                                                        ?>"
+                                               >
                                     </span>
-                                    <input type="text" id="txtlength" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <input type="text"  id="txtlength" class="length-count" value="<?php echo mb_strlen($seotitle,'utf-8');?>" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
                                     <small class="desc small-desc"> Most search engines use a maximum of 60 chars for the title.</small>
                                 </p>
                                 <p>
                                     <label>Description</label>
                                     <span class="field small-form">
-                                        <textarea id="location" class="mediuminput" name="txtDescSeo<?php echo $lang->code;?>" rows="5" cols="80" onkeyup="countCharactors(this.value);"></textarea>
+                                        <textarea id="location" class="mediuminput" name="txtDescSeo<?php echo $lang->code;?>" rows="5" cols="80" onkeyup="countCharactors(this.value);"><?php 
+                                                $seodesc = '';
+                                                foreach ($lstPost as $post_item) 
+                                                {
+                                                    
+                                                    if($lang->id == $post_item->language_id)
+                                                    {
+                                                        $seodesc = $post_item->getPostMeta($post_item->id, 'seo_description');
+                                                        echo $post_item->getPostMeta($post_item->id, 'seo_description');
+                                                    }
+                                                }
+                                            ?></textarea>
                                     </span>
-                                    <input type="text" id="txtlength2" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <input type="text" id="txtlength2" class="length-count" value="<?php echo mb_strlen($seodesc,'utf-8');?>" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
                                     <small class="desc small-desc"> Most search engines use a maximum of 160 chars for the description.</small>
                                 </p>
                                 <p>
                                     <label>Keywords</label>
                                     <span class="field small-form">
-                                        <input class="mediuminput" type="text" name="txtKeywordSeo<?php echo $lang->code;?>">
+                                        <input class="mediuminput" type="text" name="txtKeywordSeo<?php echo $lang->code;?>"
+                                               value="<?php 
+                                                            foreach ($lstPost as $post_item) 
+                                                            {
+                                                                if($lang->id == $post_item->language_id)
+                                                                {
+                                                                    echo $post_item->getPostMeta($post_item->id, 'seo_keyword');;
+                                                                }
+                                                            }
+                                                        ?>"
+                                               >                                               
                                     </span>                        
                                 </p>
                             </div>

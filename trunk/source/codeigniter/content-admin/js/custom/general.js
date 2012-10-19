@@ -10,12 +10,12 @@ jQuery(document).ready(function(){
 	var lang_num = 0;
         if(jQuery('#txtLangNum').length>0)
         {
-            $lang_num = jQuery('#txtLangNum').attr('value');
+            lang_num = jQuery('#txtLangNum').attr('value');
         }
         
         jQuery('#wizard').smartTab({
-                selected: 0,  // Selected Tab, 0 = first step   
-                keyNavigation:true, // Enable/Disable key navigation
+                selected: lang_num,  // Selected Tab, 0 = first step   
+                keyNavigation:false, // Enable/Disable key navigation
                 autoProgress:false, // Auto navigate tabs on interval
                 progressInterval: 3500, // Auto navigate Interval
                 stopOnFocus:false, // Stops autoProgress on mouse hover and restarts when not
