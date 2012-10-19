@@ -31,17 +31,19 @@
                 <th class="head0" width="10"><input type="checkbox" class="checkall" /></th>
                 <th class="head1" width="250">Tiêu đề</th>                                
                 <th class="head0">Tóm tắt</th>
-                <th class="head1">Ngày cập nhật</th>
-                <th class="head0" width="60">&nbsp;</th>
+                <th class="head1">Ngôn ngữ</th>
+                <th class="head0">Ngày cập nhật</th>
+                <th class="head1" width="60">&nbsp;</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th class="head0" width="10"><input type="checkbox" class="checkall" /></th>
-                <th class="head1">Tiêu đề</th>                                
+                <th class="head1" width="250">Tiêu đề</th>                                
                 <th class="head0">Tóm tắt</th>
-                <th class="head1">Ngày cập nhật</th>
-                <th class="head0" width="60">&nbsp;</th>
+                <th class="head1">Ngôn ngữ</th>
+                <th class="head0">Ngày cập nhật</th>
+                <th class="head1" width="60">&nbsp;</th>
             </tr>
         </tfoot>
         <tbody>                               	
@@ -54,6 +56,15 @@
                 <td><?php echo $post->post_title;?></td>
 
                 <td><?php echo $post->post_excerpt;?></td>
+                <td><?php 
+                        $lstPostLang = new Post();
+                        $lstPostLangs = $lstPostLang->getPostLang($post->id);
+                        foreach ($lstPostLangs as $pl)
+                        {                            
+                    ?>
+                    <a href="<?php echo base_url()?>administrator/pages/edit/<?php echo $pl->id;?>"><?php echo $pl->language_name;?></a>&nbsp;
+                    <?php }?>
+                </td>
                 <td><?php
                 if($post->post_modified=='0000-00-00 00:00:00')
                 {                                     	

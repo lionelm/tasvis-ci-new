@@ -18,6 +18,7 @@
             </ul>
         </li>                
         <li><a href="<?php echo base_url();?>administrator/languages" class="elements"><span>Ngôn ngữ</span></a></li>
+        <li><a href="<?php echo base_url();?>administrator/comments" class="editor"><span>Bình luận</span></a></li>
         <li><a href="./charts.html" class="charts"><span>Graphs &amp; Charts</span></a></li>
         <li><a href="./media.html" class="media"><span>Media</span></a></li>
         <li><a href="./form.html" class="editor menudrop"><span>Forms</span></a>
