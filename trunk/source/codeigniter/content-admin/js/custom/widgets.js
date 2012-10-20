@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
 	//datepicker
 	jQuery('#datepicker').datepicker();
-	
+	alert('sa');
 	//show tabbed widget
 	jQuery('#tabs').tabs();
 	
