@@ -1214,3 +1214,62 @@ p.status-ddl select{width: 77%;}
 .stepContainer{height: auto !important;}
 .post-lang .actionBar{margin-right: 15px;}
 .wizard .tabbedmenu li a.sel {background: none repeat scroll 0 0 #FFFFFF;border-bottom: 1px solid #FFFFFF;color: #333333;}
+/*Quan ly menu*/
+.widgetbox .menu_tabs_nav li .sel {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    color: #333333;
+}
+
+
+.widgetbox .menu_tabs_nav li a:hover {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    color: #333333;
+}
+#tabs_menu .ui-tabs-nav
+{
+    height: 33px;
+    overflow: hidden;
+}
+#tabs-11
+{
+    padding-left: 10px;
+    background: #FFFFFF;
+    
+}
+#tabs_menu1
+{
+   padding-left: 10px;
+    padding-right: 10px;
+}
+#tabs-11 input
+{
+    padding: 0 0 0 0 ;
+}
+.widgetbox .tab_categories
+{
+    background: #EEEEEE;
+    
+}
+.widgetbox .menu_tabs_nav li
+{
+    list-style-type:none;
+}
+.menu_tabs_nav
+{
+    width: 100%;
+    overflow: hidden;
+}
+.widgetbox .menu_tabs_nav li a {
+    padding: 5px 15px;
+     color: #555555;
+    text-decoration: none;
+    font-weight: bold;
+    background: url("../../images/titlebg.png") repeat-x scroll left top #EEEEEE;
+    border-bottom: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    line-height: 21px;
+    float: left;
+}
+/*End quan ly menu*/
