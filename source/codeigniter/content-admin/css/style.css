@@ -1213,6 +1213,11 @@ p.status-ddl select{width: 77%;}
 .post-lang .content p{border: none !important;}
 .stepContainer{height: auto !important;}
 .post-lang .actionBar{margin-right: 15px;}
+
+.wizard .tabbedmenu li a.sel {background: none repeat scroll 0 0 #FFFFFF;border-bottom: 1px solid #FFFFFF;color: #333333;}
+#message-check-name .loaders{display: none;}
+#message-check-name .message-box{display: none;}
+#message-check-name .message-success{display: none;}=======
 .wizard .tabbedmenu li a.sel {background: none repeat scroll 0 0 #FFFFFF;border-bottom: 1px solid #FFFFFF;color: #333333;}
 /*Quan ly menu*/
 .widgetbox .menu_tabs_nav li .sel {
