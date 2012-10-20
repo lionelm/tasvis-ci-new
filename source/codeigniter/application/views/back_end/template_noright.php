@@ -24,10 +24,12 @@
 
 <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery-ui-timepicker-addon.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/general.js"></script>
+
 <link rel="stylesheet" media="screen" href="<?php echo base_url();?>content-admin/css/validationEngine.jquery.css"/>
 
 <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery.validationEngine-vi.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content-admin/js/jquery.validationEngine.js"></script>
+
 <script>
 		jQuery(document).ready(function(){
 			// binds form submission and fields to the validation engine
@@ -51,14 +53,13 @@
 		}
 </script>
 <script src="<?php echo base_url();?>content-admin/js/jquery.smartTab.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.flot.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.flot.resize.min.js"></script>
 
 <script src="<?php echo base_url();?>content-admin/js/jquery.popupWindow.js"></script> 
 
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/tables.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/dashboard.js"></script>
+
 
 <!--[if lt IE 9]>
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
