@@ -100,7 +100,7 @@
                                 <p>
                                     <label>Title</label>
                                     <span class="field small-form">
-                                        <input class="mediuminput" type="text" name="txtTitleSeo<?php echo $lang->code;?>" onkeyup="countCharactor(this.value);"
+                                        <input class="mediuminput" type="text" name="txtTitleSeo<?php echo $lang->code;?>" onkeyup="countCharactor(this.value,'<?php echo 'txtlength_'.$lang->code;?>');"
                                                value="<?php 
                                                             $seotitle = '';
                                                             foreach ($lstPost as $post_item) 
@@ -114,13 +114,13 @@
                                                         ?>"
                                                >
                                     </span>
-                                    <input type="text"  id="txtlength" class="length-count" value="<?php echo mb_strlen($seotitle,'utf-8');?>" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <input type="text"  id="txtlength_<?php echo $lang->code;?>" class="length-count" value="<?php echo mb_strlen($seotitle,'utf-8');?>" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
                                     <small class="desc small-desc"> Most search engines use a maximum of 60 chars for the title.</small>
                                 </p>
                                 <p>
                                     <label>Description</label>
                                     <span class="field small-form">
-                                        <textarea id="location" class="mediuminput" name="txtDescSeo<?php echo $lang->code;?>" rows="5" cols="80" onkeyup="countCharactors(this.value);"><?php 
+                                        <textarea id="location" class="mediuminput" name="txtDescSeo<?php echo $lang->code;?>" rows="5" cols="80" onkeyup="countCharactors(this.value,'<?php echo 'txtlength2_'.$lang->code;?>');"><?php 
                                                 $seodesc = '';
                                                 foreach ($lstPost as $post_item) 
                                                 {
@@ -133,7 +133,7 @@
                                                 }
                                             ?></textarea>
                                     </span>
-                                    <input type="text" id="txtlength2" class="length-count" value="<?php echo mb_strlen($seodesc,'utf-8');?>" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <input type="text" id="txtlength2_<?php echo $lang->code;?>" class="length-count" value="<?php echo mb_strlen($seodesc,'utf-8');?>" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
                                     <small class="desc small-desc"> Most search engines use a maximum of 160 chars for the description.</small>
                                 </p>
                                 <p>
@@ -247,7 +247,16 @@
                                 foreach ($lstTag as $tag)
                                 {
                             ?>
-                            <a style="font-size: 8pt;" href="" class="link-tag" valuetag="<?php echo $tag->term_id;?>" id="tag-num-<?php echo $tag->term_id;?>"><?php echo $tag->name;?></a>
+                                <?php $flag=false;?>
+                                <?php $tag_id = $tag->term_id;?>
+                                <?php foreach($lst_post_tag as $post_tag){
+                                    if($tag_id == $post_tag->term_id){$flag=true;}		
+                                }?> 
+                                    <?php if($flag){?>
+                                    <a style="font-size: 8pt;" href="" class="link-tag added" valuetag="<?php echo $tag->term_id;?>" id="tag-num-<?php echo $tag->term_id;?>"><?php echo $tag->name;?></a>
+                                    <?php }else{?>
+                                    <a style="font-size: 8pt;" href="" class="link-tag" valuetag="<?php echo $tag->term_id;?>" id="tag-num-<?php echo $tag->term_id;?>"><?php echo $tag->name;?></a>
+                                    <?php }?>                            
                             <?php }?>                            
                         </div>
                     </div>

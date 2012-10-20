@@ -473,14 +473,14 @@ function checkslug(inputString)
     jQuery("#message-check .loaders").css('display','none');
 }
 
-function countCharactor(inputString)
+function countCharactor(inputString,inputcount)
 {
     var count = inputString.length;
-    jQuery('#txtlength').val(count);
+    jQuery('#'+inputcount).val(count);
 }
 
-function countCharactors(inputString)
+function countCharactors(inputString,inputcount)
 {
     var count = inputString.length;
-    jQuery('#txtlength2').val(count);
+    jQuery('#'+inputcount).val(count);
 }
