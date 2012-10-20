@@ -89,6 +89,31 @@
                     } else
                     $sl++;                    
                 }
+            } else
+            {
+                foreach($cats as $cat)
+                {
+                   
+                        $category = explode('-',$cat);
+                        $temp = new Temp();
+                        $temp->id = $category[1];
+                        $pre = '';
+                        for($i = 1; $i<=$category[0];$i++)
+                        {
+                            $pre .= '— ';
+                        }
+                        $term = new Term();
+                        $term->get_by_id($temp->id);
+                        
+                        $temp->name = $pre.$term->name;
+                        $term_taxonomy = new Term_taxonomy();
+                        $term_taxonomy->where('term_id', $temp->id)->get();
+                        
+                        $temp->description = $term_taxonomy->description;
+                        $temp->slug = $term->slug;
+                        $lstTerms[] = $temp;
+                        
+                    }
             }
             return $lstTerms;
         }
