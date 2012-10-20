@@ -61,17 +61,17 @@
                                 <p>
                                     <label>Title</label>
                                     <span class="field small-form">
-                                        <input class="mediuminput" type="text" name="txtTitleSeo<?php echo $lang->code;?>" onkeyup="countCharactor(this.value);">
+                                        <input class="mediuminput" type="text" name="txtTitleSeo<?php echo $lang->code;?>" onkeyup="countCharactor(this.value,'<?php echo 'txtlength_'.$lang->code;?>');">
                                     </span>
-                                    <input type="text" id="txtlength" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <input type="text" id="txtlength_<?php echo $lang->code;?>" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
                                     <small class="desc small-desc"> Most search engines use a maximum of 60 chars for the title.</small>
                                 </p>
                                 <p>
                                     <label>Description</label>
                                     <span class="field small-form">
-                                        <textarea id="location" class="mediuminput" name="txtDescSeo<?php echo $lang->code;?>" rows="5" cols="80" onkeyup="countCharactors(this.value);"></textarea>
+                                        <textarea id="location" class="mediuminput" name="txtDescSeo<?php echo $lang->code;?>" rows="5" cols="80" onkeyup="countCharactors(this.value,'<?php echo 'txtlength2_'.$lang->code;?>');"></textarea>
                                     </span>
-                                    <input type="text" id="txtlength2" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
+                                    <input type="text" id="txtlength2_<?php echo $lang->code;?>" class="length-count" value="0" style="text-align:center;" maxlength="3" size="3" name="lengthT" readonly="">
                                     <small class="desc small-desc"> Most search engines use a maximum of 160 chars for the description.</small>
                                 </p>
                                 <p>

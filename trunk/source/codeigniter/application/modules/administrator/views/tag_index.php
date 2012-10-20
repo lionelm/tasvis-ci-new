@@ -4,7 +4,8 @@
     <li><a href="<?php echo base_url();?>administrator/category">Danh mục bài viết</a></li>
     <li class="current"><a href="<?php echo base_url();?>administrator/tags">Danh mục Tag</a></li>
 </ul>
-<div class="content">                	
+<div class="content">    
+    
         <div class="edit-left">
             <form action="<?php echo base_url();?>administrator/tags" method="post" accept-charset="utf-8" id="formID" class="stdform">                    		
             <p><label>Tên Tag:</label></p>
@@ -98,5 +99,6 @@
                 <?php }?>
             </tbody>
         </table>
+        <?php echo $list_link;?>
     </div>                                  
 </div><!--content-->                

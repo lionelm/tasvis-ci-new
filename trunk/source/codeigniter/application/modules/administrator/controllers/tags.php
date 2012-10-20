@@ -15,7 +15,7 @@
             $this->load->library('session');
         }
         
-        function index()
+        function index($row=0)
         {   
             if($this->input->post('txttitle'))
             {
@@ -23,6 +23,7 @@
                 $term = new Term();
                 $name = trim($this->input->post('txttitle'));                
                 $slug = trim($this->input->post('txtslug'));
+                
                 if($slug=='')
                 {
                     $slug = $this->Common_model->makeSlugs($name,255);
@@ -30,36 +31,60 @@
                 }
                 $term->name = $name;
                 $term->slug = $slug;
-                if($this->checkSlug($slug))
+                if(!$term->checkExitTag($name))
                 {
-                    $this->session->set_flashdata('message','loi');
-                }
-                else {
-                    if($term->save())
-                    {    
-                        //$last_term = new Term();
-                        //$last_term->where('name',$name)->get();
+                    if($this->checkSlug($slug))
+                    {
+                        $this->session->set_flashdata('message','lỗi');
+                    }
+                    else {
+                        if($term->save())
+                        {                          
 
-                        //add Term_taxonomy
-                        $term_taxonomy = new Term_taxonomy();
+                            //add Term_taxonomy
+                            $term_taxonomy = new Term_taxonomy();
 
-                        //$term_taxonomy->term_id=$last_term->term_id;
-                        $term_taxonomy->taxonomy = 'tag';
-                        $term_taxonomy->description = $this->input->post('txtexcerpt');
+                            //$term_taxonomy->term_id=$last_term->term_id;
+                            $term_taxonomy->taxonomy = 'tag';
+                            $term_taxonomy->description = $this->input->post('txtexcerpt');
 
-                        $term_taxonomy->save($term);
+                            $term_taxonomy->save($term);
+                        }
                     }
                 }
-                
+                else
+                {
+                    $this->session->set_flashdata('message','Tag đã tồn tại');
+                }
+                redirect("administrator/tags");
             }
             
-            $lstTerms = new Term();           
-            $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
-                                            ->where_in_join_field('term_taxonomy','taxonomy','tag')
-                                            ->get();            
+            else
+            {
+                //paging
+                include('paging.php');
+                $config['per_page'] = 10;		
+                $config['base_url']= base_url()."/administrator/tags/index/"; 
+                
+                $lstTerms = new Term();
+                $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
+                        ->where_in_join_field('term_taxonomy','taxonomy','tag');
+                $config['total_rows']= $lstTerms->count();   
+                $config['cur_page']= $row;		
+                $this->pagination->initialize($config);
+                $data['list_link'] = $this->pagination->create_links();	
+                
+                $lstTerms = new Term();    
+                $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
+                                                ->where_in_join_field('term_taxonomy','taxonomy','tag')
+                                                ->limit($config['per_page'], $row)
+                                                ->order_by('id','ASC')
+                                                ->get();            
+
+                $data['view'] = 'tag_index';
+                $this->load->view('back_end/template_noright',$data);
+            }        
             
-            $data['view'] = 'tag_index';
-            $this->load->view('back_end/template_noright',$data);
         }   
         
         function delete()
@@ -143,7 +168,7 @@
         
         function addTagAjax()
         {
-            $name = $this->input->post('name');
+            $name = trim($this->input->post('name'));
             $slug = $this->Common_model->makeSlugs($name,255);
             $slug = $this->generateSlug($slug);
             
@@ -153,28 +178,34 @@
             
             $mess1 = '';
             $mess2 = '';
-            if($this->checkSlug($slug))
+            if(!$term->checkExitTag($name))
             {
-                echo "";
+                if($this->checkSlug($slug))
+                {
+                    echo json_encode(array('mess1'=>$mess1,'mess2'=>$mess2));
+                }
+                else {
+                    if($term->save())
+                    {                 
+
+                        //add Term_taxonomy
+                        $term_taxonomy = new Term_taxonomy();
+
+                        //$term_taxonomy->term_id=$last_term->term_id;
+                        $term_taxonomy->taxonomy = 'tag';
+                        $term_taxonomy->description = $name;
+
+                        $term_taxonomy->save($term);
+                        $mess1 = "<span><a class='ntdelbutton' valuetag='".$term->id."' id='tag-stt-".$term->id."'>X</a>&nbsp;".$term->name."</span>";
+
+                        echo json_encode(array('mess1'=>$mess1,'mess2'=>$term->id));  
+                    }               
+                }
             }
-            else {
-                if($term->save())
-                {                 
-
-                    //add Term_taxonomy
-                    $term_taxonomy = new Term_taxonomy();
-
-                    //$term_taxonomy->term_id=$last_term->term_id;
-                    $term_taxonomy->taxonomy = 'tag';
-                    $term_taxonomy->description = $name;
-
-                    $term_taxonomy->save($term);
-                    $mess1 = "<span><a class='ntdelbutton' valuetag='".$term->id."' id='tag-stt-".$term->id."'>X</a>&nbsp;".$term->name."</span>";
-                    
-                    echo json_encode(array('mess1'=>$mess1,'mess2'=>$term->id));  
-                }               
+            else
+            {
+                echo json_encode(array('mess1'=>$mess1,'mess2'=>$mess2));
             }
-            echo "";
         }
 
         function generateSlug($slug)
