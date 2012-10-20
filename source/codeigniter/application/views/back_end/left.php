@@ -23,7 +23,7 @@
         <li><a href="./media.html" class="media"><span>Media</span></a></li>
         <li><a href="./form.html" class="editor menudrop"><span>Forms</span></a>
                 <ul>
-                <li><a href="./form.html"><span>Form Styling</span></a></li>
+                <li><a href="./form.html"><span>Options General</span></a></li>
                 <li><a href="./editor.html"><span>WYSIWYG Editor</span></a></li>
                 <li><a href="./wizard.html"><span>Wizard</span></a></li>
             </ul>
