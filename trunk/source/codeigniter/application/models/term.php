@@ -16,6 +16,7 @@ class Term extends DataMapper {
     function checkExitTag($name)
     {
         $tag = new Term();        
+        $name = trim($name);
         $name = mb_strtolower($name, 'utf-8');
         $count = $tag->where("ENCODE(LOWER(" . $tag->add_table_name('name') . "),'key') = ENCODE('".$name."','key')")
             ->include_related('term_taxonomy', array('id', 'taxonomy','description'))

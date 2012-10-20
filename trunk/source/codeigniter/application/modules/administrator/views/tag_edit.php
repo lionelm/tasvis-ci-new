@@ -5,8 +5,7 @@
     <li class="current"><a href="<?php echo base_url();?>administrator/tags">Cập nhật Tag</a></li>
 </ul>
 <div class="content">                	
-        <div class="edit-left">
-            <?php //print_r($term)?>
+        <div class="edit-left">            
             <form action="<?php echo base_url();?>administrator/tags/edit" method="post" accept-charset="utf-8" id="formID" class="stdform">                    		
                 <input type="hidden" name="term_id" value="<?php echo $term->term_id;?>" />
             <p><label>Tên Tag:</label></p>
@@ -99,5 +98,6 @@
                 <?php }?>
             </tbody>
         </table>
+        <?php echo $list_link;?>
     </div>                                  
 </div><!--content-->                

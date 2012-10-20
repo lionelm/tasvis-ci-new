@@ -473,6 +473,26 @@ function checkslug(inputString)
     jQuery("#message-check .loaders").css('display','none');
 }
 
+function checktagname(inputString)
+{
+    jQuery("#message-check .loaders").css('display','inline');
+    var slug = jQuery("#txtslug").attr('value');
+    var url = jQuery("#txtslug").attr('urlload');    
+    var oldslug = jQuery("#hdfOldSlug").attr('value');
+    if(slug!=oldslug){
+        jQuery.post(url,{slug:slug},function(data) {
+            if(data == "exist")
+            {            
+                jQuery("#message-check .message-box").css('display','list-item');                        
+            }
+            else{
+                jQuery("#message-check .message-box").css('display','none');            
+            }
+        });   
+    }
+    jQuery("#message-check .loaders").css('display','none');
+}
+
 function countCharactor(inputString,inputcount)
 {
     var count = inputString.length;

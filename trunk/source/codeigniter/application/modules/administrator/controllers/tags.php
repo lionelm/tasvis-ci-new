@@ -101,24 +101,32 @@
             
         }
         
-        function edit($id=0)
+        function edit($id=0,$row=0)
         {
-            $name = $this->input->post('txttitle');
-            $slug = $this->input->post('txtslug');		
+            $name = trim($this->input->post('txttitle'));
+            $slug = trim($this->input->post('txtslug'));		
             $description = $this->input->post('txtexcerpt');
             //$parent = $this->input->post('ddlTerm');
             if ($this-> input-> post('txttitle')){
                 $id=$this->input->post('term_id');                
                 $term = new Term();
                 $term->where('id',$id)->get();
-                $term->name = $name;
+                if($term->name != $name)
+                {
+                    if(!$term->checkExitTag($name))
+                    {
+                        $term->name = $name;                        
+                    }
+                    else {
+                        $this->session->set_flashdata('message','Tên tag đã tồn tại');
+                    }
+                }                
                 $term->slug = $slug;                
                 $term->save();
                 
                 $term_taxonomy =  new Term_taxonomy();
                 $term_taxonomy->where('term_id', $id)->get();
-                $term_taxonomy->description = $description;
-                //$term_taxonomy->parent_term = $parent;
+                $term_taxonomy->description = $description;                
                 $term_taxonomy->save();
                 
                 redirect('administrator/tags','refresh');
@@ -128,11 +136,25 @@
                 $term->include_related('term', array('id', 'name','slug'))->get_by_term_id($id);
                 $data['term'] = $term;
                
-                $lstTerms = new Term();           
-                $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description')) 
-                        ->where_in_join_field('term_taxonomy','taxonomy','tag')
-                        ->get();            
-                //$this->load->vars($data);
+                //paging
+                include('paging.php');
+                $config['per_page'] = 10;		
+                $config['base_url']= base_url()."/administrator/tags/edit/".$id.'/'; 
+                
+                $lstTerms = new Term();
+                $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
+                        ->where_in_join_field('term_taxonomy','taxonomy','tag');
+                $config['total_rows']= $lstTerms->count();   
+                $config['cur_page']= $row;		
+                $this->pagination->initialize($config);
+                $data['list_link'] = $this->pagination->create_links();	
+                
+                $lstTerms = new Term();    
+                $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
+                                                ->where_in_join_field('term_taxonomy','taxonomy','tag')
+                                                ->limit($config['per_page'], $row)
+                                                ->order_by('id','ASC')
+                                                ->get();  
                 $data['view'] = 'tag_edit';
                 $this->load->view('back_end/template_noright',$data);
             }
@@ -158,6 +180,19 @@
         {
             $slug = $this->input->post('slug');
             if($this->checkSlug($slug))
+            {
+                echo "exist";
+            }
+            else {
+                echo "not exist";
+            }
+        }
+        
+        function checkTagNameAjax()
+        {
+            $name = $this->input->post('name');
+            $tag = new Term();
+            if($tag->checkExitTag($name))
             {
                 echo "exist";
             }

@@ -109,7 +109,7 @@
            }while($pos!==false);
 
            return $sSubject;
-        } 
+        }      
    
     }
 
