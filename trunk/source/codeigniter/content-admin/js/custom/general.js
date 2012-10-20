@@ -115,7 +115,30 @@ jQuery(document).ready(function(){
             
             return false;
         });
-        
+/*---------------------End HungPV-------------------------------*/
+/*---------------------DucNN-------------------------------*/
+       
+        jQuery('#tabs_menu').smartTab({
+                selected: 0,  // Selected Tab, 0 = first step   
+                keyNavigation:true, // Enable/Disable key navigation
+                autoProgress:false, // Auto navigate tabs on interval
+                progressInterval: 3500, // Auto navigate Interval
+                stopOnFocus:false, // Stops autoProgress on mouse hover and restarts when not
+                transitionEffect:'none' // Effect on navigation, none/fade/slide
+                
+            }            
+        );  
+         jQuery('#tabs_menu1').smartTab({
+                selected: 0,  // Selected Tab, 0 = first step   
+                keyNavigation:true, // Enable/Disable key navigation
+                autoProgress:false, // Auto navigate tabs on interval
+                progressInterval: 3500, // Auto navigate Interval
+                stopOnFocus:false, // Stops autoProgress on mouse hover and restarts when not
+                transitionEffect:'none' // Effect on navigation, none/fade/slide
+                
+            }            
+        );           
+/*---------------------End DucNN-------------------------------*/        
 	//search box of header
 	jQuery('#keyword').bind('focusin focusout', function(e){
 		var t = jQuery(this);
