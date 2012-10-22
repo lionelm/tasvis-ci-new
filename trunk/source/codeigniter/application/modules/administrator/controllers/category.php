@@ -15,6 +15,7 @@
         
         function index($row = 0)//+add category
         {   
+			
             if($this->input->post('txttitle'))
             {
                 //add Term
