@@ -137,7 +137,44 @@ jQuery(document).ready(function(){
                 transitionEffect:'none' // Effect on navigation, none/fade/slide
                 
             }            
-        );           
+        );
+        jQuery('#btn_add_custom_link').click(function(){
+            var url = jQuery('#txt_url').val();
+            var label = jQuery('#txt_label').val();
+            var base_url = jQuery('#base_url').val();
+            var object_id = jQuery('#object_id').val();
+            //alert(url);
+            jQuery('.menu_add_new').append(
+            
+            '<div class="widgetbox">'+
+            '<form class="stdform" action="'+base_url+'administrator/menus/save_detail/"'+object_id+' method="post">'   
+                +'<div class="title"><h2 class="general"><span>'+label+ '<input type="text" name="order" class="" size="1" value="0"/></span></h2></div>'
+                +'<div class="widgetcontent">'
+                    
+                     +   '<input type="hidden" name="id" class="smallinput" value="" />'
+                    +'</p><p><label>URL:</label>'
+                       + '<span class="field"><input type="text" name="url" class="smallinput" value="'+url+'"/></span>'
+                    +'</p><p><label>Label:</label>'
+                        +'<span class="field"><input type="text" name="label" class="smallinput" value="'+label+'" /></span>'
+                    +'<p><label>Status:</label>'
+                        +'<span class="field"><input type="text" name="status" class="smallinput" value="public"/></span>'
+                    +'</p><p><label>Parent:</label>'
+                        +'<span class="field"><input type="text" name="parent" class="smallinput" value="0"/></span>'                    
+                    +'</p><p><label>Title Attribute:</label>'
+                        +'<span class="field"><input type="text" name="title_attribute" class="smallinput" value="" /></span>'                    
+                    +'</p><p><label>Open link in a new window/tab:</label>'
+                        +'<input type="checkbox" name="open_link" value="1"  /> <br />'
+                    +'</p><p><label>CSS Class:</label>'
+                        +'<span class="field"><input type="text" name="css_class" class="smallinput" value=""/></span>'
+                    +'</p><input type="hidden" value="custom" name="type" /><input type="hidden" value="'+object_id+'" name="object_id" />'
+                    +'<p class="stdformbutton">'
+                    	+'<button class="submit radius2" name="submit">Save</button>'
+                        +'<input type="reset" class="reset radius2" value="Reset" />'
+                    +'</p></div></form></div>'
+            );                                   
+            
+          
+        });           
 /*---------------------End DucNN-------------------------------*/        
 	//search box of header
 	jQuery('#keyword').bind('focusin focusout', function(e){
