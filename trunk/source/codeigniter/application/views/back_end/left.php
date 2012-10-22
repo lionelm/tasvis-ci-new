@@ -3,6 +3,7 @@
 <div class="leftmenu">
     <ul>
         <li class="current"><a href="<?php echo base_url();?>admin/index" class="dashboard"><span>Dashboard</span></a></li>
+        
         <li><a href="<?php echo base_url();?>administrator/posts" class="widgets menudrop"><span>Bài viết</span></a>
             <ul>                
                 <li><a href="<?php echo base_url();?>administrator/posts"><span>Tất cả bài viết</span></a></li>     
@@ -11,6 +12,15 @@
                 <li><a href="<?php echo base_url();?>administrator/tags"><span>Danh mục tag</span></a></li>
             </ul>
         </li>
+        
+        <li><a href="<?php echo base_url();?>administrator/users" class="widgets menudrop"><span>Người dùng</span></a>
+            <ul>                
+                <li><a href="<?php echo base_url();?>administrator/users"><span>Tất cả Người dùng</span></a></li>     
+                <li><a href="<?php echo base_url();?>administrator/users/add"><span>Thêm mới Người dùng</span></a></li>
+               
+            </ul>
+        </li>
+        
         <li><a href="<?php echo base_url();?>administrator/pages" class="tables menudrop"><span>Trang</span></a>
             <ul>                
                 <li><a href="<?php echo base_url();?>administrator/pages"><span>Tất cả trang</span></a></li>     
