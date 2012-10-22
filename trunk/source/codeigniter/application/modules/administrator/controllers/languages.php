@@ -66,6 +66,8 @@
                 redirect('administrator/languages');
             }
             else{   
+                
+                //$id = $this->uri->segment(4); // co the su dung cach nay
                 $language = new Language();
                 $data['language'] = $language->where('id',$id)->get();
                 $lang = new Language();            
