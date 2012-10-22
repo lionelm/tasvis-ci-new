@@ -17,13 +17,16 @@
                 </p>                            
             </form>                                        
         </div>
+        
     <div class="list-right">
         <div class="contenttitle radiusbottom0">
             <h2 class="table"><span>Danh sách ngôn ngữ</span></h2>
         </div><!--contenttitle-->
+        
         <div class="tableoptions">
             <button class="deletebutton radius3" name="delete_term" value="<?php echo base_url();?>administrator/languages/delete" title="table2">Delete Selected</button> &nbsp;                           
         </div><!--tableoptions-->	
+        
         <table id="table2" class="stdtable stdtablecb" border="0" cellpadding="0" cellspacing="0">
             <colgroup>
                 <col class="con0">
