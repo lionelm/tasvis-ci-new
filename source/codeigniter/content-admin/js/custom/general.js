@@ -496,24 +496,24 @@ function checkslug(inputString)
     jQuery("#message-check .loaders").css('display','none');
 }
 
-function checktagname(inputString)
+function checktagname()
 {
-    jQuery("#message-check .loaders").css('display','inline');
-    var slug = jQuery("#txtslug").attr('value');
-    var url = jQuery("#txtslug").attr('urlload');    
-    var oldslug = jQuery("#hdfOldSlug").attr('value');
-    if(slug!=oldslug){
-        jQuery.post(url,{slug:slug},function(data) {
+    jQuery("#message-check-name .loaders").css('display','inline');
+    var name = jQuery("#txttitle").attr('value');
+    var url = jQuery("#txttitle").attr('urlload');    
+    var oldname = jQuery("#hdfOldName").attr('value');
+    if(name!=oldname){
+        jQuery.post(url,{name:name},function(data) {
             if(data == "exist")
             {            
-                jQuery("#message-check .message-box").css('display','list-item');                        
+                jQuery("#message-check-name .message-box").css('display','list-item');                        
             }
             else{
-                jQuery("#message-check .message-box").css('display','none');            
+                jQuery("#message-check-name .message-box").css('display','none');            
             }
         });   
     }
-    jQuery("#message-check .loaders").css('display','none');
+    jQuery("#message-check-name .loaders").css('display','none');
 }
 
 function countCharactor(inputString,inputcount)
