@@ -1,7 +1,8 @@
 <ul class="maintabmenu multipletabmenu">        
     <li class="current"><a href="<?php echo base_url();?>administrator/pages">Tất cả trang</a></li>
     <li><a href="<?php echo base_url();?>administrator/pages/add">Thêm mới trang</a></li>    
-</ul>               
+</ul>          
+     
 <div class="content">
         <h1 id="ajaxtitle"></h1>                       	                            
     <div class="contenttitle radiusbottom0">
