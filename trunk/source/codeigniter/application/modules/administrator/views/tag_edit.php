@@ -4,13 +4,40 @@
     <li><a href="<?php echo base_url();?>administrator/category">Danh mục bài viết</a></li>
     <li class="current"><a href="<?php echo base_url();?>administrator/tags">Cập nhật Tag</a></li>
 </ul>
-<div class="content">                	
+<div class="content">        
         <div class="edit-left">            
             <form action="<?php echo base_url();?>administrator/tags/edit" method="post" accept-charset="utf-8" id="formID" class="stdform">                    		
-                <input type="hidden" name="term_id" value="<?php echo $term->term_id;?>" />
+            <input type="hidden" name="term_id" value="<?php echo $term->term_id;?>" />
             <p><label>Tên Tag:</label></p>
-            <p><span class="field"><input name="txttitle" value="<?php echo $term->term_name;?>" id="txttitle" class="longinput validate[required]" type="text"></span></p>
+            <p><span class="field"><input name="txttitle" value="<?php echo $term->term_name;?>" id="txttitle" class="longinput validate[required]" type="text" urlload="<?php echo base_url();?>administrator/tags/checkTagNameAjax" onkeyup="checktagname(this.value);"></span></p>
             <br>
+            <div id="message-check-name">
+                <input type="hidden" id="hdfCheckName" value="" >
+                <input type="hidden" id="hdfOldName" value="<?php echo $term->term_name;?>">
+                <div class="loaders">
+                    <img alt="Loading..." src="<?php echo base_url();?>content-admin/images/loaders/loader4.gif">
+                    <span>Đang kiểm tra tên tag ...</span>
+                </div>
+                <div class="notification msgsuccess message-success">
+                    <a class="close"></a>
+                    <p>Bạn có thể sử dụng tên này.</p>
+                </div>
+                <div class="notification msgalert message-box">
+                    <a class="close"></a>
+                    <p>Tên tag đã tồn tại.</p>
+                </div>
+                <?php 
+                    if($this->session->flashdata('message')== 'loi')
+                    {
+                ?>
+                <div class="notification msgalert">
+                    <a class="close"></a>
+                    <p>Tên tag đã tồn tại.</p>
+                </div>
+                <?php
+                    }
+                ?>
+            </div>
             <p><label>Đường dẫn:</label></p>
             <p><span class="field"><input id="txtslug" urlload="<?php echo base_url();?>administrator/tags/checkSlugAjax" onkeyup="checkslug(this.value);" class="longinput validate[required]" value="<?php echo $term->term_slug;?>" name="txtslug" type="text"></span></p>
             <br>
