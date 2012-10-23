@@ -470,7 +470,7 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 	width: auto; margin: 0; font-weight: bold; color: #666; border: 1px solid #ccc; background: #eee; padding: 7px 10px;	
 	-moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; margin-left: 5px;
 }
-.stdform input[type=submit]:hover { background: #ffdd00; color: #333; }
+.stdform input[type=submit]:hover { opacity: 0.75; color: #fff; }
 .stdform input[type=reset]:hover { background: #ddd; cursor: pointer; color: #333; }
 
 .stdform textarea { 
