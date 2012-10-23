@@ -1277,4 +1277,55 @@ p.status-ddl select{width: 77%;}
     line-height: 21px;
     float: left;
 }
+.widgetbox .title1 h2 span {
+    background: none repeat scroll 0 0 #F2F2F2;    
+    background-image: -moz-linear-gradient(center top , #F9F9F9, #ECECEC);
+    border-radius: 0 2px 0 0;
+    display: block;
+    padding-left: 5px;
+    margin-left: 1px;    
+    overflow: hidden;
+}
+
+.widgetbox .title1 {
+    background: none repeat scroll 0 0 #F2F2F2;
+    border-radius: 2px 2px 0 0;
+    overflow:hidden;
+    background-image: -moz-linear-gradient(center top , #F9F9F9, #ECECEC);
+}
+.widgetbox .title1 h2.general {
+    background-position: -154px -443px;
+}
+.widgetbox .title1 h2 {   
+    background-repeat: no-repeat;
+    color: #000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.8px;       
+}
+.widgetcontent .btn_menu
+{
+    margin-top: 10px;
+}
+.stdform .order_menu
+{
+  background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 2px #DDDDDD inset;
+    color: #666666;
+    padding: 6px 0px;
+    text-align: center;
+    float: right;
+}
+.menu_detail
+{
+    display:none;
+}
+.title1:hover
+{
+    cursor: pointer;
+}
+
 /*End quan ly menu*/
