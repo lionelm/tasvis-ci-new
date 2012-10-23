@@ -28,10 +28,11 @@
         
          function add()
         {
-            if( $this->input->post('txtlogin') and $this->input->post('txtpass') )
+            if( $this->input->post('txtlogin'))
             {
                 $user_login = $this->input->post('txtlogin');
                 $user_pass = $this->input->post('txtpass');
+                $user_confirmpass = $this->input->post('txtconfirmpass');
                 $user_nicename = $this->input->post('txtnicename');
                 $user_email = $this->input->post('txtemail');       
                 $user_status = $this->input->post('rdtrangthai');         
@@ -41,6 +42,7 @@
                     $user2 = new User();
                     $user2->user_login = $user_login;
                     $user2->user_pass = md5($user_pass);
+                    $user2->user_confirmpas = md5($user_confirmpass);
                     $user2->user_nicename = $user_nicename;
                     $user2->user_email = $user_email;
                     $user2->user_registered = date('Y-m-d H:i:s');
@@ -48,19 +50,22 @@
                     $user2->user_status = $user_status;
                     
                     $user2->save(); // validation tự động kiểm tra khi ta gọi save()
+                    redirect('administrator/users');
+                    /*
                     if($user2->save() == false )
                     {
+                        
                         $data['lsterror'] = $user2->error->all; // lấy ra tất cả thông báo lỗi                                              
                         $data['view'] = 'user_error';
                         $this->load->view('back_end/template_noright',$data);   
                         
-                        /*                    
-                        $data['view'] = 'user_add';
-                        $this->load->view('back_end/template_noright',$data);
-                        */
+                                          
+                        //$data['view'] = 'user_add';
+                        //$this->load->view('back_end/template_noright',$data);
+                        
                     }else{
                         redirect('administrator/users');
-                    }
+                    }*/
                 }
             }else{
             
@@ -72,7 +77,7 @@
         }
         
         
-        function edit()
+        function edit($id=0,$row=0)
         {
                        
             if( $this->input->post('txtlogin') and $this->input->post('txtpass') )
@@ -92,10 +97,22 @@
                 $user4 = new User();
                 $data['user4'] = $user4->where('id',$id)->get();
                 
-                $user5 = new User();            
-                $data['lstuser5'] = $user5->get();
+                
+                //paging
+                include('paging.php');
+                $config['per_page'] = 3; // số bản ghi trên 1 trang
+                $config['base_url']= base_url()."/administrator/users/edit/".$id.'/'; // (ve nhaf xem lai dong nay)trang để phân trang
+                $user5 = new User();  
+                $config['total_rows']= $user5->count(); // tổng số bản ghi trong table
+                $config['cur_page']= $row; // trang hiện tại
+                $this->pagination->initialize($config);
+                $data['list_link'] = $this->pagination->create_links();	 // tạo link phân trang
+                 
+                $user1 = new User();
+                $data['lstuser'] = $user1->limit($config['per_page'], $row)->get(); 
                 $data['view'] = 'user_edit';
                 $this->load->view('back_end/template_noright',$data);
+                
            }
             
         }
