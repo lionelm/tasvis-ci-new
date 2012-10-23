@@ -22,7 +22,10 @@
     <div class="contenttitle radiusbottom0">
     	<h2 class="table"><span>List Main Menu</span></h2>
     </div><!--contenttitle-->
-           
+    <div class="tableoptions">
+    	<button class="deletebutton radius3" title="table1">Delete Selected</button> &nbsp;
+        
+    </div><!--tableoptions-->	       
     <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
         <colgroup>
             <col class="con0" />
@@ -57,7 +60,7 @@
             	<td class="center"><input type="checkbox" /></td>
                 <td><?php echo $term->name; ?></td>
                 <td>English</td>                                
-                <td class="center"><a href="" class="edit">Edit</a> &nbsp; <a href="" class="delete">Delete</a></td>
+                <td class="center"><a href="" class="edit">Edit</a> &nbsp; <a href="<?php echo base_url().'administrator/menus/delete_main_menu' ?>" id="<?php echo $term->id; ?>" class="delete">Delete</a></td>
             </tr>
             
             <?php }?>

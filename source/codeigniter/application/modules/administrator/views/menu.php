@@ -8,14 +8,14 @@
     <input type="hidden" value="<?php echo $object_id; ?>" id="object_id" />
     <div class="one_half menu_add_new">
         
-        <?php foreach ($child_menu as $menu) {
+        <?php if (count($child_menu)>0)  foreach ($child_menu as $menu) {
             
             if ($menu->type == 'custom'){
         ?>                    	                              
-    	<div class="widgetbox">
+    	<div class="widgetbox" id="menu_item_<?php echo $menu->id; ?>" >
             <form class="stdform" action="<?php echo base_url().'administrator/menus/save_detail/'.$object_id ?>" method="post">   
-                <div class="title"><h2 class="general"><span><?php echo $menu->label_display; ?>: Custom <input type="text" name="order" class="" size="1" value="<?php echo $menu->order; ?>"/></span></h2></div>
-                <div class="widgetcontent">
+                <div class="title1"><h2 class="general"><span><?php echo $menu->label_display; ?><input type="text" name="order" class="order_menu" size="1" value="<?php echo $menu->order; ?>"/></span></h2></div>
+                <div class="widgetcontent menu_detail">
                     <p>
                     	<label>Menu ID: <?php echo $menu->id; ?> </label>
                         <input type="hidden" name="id" class="smallinput" value="<?php echo $menu->id; ?>" />                    
@@ -65,9 +65,10 @@
                     </p>
                     <input type="hidden" value="custom" name="type" />
                     <input type="hidden" value="<?php echo $object_id?>" name="object_id" />
-                    <p class="stdformbutton">
+                    <p class="btn_menu">
                     	<button class="submit radius2" name="submit">Save</button>
                         <input type="reset" class="reset radius2" value="Reset" />
+                        <button id="btn_delete_menu" value="<?php echo $menu->id; ?>" class="stdbtn btn_red">Delete</button>
                     </p>
                 </div><!--widgetcontent-->
                                 
@@ -75,10 +76,10 @@
 
         </div><!--widgetbox-->
         <?php } elseif ($menu->type == 'page'){?>
-        <div class="widgetbox">
+        <div class="widgetbox" id="menu_item_<?php echo $menu->id; ?>">
             <form class="stdform" action="<?php echo base_url().'administrator/menus/save_detail/'.$object_id ?>" method="post">
-            <div class="title"><h2 class="general"><span><?php echo $menu->label_display; ?>: Page  Order:<input type="text" name="order" class="" size="1" value="<?php echo $menu->order; ?>" /></span></h2></div>
-            <div class="widgetcontent">
+            <div class="title1"><h2 class="general"><span><?php echo $menu->label_display; ?><input type="text" name="order" class="order_menu" size="1" value="<?php echo $menu->order; ?>" /></span></h2></div>
+            <div class="widgetcontent menu_detail">
                   
                 <p>
                     	<label>Menu ID: <?php echo $menu->id; ?> </label>
@@ -130,33 +131,43 @@
                 </p>
                 <input type="hidden" value="page" name="type" />
                 <input type="hidden" value="<?php echo $object_id?>" name="object_id" />
-                    <p class="stdformbutton">
+                    <p class="btn_menu">
                     	<button class="submit radius2" name="submit">Save</button>
                         <input type="reset" class="reset radius2" value="Reset" />
+                        <button id="btn_delete_menu" value="<?php echo $menu->id; ?>" class="stdbtn btn_red">Delete</button>
                     </p>
                 </div><!--widgetcontent-->
                                 
             </form>
         </div><!--widgetbox-->
         <?php } elseif ($menu->type == 'category'){ ?>
-        <div class="widgetbox">
+        <div class="widgetbox"  id="menu_item_<?php echo $menu->id; ?>">
             <form class="stdform" action="<?php echo base_url().'administrator/menus/save_detail/'.$object_id ?>" method="post">
-            <div class="title">
+            <div class="title1">
                 <h2 class="general">
-                <span><?php echo $menu->label_display; ?>: Category
-            	   Order:<input type="text" name="order" class="" size="1" value="<?php echo $menu->order; ?>"/>                    
+                <span><?php echo $menu->label_display; ?>
+            	   <input type="text" name="order" class="order_menu" size="1" value="<?php echo $menu->order; ?>"/>                    
                 </span>
                 </h2>
                 
             </div>
-            <div class="widgetcontent">
+            <div class="widgetcontent menu_detail">
                <p>
-                    	<label>Menu ID: <?php echo $menu->id; ?> </label>
+                    	<label>Menu ID: <b><?php echo $menu->id; ?></b> </label>
                         <input type="hidden" name="id" class="smallinput" value="<?php echo $menu->id; ?>" />                    
                 </p>
                 <p>
-                	<label>Original:</label>
-                    <span class="field"><input type="text" name="post_id" class="smallinput" value="<?php echo $menu->post_id; ?>"/></span>                    
+                	<label>Category: <b>
+                        <?php 
+                            //echo $menu->post_id;
+                            $temp_cat = new Term();
+                            $temp_cat->get_by_id($menu->post_id);
+                            echo $temp_cat->name; 
+                        ?></b>
+                    </label>
+                    
+                        
+                                     
                 </p>   
                 <p>
                 	<label>Label:</label>
@@ -169,7 +180,7 @@
                 <p><label>Parent:</label></p>                            
                     <p>
                         <select name="parent">
-                            <option value="<?php echo $menu->parent; ?>">-- Không thay đổi --</option>
+                            <option value="<?php echo '0'; ?>">-- Root --</option>
                             <?php 
                                 foreach ($parent_option as $term)
                                 {
@@ -200,9 +211,10 @@
                 </p>
                 <input type="hidden" value="category" name="type" />
                 <input type="hidden" value="<?php echo $object_id?>" name="object_id" />
-                    <p class="stdformbutton">
+                    <p class="btn_menu">
                     	<button class="submit radius2" name="submit">Save</button>
                         <input type="reset" class="reset radius2" value="Reset" />
+                        <button id="btn_delete_menu" value="<?php echo $menu->id; ?>" class="stdbtn btn_red">Delete</button>
                     </p>
                 </div><!--widgetcontent-->
                                 
@@ -234,47 +246,46 @@
         <div class="widgetbox" style="width: 300px">
             <div class="title"><h2 class="tabbed"><span>Pages</span></h2></div>
             <div class="widgetcontent padding0 tab_categories">
-                <div id="tabs_menu" class="ui_tabs_menu">
+                <div id="tabs_menu" class="ui_tabs_menu div_tabs_menu">
                     <ul  class="menu_tabs_nav">
-                        <li class="tab_menu_item"><a href="#tabs-1">Products</a></li>
-                        <li class="tab_menu_item"><a href="#tabs-2">Posts</a></li>
-                        <li class="tab_menu_item"><a href="#tabs-3">Media</a></li>
+                        <li class="tab_menu_item"><a href="#tabs-1">Pages</a></li>
+                        <li class="tab_menu_item"><a href="#tabs-2">Search</a></li>                        
                     </ul>
-                    <div id="tabs-1" >
-                        1
+                    <div id="tabs-1" class="tab_option" >
+                        <br />
+                        <?php foreach ($lstPost as $page) {?>                
+                    	<input type="checkbox" name=" <?php echo $page->post_title;?>" value=" <?php echo  $page->id;?>"/> <?php echo $page->post_title;?><br />                    
+                        <?php } ?> 
                     </div>
-                    <div id="tabs-2">
-                        2
+                    <div id="tabs-2" class="tab_option">
+                        2sssssssssssss
                     </div>
-                    <div id="tabs-3">
-                        3   
-                    </div>
+                    
                 </div><!--#tabs-->
+                <button id="btn_add_page" class="stdbtn btn_blue">Add</button>
             </div><!--widgetcontent-->
         </div><!--widgetbox-->
         <div class="widgetbox" style="width: 300px">
             <div class="title"><h2 class="tabbed"><span>Categories</span></h2></div>
             <div class="widgetcontent padding0 tab_categories">
-                <div id="tabs_menu1" class="ui_tabs_menu">
+                <div id="tabs_menu1" class="ui_tabs_menu div_tabs_menu">
                     <ul  class="menu_tabs_nav">
                         <li class="tab_menu_item"><a href="#tabs-11">Categories</a></li>
-                        <li class="tab_menu_item"><a href="#tabs-21">Posts</a></li>
-                        <li class="tab_menu_item"><a href="#tabs-31">Search</a></li>
+                        <li class="tab_menu_item"><a href="#tabs-21">Search</a></li>
+                       
                     </ul>
-                    <div id="tabs-11" >    
+                    <div id="tabs-11"  class="tab_option">    
                     <br />
                         <?php foreach ($term_option as $term) {?>                
-                    	<input type="checkbox" name="check2" value=" <?php echo  $term->id;?>"/> <?php echo $term->name;?><br />                    
+                    	<input type="checkbox" name=" <?php echo $term->name;?>" value=" <?php echo  $term->id;?>"/> <?php echo $term->name_display;?><br />                    
                         <?php } ?> 
                     </div>
-                    <div id="tabs-21">
+                    <div id="tabs-21" class="tab_option">
                         2
                     </div>
-                    <div id="tabs-31">
-                        3   
-                    </div>
+                    
                 </div><!--#tabs-->
-                <button class="stdbtn btn_blue">Add</button>
+                <button id="btn_add_category" class="stdbtn btn_blue">Add</button>
             </div><!--widgetcontent-->
         </div><!--widgetbox-->
     </div><!--one_half-->
