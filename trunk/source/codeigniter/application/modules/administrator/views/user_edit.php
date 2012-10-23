@@ -20,7 +20,7 @@
                 <br>  
                 
                  <p><label>Email:</label></p>
-                <p><span class="field"><input value="<?php echo $user4->user_email;?>" class="longinput validate[required]" name="txtemail" type="text"></span></p>
+                <p><span class="field"><input value="<?php echo $user4->user_email;?>" class="longinput validate[required,custom[email]]" name="txtemail" type="text"></span></p>
                 <br>  
                        
                 <p class="stdformbutton">
@@ -48,9 +48,9 @@
                 <tr>
                     <th class="head0" width="10"><input class="checkall" type="checkbox"></th>
                     <th class="head1">Họ tên</th>
-                    <th class="head0">Ten truy cập</th>
-                    <th class="head0">Mật khẩu</th>
+                    <th class="head0">Tên truy cập</th>
                     <th class="head0">Email</th>
+                    <th class="head0">Trạng thái</th>
                     <th class="head0" width="60">&nbsp;</th>
                 </tr>
             </thead>
@@ -59,14 +59,14 @@
                     <th class="head0" width="10"><input class="checkall" type="checkbox"></th>
                     <th class="head1">Họ tên</th>
                     <th class="head0">Tên truy cập</th>
-                    <th class="head0">Mật khẩu</th>
                     <th class="head0">Email</th>
+                    <th class="head0">Trạng thái</th>
                     <th class="head0" width="60">&nbsp;</th>
                 </tr>
             </tfoot>
             <tbody>
                 <?php 
-                    foreach ($lstuser5 as $user)
+                    foreach ($lstuser as $user)
                     {
                 ?>
                 <tr>
@@ -77,8 +77,16 @@
                     ?>
                     </td>
                     <td><?php echo $user->user_login;?></td>
-                    <td><?php echo $user->user_pass;?></td>
-                    <td><?php echo $user->user_email;?></td>                    
+                    <td><?php echo $user->user_email;?></td>   
+                    <td><?php if($user->user_status == 1)
+                                {
+                                    echo "<font color='green'> Active </font>";
+                                }
+                                else{
+                                    echo "<font color='red'> Disable </font>";
+                                }
+                        ?></td>   
+                                     
                     <td class="center"><a class="edit" title="Sửa" href="<?php echo base_url();?>administrator/users/edit/<?php echo $user->id;?>">Sửa</a> &nbsp; <a class="delete" id="<?php echo $user->id;?>" name="delete" title="Xóa danh mục" href="<?php echo base_url();?>administrator/users/delete">Xóa</a></td>
                 </tr>  
                 <?php
