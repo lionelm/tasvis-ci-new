@@ -1238,13 +1238,13 @@ p.status-ddl select{width: 77%;}
     height: 33px;
     overflow: hidden;
 }
-#tabs-11
+.tab_option
 {
     padding-left: 10px;
     background: #FFFFFF;
     
 }
-#tabs_menu1
+.div_tabs_menu
 {
    padding-left: 10px;
     padding-right: 10px;
@@ -1322,7 +1322,7 @@ p.status-ddl select{width: 77%;}
 }
 .menu_detail
 {
-    display:none;
+   
 }
 .title1:hover
 {
