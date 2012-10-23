@@ -11,6 +11,7 @@ class User extends DataMapper {
             'label' => 'Mật khẩu',
             'rules' => array('required', 'trim', 'min_length' => 3)
         ),
+        
         'user_email' => array(
             'label' => 'Địa chỉ Email ',
             'rules' => array('required', 'trim', 'valid_email')
