@@ -66,81 +66,87 @@
         }
         function get_menus($parent_id = '0',$limit_depth = 5, $main_menu = 0, $offset =0, $limit = 0 )
         {
+            
             $menus = substr($this->show_menus($parent_id,$limit_depth,$main_menu),0,-1);
-            $menus =  explode('|',$menus);            
-            $lstMenus = array();           
-            if ($limit != 0 )
-            {
-                $sl = 0;
-                foreach($menus as $menu)
+            $lstMenus = array();
+            if ($menus != '')
+            { 
+                $menus =  explode('|',$menus);            
+                //$lstMenus = array();           
+                if ($limit != 0 )
                 {
-                    if ($sl >= $offset)
+                    $sl = 0;
+                    foreach($menus as $menu)
                     {
-                        $sl++;
-                        $menu = explode('-',$menu);
-                        $temp = new Temp_menu();
-                        $temp->id = $menu[1];
-                        $pre = '';
-                        for($i = 1; $i<=$menu[0];$i++)
+                        if ($sl >= $offset)
                         {
-                            $pre .= '— ';
-                        }
-                        $menu_detail = new Menu();
-                        $menu_detail->get_by_id($temp->id);    
-                                        
-                        $temp->label_display = $pre.$menu_detail->label;      
-                        $temp->label = $menu_detail->label;                  
-                        $temp->id = $menu_detail->id;
-                        $temp->title_attribute = $menu_detail->title_attribute;
-                        $temp->description = $menu_detail->description;
-                        $temp->depth = $menu_detail->depth;
-                        $temp->css_class = $menu_detail->class;
-                        $temp->status = $menu_detail->status;
-                        $temp->open_link = $menu_detail->target;
-                        $temp->post_id = $menu_detail->post_id;
-                        $temp->url = $menu_detail->url;                                                                                         
-                        $temp->type = $menu_detail->type; 
-                        $temp->order = $menu_detail->order;
-                        $temp->parent = $menu_detail->parent; 
-                        
-                        $lstMenus[] = $temp;
-                        if ($sl >= $offset+$limit) break;
-                    } else
-                    $sl++;                    
-                }
-            } else
-            {
-                foreach($menus as $menu)
-                {
-                   
-                        $menu = explode('-',$menu);                        
-                        $temp = new Temp_menu();
-                        $temp->id = $menu[1];
-                        $pre = '';
-                        for($i = 1; $i<=$menu[0];$i++)
-                        {
-                            $pre .= '— ';
-                        }                        
-                        $menu_detail = new Menu();
-                        $menu_detail->get_by_id($temp->id);  
-                        $temp->label_display = $pre.$menu_detail->label;                        
-                        $temp->label = $menu_detail->label;                        
-                        $temp->id = $menu_detail->id;
-                        $temp->title_attribute = $menu_detail->title_attribute;
-                        $temp->description = $menu_detail->description;
-                        $temp->depth = $menu_detail->depth;
-                        $temp->css_class = $menu_detail->class;
-                        $temp->status = $menu_detail->status;
-                        $temp->open_link = $menu_detail->target;
-                        $temp->post_id = $menu_detail->post_id;
-                        $temp->url = $menu_detail->url;
-                        $temp->type = $menu_detail->type; 
-                        $temp->order = $menu_detail->order;
-                        $temp->parent = $menu_detail->parent; 
-                        
-                        $lstMenus[] = $temp;
-                        
+                            $sl++;
+                            $menu = explode('-',$menu);
+                            $temp = new Temp_menu();
+                            $temp->id = $menu[1];
+                            $pre = '';
+                            for($i = 1; $i<=$menu[0];$i++)
+                            {
+                                $pre .= '— ';
+                            }
+                            $menu_detail = new Menu();
+                            $menu_detail->get_by_id($temp->id);    
+                                            
+                            $temp->label_display = $pre.$menu_detail->label;      
+                            $temp->label = $menu_detail->label;                  
+                            $temp->id = $menu_detail->id;
+                            $temp->title_attribute = $menu_detail->title_attribute;
+                            $temp->description = $menu_detail->description;
+                            $temp->depth = $menu_detail->depth;
+                            $temp->css_class = $menu_detail->class;
+                            $temp->status = $menu_detail->status;
+                            $temp->open_link = $menu_detail->target;
+                            $temp->post_id = $menu_detail->post_id;
+                            $temp->url = $menu_detail->url;                                                                                         
+                            $temp->type = $menu_detail->type; 
+                            $temp->order = $menu_detail->order;
+                            $temp->parent = $menu_detail->parent; 
+                            
+                            $lstMenus[] = $temp;
+                            if ($sl >= $offset+$limit) break;
+                        } else
+                        $sl++;                    
                     }
+                } else
+                {
+                    foreach($menus as $menu)
+                    {
+                       
+                            $menu = explode('-',$menu);                        
+                            $temp = new Temp_menu();
+                            $temp->id = $menu[1];
+                            $pre = '';
+                            for($i = 1; $i<=$menu[0];$i++)
+                            {
+                                $pre .= '— ';
+                            }                        
+                            $menu_detail = new Menu();
+                            $menu_detail->get_by_id($temp->id);  
+                            $temp->label_display = $pre.$menu_detail->label;                        
+                            $temp->label = $menu_detail->label;                        
+                            $temp->id = $menu_detail->id;
+                            $temp->title_attribute = $menu_detail->title_attribute;
+                            $temp->description = $menu_detail->description;
+                            $temp->depth = $menu_detail->depth;
+                            $temp->css_class = $menu_detail->class;
+                            $temp->status = $menu_detail->status;
+                            $temp->open_link = $menu_detail->target;
+                            $temp->post_id = $menu_detail->post_id;
+                            $temp->url = $menu_detail->url;
+                            $temp->type = $menu_detail->type; 
+                            $temp->order = $menu_detail->order;
+                            $temp->parent = $menu_detail->parent; 
+                            
+                            $lstMenus[] = $temp;
+                            
+                        }
+                }
+                
             }
             return $lstMenus;
         }

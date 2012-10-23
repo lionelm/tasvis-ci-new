@@ -1,11 +1,12 @@
 <?php
     class Temp
     {
-        public $id;
-        public $name;
-        public $description;
-        public $depth;
-        public $slug;
+        public $id = 0;
+        public $name = '';
+        public $description = '';
+        public $depth = 0;
+        public $slug = '';
+        public $name_display = '';
     }
     class Category_model extends CI_Model
     {
@@ -78,7 +79,8 @@
                         $term = new Term();
                         $term->get_by_id($temp->id);
                         
-                        $temp->name = $pre.$term->name;
+                        $temp->name_display = $pre.$term->name;
+                        $temp->name = $term->name;
                         $term_taxonomy = new Term_taxonomy();
                         $term_taxonomy->where('term_id', $temp->id)->get();
                         
@@ -104,8 +106,8 @@
                         }
                         $term = new Term();
                         $term->get_by_id($temp->id);
-                        
-                        $temp->name = $pre.$term->name;
+                        $temp->name_display = $pre.$term->name;
+                        $temp->name = $term->name;
                         $term_taxonomy = new Term_taxonomy();
                         $term_taxonomy->where('term_id', $temp->id)->get();
                         
