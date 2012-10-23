@@ -62,5 +62,5 @@
             </tbody>
            
         </table>         
-                                  
+        <?php echo $list_link;?>                          
 </div><!--content-->                
