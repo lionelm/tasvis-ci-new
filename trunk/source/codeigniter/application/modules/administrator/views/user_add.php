@@ -17,16 +17,20 @@
             <br> 
             
             <p><label>Mật khẩu:</label></p>
-            <p><span class="field"><input class="longinput validate[required]" name="txtpass" type="password"></span></p>
+            <p><span class="field"><input class="longinput validate[required]" id="txtpass" name="txtpass" type="password"></span></p>
+            <br>
+            
+            <p><label>Xác nhận mật khẩu:</label></p>
+            <p><span class="field"><input class="longinput validate[required,equals[txtpass]" name="txtconfirmpass" type="password"></span></p>
             <br>
             
             <p><label>Email:</label></p>
-            <p><span class="field"><input class="longinput validate[required]" name="txtemail" type="text"></span></p>
+            <p><span class="field"><input class="longinput validate[required,custom[email]" name="txtemail" type="text"></span></p>
             <br>
             
             <p><label>Trạng thái:</label></p>
-            <p><span class="field"><input type="radio" name="rdtrangthai" value="1" checked="checked"/>Hiện 
-                                    <input type="radio" name="rdtrangthai" value="0" />Ẩn</span></p>
+            <p><span class="field"><input type="radio" name="rdtrangthai" value="1" checked="checked"/>Active  
+                                    <input type="radio" name="rdtrangthai" value="0" />Disable</span></p>
             <br>
             
                        
