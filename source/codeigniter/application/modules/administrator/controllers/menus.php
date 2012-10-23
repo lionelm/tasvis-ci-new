@@ -37,7 +37,34 @@
         }
         function menu($object_id = 0)
         { 
+            
             $object_id = 38;
+            // lay danh sach cac page
+             $lstPost = new Post();
+                
+           
+            
+            //paging
+            include('paging.php');
+            $config['per_page'] = 10;		
+            $config['base_url']= base_url()."/administrator/pages/index/"; 
+            $lstPost->where('post_type','page')->group_by('root_lang');
+            
+            $row = 0;
+            $config['total_rows']= $lstPost->count();        
+            $config['cur_page']= $row;		
+            $this->pagination->initialize($config);
+            $data['list_link'] = $this->pagination->create_links();	
+            
+            $lstPost = new Post();
+            $lstPost->where('post_type','page')
+                    ->limit($config['per_page'], $row)
+                    ->order_by('id','DESC')
+                    ->group_by('root_lang');
+            
+            
+            $data['lstPost'] = $lstPost->get();   
+            
             //lay danh sach cac menu con
             $data['child_menu'] = $this->Menu_model->get_menus(0,5,$object_id);            
             $data['term_option'] = $this->Category_model->get_categories(0,5); 
@@ -57,7 +84,7 @@
             $temp->class = $this->input->post('css_class');
             $temp->status = $this->input->post('status');
             $temp->target = $this->input->post('open_link');
-            $temp->post_id = $this->input->post('post_id');
+            if ($this->input->post('post_id')) $temp->post_id = $this->input->post('post_id');
             $temp->url = $this->input->post('url');                                                                                         
             $temp->type = $this->input->post('type'); 
             $temp->order = $this->input->post('order');
@@ -68,6 +95,24 @@
             
         }
                 
-           
+        function delete()
+        {
+            $menu_id = $this->input->post('id');
+            $menu = new Menu();
+            $menu->get_by_id($menu_id);
+            $menu->delete();
+        }   
+        function delete_main_menu()
+        {
+            $main_menu_id = $this->input->post('param');
+            
+            $menu = new Menu();
+            $menu->where('object_id','38')->get();
+            $menu->delete_all();
+            //echo $main_menu_id;
+            $term = new Term();
+            $term->get_by_id($main_menu_id);
+            $term->delete();
+        }   
     }
 ?>
