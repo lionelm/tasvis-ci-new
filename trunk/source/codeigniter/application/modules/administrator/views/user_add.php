@@ -25,8 +25,8 @@
             
                        
             <p class="stdformbutton">
-                <input name="submit" value="Add" class="submit radius2" type="submit">                                
-                <input value="Cancel" class="reset radius2" type="reset">
+                <input name="submit" value="Thêm mới" class="submit radius2" type="submit">                                
+                <input value="Hủy" class="reset radius2" type="reset">
             </p>                            
         </form>                                        
         </div>
