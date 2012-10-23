@@ -138,6 +138,7 @@ jQuery(document).ready(function(){
                 
             }            
         );
+        //Them mot custom link moi
         jQuery('#btn_add_custom_link').click(function(){
             var url = jQuery('#txt_url').val();
             var label = jQuery('#txt_label').val();
@@ -148,8 +149,8 @@ jQuery(document).ready(function(){
             
             '<div class="widgetbox">'+
             '<form class="stdform" action="'+base_url+'administrator/menus/save_detail/"'+object_id+' method="post">'   
-                +'<div class="title"><h2 class="general"><span>'+label+ '<input type="text" name="order" class="" size="1" value="0"/></span></h2></div>'
-                +'<div class="widgetcontent">'
+                +'<div class="title1"><h2 class="general"><span>'+label+ '<input type="text" name="order" class="order_menu" size="1" value="0"/></span></h2></div>'
+                +'<div class="widgetcontent menu_detail">'
                     
                      +   '<input type="hidden" name="id" class="smallinput" value="" />'
                     +'</p><p><label>URL:</label>'
@@ -167,14 +168,165 @@ jQuery(document).ready(function(){
                     +'</p><p><label>CSS Class:</label>'
                         +'<span class="field"><input type="text" name="css_class" class="smallinput" value=""/></span>'
                     +'</p><input type="hidden" value="custom" name="type" /><input type="hidden" value="'+object_id+'" name="object_id" />'
-                    +'<p class="stdformbutton">'
+                    +'<p class="btn_menu">'
                     	+'<button class="submit radius2" name="submit">Save</button>'
                         +'<input type="reset" class="reset radius2" value="Reset" />'
                     +'</p></div></form></div>'
             );                                   
             
           
-        });           
+        }); 
+        // an hien menu detail
+       /* jQuery(document).on("toggle",".title1",function(){ 
+            if(jQuery(this).attr("class")=="tamgiac arrow-up"){
+    		   jQuery(this).removeClass("arrow-up");
+    		   jQuery(this).addClass("arrow-down");
+    	   }else{
+    		   jQuery(this).removeClass("arrow-down");
+    		   jQuery(this).addClass("arrow-up");
+    	   }
+    		   jQuery(this).next().slideToggle("500");
+            jQuery('.widgetcontent').toggle();        
+        },function(){
+            if(jQuery(this).attr("class")=="tamgiac arrow-up"){
+    			   jQuery(this).removeClass("arrow-up");
+    			   jQuery(this).addClass("arrow-down");
+    		   }else{
+    			   jQuery(this).removeClass("arrow-down");
+    			   jQuery(this).addClass("arrow-up");
+    		   }
+    		   jQuery(this).next().slideToggle("500");
+        });*/
+        jQuery('.menu_detail').hide();
+        /**
+ * jQuery('.title1').click(function() {
+ *     	   
+ *     		   jQuery(this).next().slideToggle("500");
+ *     	});
+ */
+        jQuery(document).on("click",".title1",function(){
+             jQuery(this).next().slideToggle("500");
+	   });
+        // them moi mot category vao link
+        jQuery('#btn_add_category').click(function(){								
+		var id = '';
+		var base_url = jQuery('#base_url').val();
+        var object_id = jQuery('#object_id').val();							// get target id of table        								   
+		var sel = false;											//initialize to false as no selected row
+		var ch = jQuery('#tabs-11').find('input[type=checkbox]');		//get each checkbox in a table
+		//check if there is/are selected row in table
+		ch.each(function(){
+			if(jQuery(this).is(':checked')) {
+				sel = true;
+				id = jQuery(this).attr('value');
+			    category_name = jQuery(this).attr('name'); 
+                jQuery(this).attr('checked',false);
+				jQuery('.menu_add_new').append(
+            
+                '<div class="widgetbox" >'
+                +'<form class="stdform" action="'+base_url+'administrator/menus/save_detail/"'+object_id+' method="post">'   
+                    +'<div class="title1"><h2 class="general"><span>'+category_name+ '<input type="text" name="order" class="order_menu" size="1" value="0"/></span></h2></div>'
+                    +'<div class="widgetcontent " >'
+                        
+                         +   '<input type="hidden" name="id" class="smallinput" value="" />'
+                        +'</p><p><label>Category:<b>'+category_name+'</b></label>'
+                         +   '<input type="hidden" name="post_id" class="smallinput" value="'+id+'" />'  
+                        +'</p><p><label>Label:</label>'
+                            +'<span class="field"><input type="text" name="label" class="smallinput" value="'+category_name+'" /></span>'
+                        +'<p><label>Status:</label>'
+                            +'<span class="field"><input type="text" name="status" class="smallinput" value="public"/></span>'
+                        +'</p><p><label>Parent:</label>'
+                            +'<span class="field"><input type="text" name="parent" class="smallinput" value="0"/></span>'                    
+                        +'</p><p><label>Title Attribute:</label>'
+                            +'<span class="field"><input type="text" name="title_attribute" class="smallinput" value="" /></span>'                    
+                        +'</p><p><label>Open link in a new window/tab:</label>'
+                            +'<input type="checkbox" name="open_link" value="1"  /> <br />'
+                        +'</p><p><label>CSS Class:</label>'
+                            +'<span class="field"><input type="text" name="css_class" class="smallinput" value=""/></span>'
+                        +'</p><input type="hidden" value="category" name="type" /><input type="hidden" value="'+object_id+'" name="object_id" />'
+                        +'<p class="btn_menu">'
+                        	+'<button class="submit radius2" name="submit">Save</button>'
+                            +'<input type="reset" class="reset radius2" value="Reset" />'
+                            
+                        +'</p></div></form></div>'
+                ); 
+    		}
+		});
+		
+		if(!sel) alert('No data selected');							//alert to no data selected
+	});
+    // them moi mot page vao link
+        jQuery('#btn_add_page').click(function(){								
+		var id = '';
+		var base_url = jQuery('#base_url').val();
+        var object_id = jQuery('#object_id').val();							// get target id of table        								   
+		var sel = false;											//initialize to false as no selected row
+		var ch = jQuery('#tabs-1').find('input[type=checkbox]');		//get each checkbox in a table
+		//check if there is/are selected row in table
+		ch.each(function(){
+			if(jQuery(this).is(':checked')) {
+				sel = true;
+				id = jQuery(this).attr('value');
+			    page_name = jQuery(this).attr('name'); 
+                jQuery(this).attr('checked',false);
+				jQuery('.menu_add_new').append(
+            
+                '<div class="widgetbox" id="menu_item_'+id+'">'
+                +'<form class="stdform" action="'+base_url+'administrator/menus/save_detail/"'+object_id+' method="post">'   
+                    +'<div class="title1"><h2 class="general"><span>'+page_name+ '<input type="text" name="order" class="order_menu" size="1" value="0"/></span></h2></div>'
+                    +'<div class="widgetcontent ">'
+                        
+                         +   '<input type="hidden" name="id" class="smallinput" value="" />'
+                        +'</p><p><label>Page:<b>'+page_name+'</b></label>'
+                         +   '<input type="hidden" name="post_id" class="smallinput" value="'+id+'" />'  
+                        +'</p><p><label>Label:</label>'
+                            +'<span class="field"><input type="text" name="label" class="smallinput" value="'+page_name+'" /></span>'
+                        +'<p><label>Status:</label>'
+                            +'<span class="field"><input type="text" name="status" class="smallinput" value="public"/></span>'
+                        +'</p><p><label>Parent:</label>'
+                            +'<span class="field"><input type="text" name="parent" class="smallinput" value="0"/></span>'                    
+                        +'</p><p><label>Title Attribute:</label>'
+                            +'<span class="field"><input type="text" name="title_attribute" class="smallinput" value="" /></span>'                    
+                        +'</p><p><label>Open link in a new window/tab:</label>'
+                            +'<input type="checkbox" name="open_link" value="1"  /> <br />'
+                        +'</p><p><label>CSS Class:</label>'
+                            +'<span class="field"><input type="text" name="css_class" class="smallinput" value=""/></span>'
+                        +'</p><input type="hidden" value="category" name="type" /><input type="hidden" value="'+object_id+'" name="object_id" />'
+                        +'<p class="btn_menu">'
+                        	+'<button class="submit radius2" name="submit">Save</button>'
+                            +'<input type="reset" class="reset radius2" value="Reset" />'
+                           
+                        +'</p></div></form></div>'
+                ); 
+               
+
+    		}
+		});
+		
+		if(!sel) alert('No data selected');							//alert to no data selected
+	});
+    // Delete menu detail
+    
+    jQuery(document).on("click","#btn_delete_menu",function(){
+             id = jQuery(this).attr('value');
+             base_url = jQuery('#base_url').val();
+             jQuery.ajax({
+              type:"POST",
+              url:base_url+'administrator/menus/delete', 
+              data:"id="+id, 
+              //dataType:"xml",                
+              success: function (data){ 
+                
+                jQuery('#menu_item_'+id).fadeOut(function(){
+					jQuery('#menu_item_'+id).remove();							//remove row when animation is finished
+				});
+                //alert('thanh cong');
+              }
+            });
+          return false;   
+	   });
+       
+       
 /*---------------------End DucNN-------------------------------*/        
 	//search box of header
 	jQuery('#keyword').bind('focusin focusout', function(e){
