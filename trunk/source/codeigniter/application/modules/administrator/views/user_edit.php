@@ -86,6 +86,7 @@
                 ?>
             </tbody>
            
-        </table>         
+        </table>    
+        <?php echo $list_link;?>      
     </div>                                  
 </div><!--content-->
