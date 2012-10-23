@@ -3,7 +3,8 @@
     <li ><a href="<?php echo base_url();?>administrator/users">Tất cả người dùng</a></li>
     <li class="current"><a href="<?php echo base_url();?>administrator/users/add">Thêm mới người dùng</a></li> 
 </ul> 
-     
+
+    
 <div class="content">                	
         <div class="edit-left">
             <form action="<?php echo base_url();?>administrator/users/add" method="post" accept-charset="utf-8" id="formID" class="stdform">                    		
@@ -23,6 +24,11 @@
             <p><span class="field"><input class="longinput validate[required]" name="txtemail" type="text"></span></p>
             <br>
             
+            <p><label>Trạng thái:</label></p>
+            <p><span class="field"><input type="radio" name="rdtrangthai" value="1" checked="checked"/>Hiện 
+                                    <input type="radio" name="rdtrangthai" value="0" />Ẩn</span></p>
+            <br>
+            
                        
             <p class="stdformbutton">
                 <input name="submit" value="Thêm mới" class="submit radius2" type="submit">                                
@@ -31,3 +37,4 @@
         </form>                                        
         </div>
  </div>       
+ 
