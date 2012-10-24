@@ -148,7 +148,7 @@ jQuery(document).ready(function(){
             jQuery('.menu_add_new').append(
             
             '<div class="widgetbox">'+
-            '<form class="stdform" action="'+base_url+'administrator/menus/save_detail/"'+object_id+' method="post">'   
+            '<form class="stdform" action="'+base_url+'administrator/menus/save_detail/'+object_id+'" method="post">'   
                 +'<div class="title1"><h2 class="general"><span>'+label+ '<input type="text" name="order" class="order_menu" size="1" value="0"/></span></h2></div>'
                 +'<div class="widgetcontent menu_detail">'
                     
@@ -224,7 +224,7 @@ jQuery(document).ready(function(){
 				jQuery('.menu_add_new').append(
             
                 '<div class="widgetbox" >'
-                +'<form class="stdform" action="'+base_url+'administrator/menus/save_detail/"'+object_id+' method="post">'   
+                +'<form class="stdform" action="'+base_url+'administrator/menus/save_detail/'+object_id+'" method="post">'   
                     +'<div class="title1"><h2 class="general"><span>'+category_name+ '<input type="text" name="order" class="order_menu" size="1" value="0"/></span></h2></div>'
                     +'<div class="widgetcontent " >'
                         
@@ -247,7 +247,7 @@ jQuery(document).ready(function(){
                         +'<p class="btn_menu">'
                         	+'<button class="submit radius2" name="submit">Save</button>'
                             +'<input type="reset" class="reset radius2" value="Reset" />'
-                            
+                            +'<button id="btn_cancel" class="stdbtn btn_blue">Cancel</button>'
                         +'</p></div></form></div>'
                 ); 
     		}
@@ -272,7 +272,7 @@ jQuery(document).ready(function(){
 				jQuery('.menu_add_new').append(
             
                 '<div class="widgetbox" id="menu_item_'+id+'">'
-                +'<form class="stdform" action="'+base_url+'administrator/menus/save_detail/"'+object_id+' method="post">'   
+                +'<form class="stdform" action="'+base_url+'administrator/menus/save_detail/'+object_id+'" method="post">'   
                     +'<div class="title1"><h2 class="general"><span>'+page_name+ '<input type="text" name="order" class="order_menu" size="1" value="0"/></span></h2></div>'
                     +'<div class="widgetcontent ">'
                         
@@ -295,7 +295,7 @@ jQuery(document).ready(function(){
                         +'<p class="btn_menu">'
                         	+'<button class="submit radius2" name="submit">Save</button>'
                             +'<input type="reset" class="reset radius2" value="Reset" />'
-                           
+                            +'<button id="btn_cancel" class="stdbtn btn_blue">Cancel</button>'
                         +'</p></div></form></div>'
                 ); 
                
@@ -325,7 +325,13 @@ jQuery(document).ready(function(){
             });
           return false;   
 	   });
-       
+      jQuery(document).on("click","#btn_cancel",function(){
+        
+                jQuery(this).parent().parent().fadeOut(function(){
+					jQuery(this).parent().parent().remove();							//remove row when animation is finished
+				});
+              return false;
+	   }); 
        
 /*---------------------End DucNN-------------------------------*/        
 	//search box of header
