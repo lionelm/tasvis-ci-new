@@ -93,6 +93,48 @@ jQuery(document).ready(function(){
 		}
 		return false;
 	});
+        
+        jQuery(document).on("click",".deletebuttonchild",function(){		
+		var url = jQuery(this).attr('value');             
+                var parent = jQuery("#hdfID").attr('value');
+		var id = '';
+		var tb = jQuery(this).attr('title');							// get target id of table								   
+		var sel = false;											//initialize to false as no selected row
+		var ch = jQuery('#'+tb).find('tbody input[type=checkbox]');		//get each checkbox in a table
+		//check if there is/are selected row in table
+		ch.each(function(){
+			if(jQuery(this).is(':checked')) {
+				sel = true;
+				id = jQuery(this).attr('value');
+				jQuery.post(url,{parent:parent,child:id},function(data) {
+					//alert(data);				
+				});
+				jQuery(this).parents('tr').fadeOut(function(){
+					jQuery(this).remove();							//remove row when animation is finished
+				});
+			}
+		});
+		
+		if(!sel) alert('No data selected');							//alert to no data selected
+	});
+	
+	
+	//delete individual row
+	jQuery(document).on("click",".stdtable a.deletechild",function(){
+		var c = confirm('Continue delete ?');
+		if(c){
+			var url = jQuery(this).attr('href');
+			var child = jQuery(this).attr('id');
+			var parent = jQuery("#hdfID").attr('value');
+			jQuery.post(url,{child:child,parent:parent},function(data) {
+                            
+			});			
+			jQuery(this).parents('tr').fadeOut(function(){ 
+				jQuery(this).remove();
+			});
+		}
+		return false;
+	});
 	
 	//get data from server and inject it next to row
 	jQuery('.stdtable a.toggle').click(function(){

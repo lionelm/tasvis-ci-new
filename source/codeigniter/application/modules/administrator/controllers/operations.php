@@ -54,8 +54,13 @@
         {
             $id = $this->input->post('param');
             $auth = new Authitem();
-            $auth->where('id', $id)->get();
-            $auth->delete_all();
+            $auth->where('id', $id)->get();           
+            
+            $authitemchild = new Authitemchild();
+            $authitemchild->where('authitem_id',$id)->get();
+            $authitemchild->delete_all($auth);
+            
+            $auth->delete();
         }
         
         function edit($id=0,$row=0)
