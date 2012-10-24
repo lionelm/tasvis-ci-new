@@ -22,6 +22,28 @@
             $data['view'] = 'main_menu';
             $this->load->view('back_end/template_noright',$data);
         }
+        function edit_main_menu($term_id = 0)
+        {
+            if ($this->input->post('name'))
+            {
+                $term = new Term();
+                $term->get_by_id($this->input->post('id'));
+                $term->name = $this->input->post('name');
+                $term->save();
+                $this->index();
+            } else
+            {
+                $term = new Term();
+                $term->get_by_id($term_id);
+                $data['main_menu']  = $term;  
+                // Lay ra danh sach menu
+                $term = new Term();
+                $term->where('term_group',1)->get();
+                $data['list_menu'] =  $term;
+                $data['view'] = 'main_menu_edit';
+                $this->load->view('back_end/template_noright',$data);
+            }
+        }
         function add_main_menu()
         {
             if($this->input->post('name_menu'))
@@ -38,7 +60,7 @@
         function menu($object_id = 0)
         { 
             
-            $object_id = 38;
+            //$object_id = 38;
             // lay danh sach cac page
              $lstPost = new Post();
                 
@@ -70,7 +92,11 @@
             $data['term_option'] = $this->Category_model->get_categories(0,5); 
             $data['parent_option'] =  $this->Menu_model->get_menus(0,5,$object_id); 
             $data['view'] = 'menu';
+            $term = new Term();
+            $term->get_by_id($object_id);
+            
             $data['object_id'] = $object_id;
+            $data['name_main_menu'] = $term->name;
             $this->load->view('back_end/template_noright',$data);
         } 
         function save_detail($object_id = 0 )
@@ -91,7 +117,8 @@
             $temp->parent = $this->input->post('parent');  
             $temp->object_id = $this->input->post('object_id');              
             $temp->save();
-            $this->menu($object_id);
+            redirect('administrator/menus/menu/'.$object_id);
+            
             
         }
                 
@@ -107,7 +134,7 @@
             $main_menu_id = $this->input->post('param');
             
             $menu = new Menu();
-            $menu->where('object_id','38')->get();
+            $menu->where('object_id',$main_menu_id)->get();
             $menu->delete_all();
             //echo $main_menu_id;
             $term = new Term();
