@@ -17,5 +17,37 @@
             $authitemchild = new Authitemchild();
             return $authitemchild->where('parent_id',$id)->count();
         }
+        
+        function checkParent($child,$parent)
+        {
+            $authitemchild = new Authitemchild();
+            $count = $authitemchild->where('authitem_id', $child)
+                                    ->where('parent_id',$parent)
+                                    ->count();
+            if($count>0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        function checkChild($child,$parent)
+        {
+            $authitemchild = new Authitemchild();
+            $count = $authitemchild->where('authitem_id', $child)
+                                    ->where('parent_id',$parent)
+                                    ->count();
+            if($count>0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 ?>
