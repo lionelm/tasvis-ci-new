@@ -118,29 +118,22 @@
             $parent = $this->input->post('parent');
             $child = $this->input->post('child');
             
-            $itemchild = new Authitemchild();
-            $count = $itemchild->where('parent_id', $parent)
-                    ->where('authitem_id', $child)
-                    ->count();
-            if($count>0)
+            $auth = new Authitem();
+            
+            $message = "false";
+            if((!($auth->checkChild($child, $parent)))&!(($auth->checkParent($parent, $child))))
             {
-                echo "false";
-            }
-            else {
                 $itemchild = new Authitemchild();
                 $itemchild->parent_id = $parent;
                 $itemchild->authitem_id = $child;
                 if($itemchild->save())
                 {
-                    echo "true";
+                    $message = "true";
                 }
-                else {
-                    echo "false";
-                }
-                
             }
-            
-        }
+            echo $message;
+        }     
+        
         
         function deletechild()
         {
