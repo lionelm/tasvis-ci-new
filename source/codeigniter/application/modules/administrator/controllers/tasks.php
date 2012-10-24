@@ -117,7 +117,7 @@
             $auth = new Authitem();
             
             $message = "false";
-            if((!($auth->checkChild($child, $parent)))&!(($auth->checkParent($parent, $child))))
+            if((!($auth->checkChild($child, $parent)))&!(($auth->checkParent($parent, $child)))&($auth->checkAddChild($parent, $child)))
             {
                 $itemchild = new Authitemchild();
                 $itemchild->parent_id = $parent;
@@ -141,8 +141,10 @@
                     ->get();
             
             $itemchild->delete();
-        }
-        
+        }       
     }
 ?>
+
+
+
 
