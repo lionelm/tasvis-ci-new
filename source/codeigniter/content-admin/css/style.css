@@ -1328,6 +1328,25 @@ p.status-ddl select{width: 77%;}
 {
     cursor: pointer;
 }
-
+#btn_add_custom_link
+{
+     margin: 10px 0 0;
+}
+#btn_add_page
+{
+     margin: 10px 0px 10px 10px;
+}
+#btn_add_category
+{
+     margin: 10px 0px 10px 10px;
+}
+#btn_cancel
+{
+    margin-left: 5px;
+}
+.content .menu_add_new
+{
+   margin-right: 15%;
+}
 /*End quan ly menu*/
 /*--------------End DucNN--------------------------------------*/
