@@ -1,11 +1,11 @@
 <?php
 /*
  * Create by: HungPV
- * Date Create: 23/10/2012
- * File Name: tasks.php
+ * Date Create: 24/10/2012
+ * File Name: roles.php
  */
 
-    class Tasks extends MX_Controller
+    class Roles extends MX_Controller
     {
         function __construct() {
             parent::__construct();
@@ -22,7 +22,7 @@
                 $authitem = new Authitem();
                 $authitem->name = trim($name);
                 $authitem->description = trim($description);
-                $authitem->type = "task";
+                $authitem->type = "role";
                 
                 $authitem->save();
                 
@@ -35,18 +35,18 @@
             $config['base_url']= base_url()."/administrator/tasks/index/"; 
 
             $lstAuthitem = new Authitem();
-            $config['total_rows']= $lstAuthitem->where('type','task')->count();   
+            $config['total_rows']= $lstAuthitem->where('type','role')->count();   
             $config['cur_page']= $row;		
             $this->pagination->initialize($config);
             $data['list_link'] = $this->pagination->create_links();	
 
             $lstAuthitem = new Authitem();
-            $data['lstAuthitem'] = $lstAuthitem->where('type','task')                                            
+            $data['lstAuthitem'] = $lstAuthitem->where('type','role')                                            
                                             ->limit($config['per_page'], $row)
                                             ->order_by('id','DESC')
                                             ->get();
             
-            $data['view'] = 'task_add';
+            $data['view'] = 'role_add';
             $this->load->view('back_end/template_noright',$data);
         }     
         
@@ -96,14 +96,18 @@
                                                 ->order_by('name','ASC')
                                                 ->get(); 
                 $lstAuthitem = new Authitem();
+                $data['lstRole'] = $lstAuthitem->where('type','role') 
+                                                ->order_by('name','ASC')
+                                                ->get(); 
+                
+                $lstAuthitem = new Authitem();
                 $data['lstOperationChild'] = $lstAuthitem->include_related('authitemchild', array('id', 'authitem_id','parent_id'))
                                                         ->where_in_join_field('authitemchild','parent_id',$id)
                                                         ->order_by('name','ASC')
                                                         ->get(); 
                 $authitemchild = new Authitemchild();
                 $data['lstParent'] = $authitemchild->where('authitem_id',$id)->get();
-                
-                $data['view'] = 'task_edit';
+                $data['view'] = 'role_edit';
                 $this->load->view('back_end/template_noright',$data);
             }
             

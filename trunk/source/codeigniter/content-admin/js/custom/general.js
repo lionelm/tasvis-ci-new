@@ -115,6 +115,34 @@ jQuery(document).ready(function(){
             
             return false;
         });
+        
+        jQuery(document).on("click","#btnAddChildTask",function(){
+            var url = jQuery(this).attr('urllink');
+            var parent = jQuery("#hdfID").attr('value');
+            var child = jQuery("#ddlAuth").val();
+            var child_name = jQuery("#ddlAuth option:selected").text();
+            var child_desc = jQuery("#ddlAuth option:selected").attr('title');
+            var baselink = jQuery(this).attr('baselink');
+            var type = jQuery(this).attr('typeauth');
+            
+            jQuery.post(url,{parent:parent,child:child},function(data) {
+                if(data.indexOf("true") != -1)
+                {
+                    var content = "";
+                    content+="<tr>";
+                    content+="	<td class='center'><input type='checkbox' value='"+child+"'></td>";
+                    content+="		<td>";
+                    content+="		"+child_name+"</td>";
+                    content+="		<td>"+child_desc+"</td>";
+                    content+="		<td class='center'>";                    
+                    content+="			<a href='"+baselink+"administrator/"+type+"/deletechild' title='Remove Child' name='delete' id='"+child+"' class='deletechild'>Remove</a>";
+                    content+="		</td>";
+                    content+="</tr>";
+                    jQuery("#tblChildTask #tbodyChildTask").append(content);
+                }
+            });
+            return false;
+        });        
 /*---------------------End HungPV-------------------------------*/
 /*---------------------DucNN-------------------------------*/
        
