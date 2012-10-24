@@ -1,13 +1,14 @@
 <ul class="maintabmenu">
     <li class=""><a href="<?php echo base_url();?>administrator/menus/index">Main Menu</a></li>
-	<li class="current"><a href="<?php echo base_url();?>administrator/menus/menu">Menu Detail</a></li>
+	<li class="current"><a href="<?php echo base_url();?>administrator/menus/menu/<?php echo $object_id; ?>">Menu Detail</a></li>
 </ul><!--maintabmenu-->
 
 <div class="content">
     <input type="hidden" value="<?php echo base_url()?>" id="base_url" />
     <input type="hidden" value="<?php echo $object_id; ?>" id="object_id" />
     <div class="one_half menu_add_new">
-        
+        <h2><?php  echo $name_main_menu;?></h2>
+        <br />
         <?php if (count($child_menu)>0)  foreach ($child_menu as $menu) {
             
             if ($menu->type == 'custom'){
@@ -18,23 +19,23 @@
                 <div class="widgetcontent menu_detail">
                     <p>
                     	<label>Menu ID: <?php echo $menu->id; ?> </label>
-                        <input type="hidden" name="id" class="smallinput" value="<?php echo $menu->id; ?>" />                    
+                        <input type="hidden" name="id" class="smallinput" value="<?php echo $menu->id; ?>" id="id<?php echo $menu->id; ?>"/>                    
                     </p>
                     <p>
                     	<label>URL:</label>
-                        <span class="field"><input type="text" name="url" class="smallinput" value="<?php echo $menu->url; ?>"/></span>                    
+                        <span class="field"><input type="text" name="url" class="smallinput" value="<?php echo $menu->url; ?>" id="url<?php echo $menu->id; ?>"/></span>                    
                     </p>   
                     <p>
                     	<label>Label:</label>
-                        <span class="field"><input type="text" name="label" class="smallinput" value="<?php echo $menu->label; ?>" /></span>                    
+                        <span class="field"><input type="text" name="label" class="smallinput" value="<?php echo $menu->label; ?>" id="label<?php echo $menu->id; ?>"/></span>                    
                     </p> 
                     <p>
                         <label>Status:</label>
-                        <span class="field"><input type="text" name="status" class="smallinput" value="<?php echo $menu->status; ?>"/></span>
+                        <span class="field"><input type="text" name="status" class="smallinput" value="<?php echo $menu->status; ?>" id="status<?php echo $menu->id; ?>"/></span>
                     </p>
                     <p><label>Parent:</label></p>                            
                     <p>
-                        <select name="parent">
+                        <select name="parent" id="parent<?php echo $menu->id; ?>">
                             <option value="<?php echo $menu->parent; ?>">-- Không thay đổi --</option>
                             <?php 
                                 foreach ($parent_option as $term)
@@ -53,15 +54,15 @@
                     </p>
                     <p>
                     	<label>Title Attribute:</label>
-                        <span class="field"><input type="text" name="title_attribute" class="smallinput" value="<?php echo $menu->title_attribute; ?>" /></span>                    
+                        <span class="field"><input type="text" name="title_attribute" class="smallinput" value="<?php echo $menu->title_attribute; ?> " id="title_attribute<?php echo $menu->id; ?>"/></span>                    
                     </p>      
                     <p>
                         <label>Open link in a new window/tab:</label>
-                        <input type="checkbox" name="open_link" value=" <?php echo '1';?>" <?php if ($menu->open_link == 1 ) echo 'checked';?>/> <?php ?><br />
+                        <input id="open_link<?php echo $menu->id; ?>" type="checkbox" name="open_link" value=" <?php echo '1';?>" <?php if ($menu->open_link == 1 ) echo 'checked';?>/> <?php ?><br />
                     </p>
                     <p>
                         <label>CSS Class:</label>
-                        <span class="field"><input type="text" name="css_class" class="smallinput" value="<?php echo $menu->css_class; ?>"/></span>
+                        <span class="field"><input id="css_class<?php echo $menu->id; ?>" type="text" name="css_class" class="smallinput" value="<?php echo $menu->css_class; ?>"/></span>
                     </p>
                     <input type="hidden" value="custom" name="type" />
                     <input type="hidden" value="<?php echo $object_id?>" name="object_id" />
@@ -69,6 +70,7 @@
                     	<button class="submit radius2" name="submit">Save</button>
                         <input type="reset" class="reset radius2" value="Reset" />
                         <button id="btn_delete_menu" value="<?php echo $menu->id; ?>" class="stdbtn btn_red">Delete</button>
+                        
                     </p>
                 </div><!--widgetcontent-->
                                 
@@ -233,15 +235,16 @@
                 <div class="stdform">
                 <p>
                 	<label>URL:</label>
-                    <span class="field"><input type="text" name="input1" id="txt_url" value="http://"/></span>                    
+                    <span class="field"><input size="45" type="text" name="input1" id="txt_url" value="http://"/></span>                    
                 </p>   
                 <p>
                 	<label>Label:</label>
-                    <span class="field"><input type="text" name="input1" id="txt_label"/></span>                    
+                    <span class="field"><input size="45" type="text" name="input1" id="txt_label"/></span>                    
                 </p>   
-                </div>    
+                </div> 
+                <button id="btn_add_custom_link" class="stdbtn btn_blue">Add</button>   
             </div><!--widgetcontent-->
-            <button id="btn_add_custom_link" class="stdbtn btn_blue">Add</button>
+            
         </div><!--widgetbox-->
         <div class="widgetbox" style="width: 300px">
             <div class="title"><h2 class="tabbed"><span>Pages</span></h2></div>
@@ -249,7 +252,7 @@
                 <div id="tabs_menu" class="ui_tabs_menu div_tabs_menu">
                     <ul  class="menu_tabs_nav">
                         <li class="tab_menu_item"><a href="#tabs-1">Pages</a></li>
-                        <li class="tab_menu_item"><a href="#tabs-2">Search</a></li>                        
+                        <!--<li class="tab_menu_item"><a href="#tabs-2">Search</a></li>-->                        
                     </ul>
                     <div id="tabs-1" class="tab_option" >
                         <br />
@@ -257,10 +260,11 @@
                     	<input type="checkbox" name=" <?php echo $page->post_title;?>" value=" <?php echo  $page->id;?>"/> <?php echo $page->post_title;?><br />                    
                         <?php } ?> 
                     </div>
+                    <!--
                     <div id="tabs-2" class="tab_option">
                         2sssssssssssss
                     </div>
-                    
+                    -->
                 </div><!--#tabs-->
                 <button id="btn_add_page" class="stdbtn btn_blue">Add</button>
             </div><!--widgetcontent-->
@@ -271,7 +275,7 @@
                 <div id="tabs_menu1" class="ui_tabs_menu div_tabs_menu">
                     <ul  class="menu_tabs_nav">
                         <li class="tab_menu_item"><a href="#tabs-11">Categories</a></li>
-                        <li class="tab_menu_item"><a href="#tabs-21">Search</a></li>
+                        <!--<li class="tab_menu_item"><a href="#tabs-21">Search</a></li>-->
                        
                     </ul>
                     <div id="tabs-11"  class="tab_option">    
@@ -280,10 +284,11 @@
                     	<input type="checkbox" name=" <?php echo $term->name;?>" value=" <?php echo  $term->id;?>"/> <?php echo $term->name_display;?><br />                    
                         <?php } ?> 
                     </div>
+                    <!--
                     <div id="tabs-21" class="tab_option">
                         2
                     </div>
-                    
+                    -->
                 </div><!--#tabs-->
                 <button id="btn_add_category" class="stdbtn btn_blue">Add</button>
             </div><!--widgetcontent-->

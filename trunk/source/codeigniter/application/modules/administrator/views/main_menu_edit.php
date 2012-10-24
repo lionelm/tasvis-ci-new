@@ -1,18 +1,20 @@
 <ul class="maintabmenu">
-    <li class="current"><a href="<?php echo base_url();?>administrator/menus/index">Main Menu</a></li>	
+    <li class="current"><a href="<?php echo base_url();?>administrator/menus/index">Main Menu</a></li>
+	<li class=""><a href="<?php echo base_url();?>administrator/menus/menu">Menu Detail</a></li>
 </ul><!--maintabmenu-->
 
 <div class="content">
     <div class="widgetbox" style="width: 500px">
         <div class="title"><h2 class="general"><span>Create Menu</span></h2></div>
         <div class="widgetcontent stdform stdformwidget">
-            <form class="stdform" action="<?php echo base_url().'administrator/menus/add_main_menu' ?>" method="post">   
+            <form class="stdform" action="<?php echo base_url().'administrator/menus/edit_main_menu' ?>" method="post">   
                 <div class="par">
                 	<label>Name</label>               
-                    <input type="text" name="name_menu" class="longinput" />               
+                    <input type="text" name="name" class="longinput" value="<?php echo $main_menu->name; ?>" />
+                    <input type="hidden" name="id" value="<?php echo $main_menu->id; ?>" />               
                 </div><!--par-->                        
                <p class="stdformbutton">
-                	<button class="submit radius2">Add</button>
+                	<button class="submit radius2">Update</button>
                     <input type="reset" class="reset radius2" value="Reset" />
                 </p>
             </form>  
