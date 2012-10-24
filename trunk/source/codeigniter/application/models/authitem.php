@@ -49,5 +49,32 @@
                 return false;
             }
         }
+        
+        function getParent($child)
+        {
+            $authitemchild = new Authitemchild();
+            
+            $arr = array();
+            $authitemchild->where('authitem_id', $child)->get();
+            
+            foreach ($authitemchild as $authitem)
+            {
+                array_push($arr, $authitem->parent_id);
+                $arr = array_merge($arr,$this->getParent($authitem->parent_id));
+            }
+            return $arr;
+        }
+        
+        function checkAddChild($child,$parent)
+        {
+            $lst = $this->getParent($child);
+            if(in_array($parent,$lst ))
+            {
+                return FALSE;
+            }
+            else {
+                return TRUE;
+            }
+        }
     }
 ?>
