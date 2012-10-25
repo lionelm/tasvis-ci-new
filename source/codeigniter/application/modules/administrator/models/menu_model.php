@@ -92,7 +92,7 @@
                             $menu_detail = new Menu();
                             $menu_detail->get_by_id($temp->id);    
                                             
-                            $temp->label_display = $pre.$menu_detail->label;      
+                            $temp->label_display = $pre.$menu_detail->get_name($temp->id,'vi');      
                             $temp->label = $menu_detail->label;                  
                             $temp->id = $menu_detail->id;
                             $temp->title_attribute = $menu_detail->title_attribute;
@@ -127,7 +127,7 @@
                             }                        
                             $menu_detail = new Menu();
                             $menu_detail->get_by_id($temp->id);  
-                            $temp->label_display = $pre.$menu_detail->label;                        
+                            $temp->label_display = $pre.$menu_detail->get_name($temp->id,'vi');                       
                             $temp->label = $menu_detail->label;                        
                             $temp->id = $menu_detail->id;
                             $temp->title_attribute = $menu_detail->title_attribute;
