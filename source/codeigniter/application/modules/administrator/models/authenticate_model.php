@@ -20,20 +20,18 @@
         }
         function check($parent_id = 0, $child_id = 0, $depth = 0 )        
         {         
+            if ($parent_id == $child_id ) return true;
+            
             $auth_item_child = new Authitemchild();            
             $auth_item_child->where('parent_id', $parent_id);                        
-            $list_child = $auth_item_child->get();            
-            if (count($list_child) > 0)
-            {
-                foreach ($list_child as $child)
-                {   
-                    if ($child->authitem_id == $child_id) { return true; } 
-                    else                    
-                    {                                   
-                        return $this->check($child->authitem_id, $child_id, $depth+1); 
-                    }
-                }
-            }                                   
+            $list_child = $auth_item_child->get();
+                        
+            foreach ($list_child as $child)
+            {   
+                if ($this->check($child->authitem_id, $child_id, $depth+1)) return true; 
+            }
+            
+            return false;                                   
         }
         
            
