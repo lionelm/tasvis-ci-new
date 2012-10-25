@@ -83,10 +83,8 @@ jQuery(document).ready(function(){
 		if(c){
 			var url = jQuery(this).attr('href');
 			var id = jQuery(this).attr('id');
-			var p_methor = jQuery(this).attr('name');
-			jQuery.post(url,{method:p_methor,param:id},function(data) {
-                            
-			});			
+			
+			jQuery.post(url,{param:id},function(data) {    });			
 			jQuery(this).parents('tr').fadeOut(function(){ 
 				jQuery(this).remove();
 			});

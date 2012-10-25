@@ -66,7 +66,7 @@ h1,h2,h3 { font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif; letter
 .bebas { font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif; }
 .width1 { width: 1px; }
 
-button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, sans-serif; margin: 0; }
+button,input,select,textarea {background-color: #B5B5B5; font-size: 12px; font-family: Arial, Helvetica, sans-serif; margin: 0; }
 
 /***********LOGIN PAGE STYLES*************/
 .loginbox { background: #444; padding: 10px; width: 400px; margin: 8% auto 0 auto; position: relative; }
@@ -466,6 +466,8 @@ button,input,select,textarea { font-size: 12px; font-family: Arial, Helvetica, s
 	width: auto; margin: 0; font-weight: bold; color: #eee; background: #333; border: 0; padding: 7px 10px; 
 	-moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; cursor: pointer;
 }
+
+
 .stdform input[type=reset] {
 	width: auto; margin: 0; font-weight: bold; color: #666; border: 1px solid #ccc; background: #eee; padding: 7px 10px;	
 	-moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; margin-left: 5px;

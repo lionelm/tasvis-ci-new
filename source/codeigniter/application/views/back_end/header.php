@@ -28,13 +28,13 @@
         <div id="userPanel" class="headercolumn">
             <a href="" class="userinfo radius2">
                 <img src="<?php echo base_url(); ?>content-admin/images/avatar.png" alt="" class="radius2" />
-                <span><strong>Justin Meller</strong></span>
+                <span><strong>Xin chào: <?php echo $this->session->userdata('user');  ?></strong></span>
             </a>
             <div class="userdrop">
                 <ul>
-                    <li><a href="">Profile</a></li>
+                    <li><a href="<?php echo base_url(); ?>administrator/users/profile/<?php echo $this->session->userdata('id');?>">Edit Profile</a></li>
                     <li><a href="">Account Settings</a></li>
-                    <li><a href="./index.html">Logout</a></li>
+                    <li><a href="<?php echo base_url(); ?>administrator/login/logout/">Logout</a></li>
                 </ul>
             </div><!--userdrop-->
         </div><!--headercolumn-->

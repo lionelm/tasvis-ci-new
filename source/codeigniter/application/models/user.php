@@ -2,7 +2,7 @@
 
 class User extends DataMapper {
  
-   var $validation = array(
+ /*  var $validation = array(
         'user_login' => array(
             'label' => 'Tên truy cập',
             'rules' => array('required', 'trim', 'unique', 'min_length' => 3, 'max_length' => 20)
@@ -17,6 +17,7 @@ class User extends DataMapper {
             'rules' => array('required', 'trim', 'valid_email')
         )
     );
+    */
     public function __construct()
     {
         // model constructor
