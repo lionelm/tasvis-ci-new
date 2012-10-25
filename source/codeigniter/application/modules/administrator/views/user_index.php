@@ -58,7 +58,7 @@
                                     echo "<font color='green'> Active </font>";
                                 }
                                 else{
-                                    echo "<font color='red'> Disable </font>";
+                                    echo "<font color='red'> Pending... </font>";
                                 }
                         ?></td>                 
                     <td class="center"><a class="edit" title="Sửa" href="<?php echo base_url();?>administrator/users/edit/<?php echo $user->id;?>">Sửa</a> &nbsp; <a class="delete" id="<?php echo $user->id;?>" name="delete" title="Xóa danh mục" href="<?php echo base_url();?>administrator/users/delete">Xóa</a></td>
