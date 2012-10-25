@@ -18,12 +18,15 @@
             $site_title = $this->input->post('site_title');
             $site_name = $this->input->post('site_name');
             $site_url = $this->input->post('site_url');
+            $template = $this->input->post('template');
             $email_admin = $this->input->post('email_admin');
-            $site_description = $this->input->post('site_description');           
+            $site_description = $this->input->post('site_description');   
+                    
             $is_update = 0;
             if ($site_title != '' ) $is_update = 1; 
             if ($site_name != '') $is_update = 1;
             if ($site_url != '') $is_update = 1;
+            if ($template != '') $is_update = 1;
             if ($email_admin != '') $is_update = 1;
             if ($site_description != '') $is_update = 1;
            
@@ -39,6 +42,9 @@
                 
                 $option->where('option_name','site_url')->get();
                 $site_url = $option->option_value;
+                
+                $option->where('option_name','template')->get();
+                $template = $option->option_value;
                 
                 $option->where('option_name','email_admin')->get();
                 $email_admin = $option->option_value;
@@ -85,6 +91,19 @@
                     $option->option_value = $site_url;
                     $option->save();
                 }
+                
+                $option = new Option();
+                
+                if ($option->where('option_name','template')->count() > 0)
+                {
+                    $option->where('option_name','template')->update('option_value',$template);
+                } else
+                {
+                    $option->option_name = 'template';
+                    $option->option_value = $template;
+                    $option->save();
+                }
+                
                 $option = new Option();
                 
                 if ($option->where('option_name','email_admin')->count() > 0)
@@ -113,6 +132,7 @@
             $data['site_title'] =$site_title;
             $data['site_name'] = $site_name;
             $data['site_url'] = $site_url;
+            $data['template'] = $template;
             $data['email_admin'] = $email_admin;
             $data['site_description'] = $site_description;            
             $data['view'] = 'option_general';
