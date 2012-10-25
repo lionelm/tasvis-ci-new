@@ -95,7 +95,7 @@
             {
                 $user_id = $this->input->post('txtid');
                 $user_login = $this->input->post('txtlogin');
-                $user_pass = $this->input->post('txtpass');
+                $user_pass = md5($this->input->post('txtpass'));
                 $user_nicename = $this->input->post('txtnicename');
                 $user_email = $this->input->post('txtemail');
                 
