@@ -11,7 +11,8 @@
             // load session library
             $this->load->library('pagination');   
             $this->load->model('Category_model');     
-            $this->load->model('Menu_model');         
+            $this->load->model('Menu_model');             
+            $this->load->model('Authenticate_model');        
         }
         function index()
         {
@@ -60,12 +61,8 @@
         function menu($object_id = 0)
         { 
             
-            //$object_id = 38;
             // lay danh sach cac page
-             $lstPost = new Post();
-                
-           
-            
+             $lstPost = new Post();                                       
             //paging
             include('paging.php');
             $config['per_page'] = 10;		
@@ -117,9 +114,7 @@
             $temp->parent = $this->input->post('parent');  
             $temp->object_id = $this->input->post('object_id');              
             $temp->save();
-            redirect('administrator/menus/menu/'.$object_id);
-            
-            
+            redirect('administrator/menus/menu/'.$object_id);                        
         }
                 
         function delete()
@@ -136,10 +131,9 @@
             $menu = new Menu();
             $menu->where('object_id',$main_menu_id)->get();
             $menu->delete_all();
-            //echo $main_menu_id;
             $term = new Term();
             $term->get_by_id($main_menu_id);
             $term->delete();
-        }   
-    }
+        }
+  }
 ?>
