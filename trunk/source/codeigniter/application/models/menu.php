@@ -11,6 +11,15 @@ class Menu extends DataMapper {
     {
         // model constructor
         parent::__construct();
-    }   
+    }  
+    
+    function get_name($id = 0, $language = '')
+    {
+        $menu = new Menu();
+        $menu->get_by_id($id);
+        $label = $menu->label;
+        preg_match('/<!--:'.$language.'-->(.*?)<!--:-->/',$label,$arr);
+        return $arr[1];
+    }         
 }
 ?>
