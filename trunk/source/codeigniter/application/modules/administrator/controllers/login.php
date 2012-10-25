@@ -13,11 +13,17 @@
         {
             $user_login = $this->input->post('username');
             $user_pass = $this->input->post('password');
+            
+            
             if($this->checklogin($user_login,md5($user_pass)))
             {
+                $user = new User();
+                $user->where('user_login',$user_login)->get();
+                
                 $this->session->set_userdata('login','1');
                 $this->session->set_userdata('user',$user_login);
                 $this->session->set_userdata('pass',$user_pass);
+                $this->session->set_userdata('id',$user->id);
                redirect('administrator/users');
             }else{
                 $this->session->set_userdata('login','0');
