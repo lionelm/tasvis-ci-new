@@ -7,19 +7,19 @@
         <div class="edit-left">
             <form action="<?php echo base_url();?>administrator/users/edit" method="post" accept-charset="utf-8" id="formID" class="stdform">                    		
                 <input type="hidden" value="<?php echo $user4->id;?>" name="txtid">
-                <p><label>Họ tên:</label></p>
+                <p><label>Họ tên</label></p>
                 <p><span class="field"><input name="txtnicename" value="<?php echo $user4->user_nicename;?>" id="txtnicename" class="longinput validate[required]" type="text"></span></p>
                 <br>
                 
-                <p><label>Tên truy cập:</label></p>
-                <p><span class="field"><input value="<?php echo $user4->user_login;?>" class="longinput validate[required]" name="txtlogin" type="text"></span></p>
+                <p><label>Tên truy cập [ Không được thay đổi ]</label></p>
+                <p><span class="field"><input value="<?php echo $user4->user_login;?>" class="longinput validate[required]" disabled="disable" name="txtlogin" type="text"></span></p>
                 <br>     
                 
-                 <p><label>Mật khẩu:</label></p>
+                 <p><label>Mật khẩu</label></p>
                 <p><span class="field"><input value="<?php echo $user4->user_pass;?>" class="longinput validate[required]" name="txtpass" type="password"></span></p>
                 <br>  
                 
-                 <p><label>Email:</label></p>
+                 <p><label>Email</label></p>
                 <p><span class="field"><input value="<?php echo $user4->user_email;?>" class="longinput validate[required,custom[email]]" name="txtemail" type="text"></span></p>
                 <br>  
                        

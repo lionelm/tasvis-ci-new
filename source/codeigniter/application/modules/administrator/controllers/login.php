@@ -63,18 +63,8 @@
                if($count == 1)
                {
                       
-                        
-                        
-                       
-                        	
-                        
-                                      
-                       
-                        
-                        
-                       $this->email->from('dangky@butdanh.com','Bút Danh');          
-                                                    
-                        $this->email->to('dinhhv@tasvis.com.vn');  
+                        $this->email->from('dangky@butdanh.com','Bút Danh'); 
+                        $this->email->to($user_email);  
                         $this->email->subject('Đăng ký thành viên');
                         //$this->email->cc('hoangdinh812@gmail.com'); 
                         //$this->email->bcc('hanhphuckhicoem_812@yahoo.com'); 
