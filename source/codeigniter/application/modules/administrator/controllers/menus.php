@@ -135,5 +135,6 @@
             $term->get_by_id($main_menu_id);
             $term->delete();
         }
-  }
+   
+    }
 ?>
