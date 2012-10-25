@@ -62,19 +62,32 @@
                $count = $user->where('user_email',$user_email)->count();
                if($count == 1)
                {
-                        /*
-                        $this->email->from('dinhhv@tasvis.com.vn', 'dinhhv');
-                        $this->email->to('hoangdinh812911@gmail.com'); 
+                      
+                        
+                        
+                       
+                        	
+                        
+                                      
+                       
+                        
+                        
+                       $this->email->from('dangky@butdanh.com','Bút Danh');          
+                                                    
+                        $this->email->to('dinhhv@tasvis.com.vn');  
+                        $this->email->subject('Đăng ký thành viên');
                         //$this->email->cc('hoangdinh812@gmail.com'); 
                         //$this->email->bcc('hanhphuckhicoem_812@yahoo.com'); 
                         
-                        $this->email->subject('Xác Nhận Tài Khoản Từ Website');
-                        $this->email->message('Vui lòng bấm vào link dưới đề hoàn tất việc đăng ký');	
+                        $email_msg='Chào mừng bạn đến với '.base_url().' <br/><br/>';
+                        $email_msg.='Hãy nhấn vào đường dẫn sau để kích hoạt tài khoản của bạn: <br/>';
+                        $email_msg.=base_url().'home/verify/';
+                        $this->email->message($email_msg);  
+                        $this->email->send();
+                         echo $this->email->print_debugger(); // in thông tin trên để dễ dàng gỡ lỗi
                         
-                        $this->email->send();                    
-                        echo $this->email->print_debugger(); // in thông tin trên để dễ dàng gỡ lỗi
-                        */
-                        redirect('administrator/login/newpass');
+                        
+                        //redirect('administrator/login/newpass');
                      
     
                }else{
