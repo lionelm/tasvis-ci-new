@@ -91,7 +91,7 @@
         function edit($id=0,$row=0)
         {
                        
-            if( $this->input->post('txtlogin') and $this->input->post('txtpass') )
+            if($this->input->post('txtpass') )
             {
                 $user_id = $this->input->post('txtid');
                 $user_login = $this->input->post('txtlogin');
@@ -100,7 +100,7 @@
                 $user_email = $this->input->post('txtemail');
                 
                 $user3 = new User();
-                $user3->where('id = ',$user_id)->update(array('id'=>$user_id,'user_login'=>$user_login,'user_pass'=>$user_pass,'user_nicename'=>$user_nicename,'user_email'=>$user_email));
+                $user3->where('id = ',$user_id)->update(array('id'=>$user_id,'user_pass'=>$user_pass,'user_nicename'=>$user_nicename,'user_email'=>$user_email));
                 redirect('administrator/users');
                            
             }else{ 
@@ -140,7 +140,7 @@
                 $user_email = $this->input->post('txtemail');
                 
                 $user3 = new User();
-                $user3->where('id = ',$user_id)->update(array('id'=>$user_id,'user_login'=>$user_login,'user_pass'=>$user_pass,'user_nicename'=>$user_nicename,'user_email'=>$user_email));
+                $user3->where('id = ',$user_id)->update(array('id'=>$user_id,'user_pass'=>$user_pass,'user_nicename'=>$user_nicename,'user_email'=>$user_email));
                 redirect('administrator/users');
                            
             }else{ 
