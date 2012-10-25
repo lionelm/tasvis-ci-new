@@ -19,7 +19,7 @@ class Menu extends DataMapper {
         $menu->get_by_id($id);
         $label = $menu->label;
         preg_match('/<!--:'.$language.'-->(.*?)<!--:-->/',$label,$arr);
-        return $arr[1];
+        if (count($arr) > 0) { return $arr[1]; } else { return $label;}
     }         
 }
 ?>
