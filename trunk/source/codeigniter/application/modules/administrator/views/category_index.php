@@ -24,7 +24,7 @@
                         foreach ($term_option as $term)
                         {
                     ?>
-                    <option value="<?php echo $term->id;?>"><?php echo $term->name;?></option>
+                    <option value="<?php echo $term->id;?>"><?php echo $term->name_display;?></option>
                     <?php }?>                    
                 </select>
             </p>
@@ -74,7 +74,7 @@
                         <td class="center"><input value="<?php echo $item->id;?>" type="checkbox"></td>
                         <td>
                         <?php 
-                            echo $item->name;
+                            echo $item->name_display;
                         ?>
                         </td>
                         <td><?php echo $item->description;?></td>
