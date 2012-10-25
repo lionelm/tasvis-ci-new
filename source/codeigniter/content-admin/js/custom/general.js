@@ -199,6 +199,7 @@ jQuery(document).ready(function(){
                     +'<p class="btn_menu">'
                     	+'<button class="submit radius2" name="submit">Save</button>'
                         +'<input type="reset" class="reset radius2" value="Reset" />'
+                        +'<button id="btn_cancel" class="stdbtn btn_blue">Cancel</button>'
                     +'</p></div></form></div>'
             );                                   
             
