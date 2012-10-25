@@ -20,6 +20,10 @@
             <span class="field"><input type="text" name="site_url" class="mediuminput" value="<?php echo $site_url; ?>"/></span>
         </p>
         <p>
+        	<label>Template:</label>
+            <span class="field"><input type="text" name="template" class="mediuminput" value="<?php echo $template; ?>"/></span>
+        </p>
+        <p>
         	<label>Email Admin:</label>
             <span class="field"><input type="text" name="email_admin" class="mediuminput" value="<?php echo $email_admin; ?>" /></span>
         </p>
