@@ -19,7 +19,7 @@
             if ($this->check($parent_id,$child_id)) 
                 { return true; } else { return false; };
         }
-        function check($parent_id = 0, $child_id = 0, $depth = 0 )        
+        function check($parent_id = 0, $child_id = 0 )        
         {         
             if ($parent_id == $child_id ) return true;
             
@@ -29,7 +29,7 @@
                         
             foreach ($list_child as $child)
             {   
-                if ($this->check($child->authitem_id, $child_id, $depth+1)) return true; 
+                if ($this->check($child->authitem_id, $child_id)) return true; 
             }
             
             return false;                                   
