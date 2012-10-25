@@ -52,7 +52,7 @@ $(document).ready(function(){
         
         <div class="loginform">
         	<div class="loginerror"><p>Invalid username or password</p></div>
-        	<form id="login" action="<?php echo base_url();?>administrator/login/index" method="post">
+        	<form id="login" action="<?php echo base_url(); ?>administrator/login/index" method="post">
             	<p>
                 	<label for="username" class="bebas">Username</label>
                     <input type="text" id="username" name="username" class="radius2" />
@@ -63,9 +63,9 @@ $(document).ready(function(){
                 </p>
                 <p>
                 	<button class="radius3 bebas">Sign in</button>
-                    
+                 
                 </p>
-                <p><a href="" class="whitelink small">Can't access your account?</a></p>
+                <p><a href="" class="whitelink small"> Đăng ký!</a> ... <a href="<?php echo base_url(); ?>administrator/login/forget" class="whitelink small">Quên mật khẩu?</a></p>
             </form>
         </div><!--loginform-->
     </div><!--loginboxinner-->
