@@ -73,7 +73,7 @@
                          $user = new User();
                          $user->where('user_email',$session_email)->update(array('user_pass'=>$newpass,'user_status'=>1)); 
                         
-                        
+                        //sendmail
                         $this->email->from('dangky@butdanh.com','Bút Danh'); 
                         $this->email->to($user_email);                         
                         //$this->email->cc('hoangdinh812@gmail.com'); 
@@ -85,16 +85,10 @@
                         $this->email->message($email_msg);  
                         $this->email->send();
                          //echo $this->email->print_debugger(); // in thông tin trên để dễ dàng gỡ lỗi
-                        
-                        echo "Chúng tôi đã gửi email xác nhận quên password đến địa chỉ email: " ;
-                        echo "<font color='red'>".$this->session->userdata('email')."</font>";
-                        echo " của bạn<br>"; 
-                        echo " Bạn vui lòng kiểm tra email và thực hiện theo hướng dẫn để xác nhận quên mật khẩu.<br>
-                               Nếu bạn không nhận được email xác nhận quên password, vui lòng kiểm tra hộp thư rác (bulk mail) hoặc thực hiện lại thao tác quên password . ";
-                            
-                         
-                       //$data['view'] = 'report';
-                       //$this->load->view('back_end/template_change',$data);
+                        // end sendmail
+                       
+                       $data['view'] = 'report';
+                       $this->load->view('back_end/template_change',$data);
                      
                      
     
@@ -138,10 +132,13 @@
                         $this->email->send();
                          //echo $this->email->print_debugger(); // in thông tin trên để dễ dàng gỡ lỗi
                         
-                        echo "Password cua bạn đã được thay đổi, truy cập địa chỉ email: " ;
+                        /* echo "Password cua bạn đã được thay đổi, truy cập địa chỉ email: " ;
                         echo "<font color='red'>".$this->session->userdata('email')."</font>";
                         echo " để xem thông tin chi tiết<br>"; 
-                        
+                        */
+                        $data['view'] = 'report2';
+                       $this->load->view('back_end/template_change',$data);
+                   
                    
                    $this->session->sess_destroy();
                    //redirect('administrator/login');
