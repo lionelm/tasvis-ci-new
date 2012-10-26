@@ -36,7 +36,8 @@
                 $user_pass = $this->input->post('txtpass');
                 $user_confirmpass = $this->input->post('txtconfirmpass');
                 $user_nicename = $this->input->post('txtnicename');
-                $user_email = $this->input->post('txtemail');       
+                $user_email = $this->input->post('txtemail');
+                $authitem_id = $this->input->post('slrole');        
                 $user_status = $this->input->post('rdtrangthai');         
                 
                 if( !$this->checkuser($user_login) )
@@ -49,28 +50,30 @@
                     $user2->user_email = $user_email;
                     $user2->user_registered = date('Y-m-d H:i:s');
                     $user2->display_name = $user_nicename;
+                    $user2->authitem_id = $authitem_id;
                     $user2->user_status = $user_status;
                     
                     $user2->save(); // validation tự động kiểm tra khi ta gọi save()
                     redirect('administrator/users');
-                    /*
-                    if($user2->save() == false )
+                   
+                    /* if($user2->save() == false )
                     {
-                        
                         $data['lsterror'] = $user2->error->all; // lấy ra tất cả thông báo lỗi                                              
                         $data['view'] = 'user_error';
                         $this->load->view('back_end/template_noright',$data);   
-                        
-                                          
+                                
                         //$data['view'] = 'user_add';
                         //$this->load->view('back_end/template_noright',$data);
                         
                     }else{
                         redirect('administrator/users');
-                    }*/
+                    } */
                 }
             }else{
-            
+                
+                $authitem = new Authitem();
+                $data['lstrole'] = $authitem->where('type','role')->get();
+                
                 $data['view'] = 'user_add';
                 $this->load->view('back_end/template_noright',$data);
                                
@@ -82,8 +85,8 @@
         {
             $id = $this->input->post('param'); //sử dụng jquery(ajax)
             $user = new User();
-            //$user->get_by_id($id);
-            $user->where('id',$id)->get();
+            $user->get_by_id($id);
+            //$user->where('id',$id)->get();
             $user->delete();
             
         }  
@@ -97,16 +100,20 @@
                 $user_login = $this->input->post('txtlogin');
                 $user_pass = md5($this->input->post('txtpass'));
                 $user_nicename = $this->input->post('txtnicename');
+                $authitem_id = $this->input->post('slrole'); 
                 $user_email = $this->input->post('txtemail');
                 
                 $user3 = new User();
-                $user3->where('id = ',$user_id)->update(array('id'=>$user_id,'user_pass'=>$user_pass,'user_nicename'=>$user_nicename,'user_email'=>$user_email));
+                $user3->where('id = ',$user_id)->update(array('id'=>$user_id,'user_pass'=>$user_pass,'user_nicename'=>$user_nicename,'authitem_id'=>$authitem_id,'user_email'=>$user_email));
                 redirect('administrator/users');
                            
             }else{ 
                 $id = $this->uri->segment(4);
                 $user4 = new User();
                 $data['user4'] = $user4->where('id',$id)->get();
+                
+                $authitem = new Authitem();
+                $data['lstrole'] = $authitem->where('type','role')->get();
                 
                 
                 //paging

@@ -18,6 +18,8 @@ class User extends DataMapper {
         )
     );
     */
+    
+    public  $has_one = array("authitem"); 
     public function __construct()
     {
         // model constructor
