@@ -196,10 +196,10 @@
                             if($term_id == $tp->term_id){$flag=true;}		
                             }?>                                	
                                 <?php if($flag){?>
-                                <input type="checkbox" checked="checked" value="<?php echo $term->id; ?>" name="cbcategory[]">&nbsp;&nbsp;&nbsp;<?php echo $term->name;?>
+                                <input type="checkbox" checked="checked" value="<?php echo $term->id; ?>" name="cbcategory[]">&nbsp;&nbsp;&nbsp;<?php echo $term->name_display;?>
                                 <br>                                    
                             <?php }else{?>
-                                <input type="checkbox" value="<?php echo $term->id; ?>" name="cbcategory[]">&nbsp;&nbsp;&nbsp;<?php echo $term->name;?>
+                                <input type="checkbox" value="<?php echo $term->id; ?>" name="cbcategory[]">&nbsp;&nbsp;&nbsp;<?php echo $term->name_display;?>
                                 <br>
                             <?php }?>
                     <?php }?>

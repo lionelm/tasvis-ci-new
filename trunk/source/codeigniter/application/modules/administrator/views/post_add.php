@@ -117,7 +117,7 @@
                     foreach ($term_option as $term)
                     {
                     ?>     
-                    <input type="checkbox" name="cbcategory[]" value="<?php echo $term->id; ?>">&nbsp;&nbsp;&nbsp;<?php echo $term->name;?><br>
+                    <input type="checkbox" name="cbcategory[]" value="<?php echo $term->id; ?>">&nbsp;&nbsp;&nbsp;<?php echo $term->name_display;?><br>
                     <?php }?>
                 </div>
             </div>

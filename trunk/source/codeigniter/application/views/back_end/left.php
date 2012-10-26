@@ -30,22 +30,12 @@
                         
         <li><a href="<?php echo base_url();?>administrator/languages" class="elements"><span>Ngôn ngữ</span></a></li>
         <li><a href="<?php echo base_url();?>administrator/comments" class="editor"><span>Bình luận</span></a></li>
-        <li><a href="./charts.html" class="charts"><span>Graphs &amp; Charts</span></a></li>
-        <li><a href="./media.html" class="media"><span>Media</span></a></li>
-        
-        <li><a href="./form.html" class="editor menudrop"><span>Forms</span></a>
-                <ul>
-                <li><a href="./form.html"><span>Options General</span></a></li>
-                <li><a href="./editor.html"><span>WYSIWYG Editor</span></a></li>
-                <li><a href="./wizard.html"><span>Wizard</span></a></li>
+        <li><a href="<?php echo base_url();?>administrator/customs" class="buttons menudrop"><span>Custom field</span></a>
+            <ul>
+                <li><a href="<?php echo base_url();?>administrator/customs"><span>Custom field type</span></a></li>
+                <li><a href="<?php echo base_url();?>administrator/customs/list"><span>Custom field list</span></a></li>                
             </ul>
-        </li>
-        
-        <li><a href="./grid.html" class="grid"><span>Grid</span></a></li>
-        <li><a href="./calendar.html" class="calendar"><span>Calendar</span></a></li>
-        <li><a href="./buttons.html" class="buttons"><span>Buttons &amp; Icons</span></a></li>
-        <li><a href="./chat.html" class="chat"><span>Chat Support</span></a></li>
-        <li><a href="./404.html" class="error"><span>Error Pages</span></a></li>
+        </li>        
     </ul>
 
 </div><!--leftmenu-->
