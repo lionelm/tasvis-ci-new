@@ -19,12 +19,17 @@
             {
                 $user = new User();
                 $user->where('user_login',$user_login)->get();
-                
-                $this->session->set_userdata('login','1');
-                $this->session->set_userdata('user',$user_login);
-                $this->session->set_userdata('pass',$user_pass);
-                $this->session->set_userdata('id',$user->id);
-               redirect('administrator/users');
+                if($user->user_status == 1)
+                {                
+                    $this->session->set_userdata('login','1');
+                    $this->session->set_userdata('user',$user_login);
+                    $this->session->set_userdata('pass',$user_pass);
+                    $this->session->set_userdata('id',$user->id);
+                    redirect('administrator/users');
+                }else{
+                    $data['view'] = 'login_status';
+                    $this->load->view('back_end/template_change',$data);
+                }
             }else{
                 $this->session->set_userdata('login','0');
                $this->load->view('login_index');
@@ -41,7 +46,7 @@
                 return false;
             }else{
                 return true;
-                //return $user->where($array)->get();
+                
             }
         }
         
@@ -76,7 +81,7 @@
                         $this->email->subject('Thay đổi mật khẩu');
                         $email_msg='Chào mừng bạn đến với '.base_url().' <br/><br/>';
                         $email_msg.='Starlight nhận được yêu cầu thay đổi password tài khoản của bạn: <br/>Nếu bạn chắc chắn muốn thực hiện việc thay đổi password của tài khoản vui lòng click vào link bên dưới:<br>';
-                        $email_msg.=base_url().'administrator/login/newpass'; // $email_msg.=base_url().'home/verify/';
+                        $email_msg.=base_url().'administrator/login/newpass/'.$newpass; // $email_msg.=base_url().'home/verify/';
                         $this->email->message($email_msg);  
                         $this->email->send();
                          //echo $this->email->print_debugger(); // in thông tin trên để dễ dàng gỡ lỗi

@@ -34,7 +34,7 @@
                 <ul>
                     <li><a href="">Profile</a></li>
                     <li><a href="">Account Settings</a></li>
-                    <li><a href="">Logout</a></li>
+                    <li><a href="<?php echo base_url(); ?>administrator/login/logout/">Logout</a></li>
                 </ul>
             </div><!--userdrop-->
         </div><!--headercolumn-->

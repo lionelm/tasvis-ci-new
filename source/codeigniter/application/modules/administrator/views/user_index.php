@@ -25,6 +25,7 @@
                     <th class="head1">Họ tên</th>
                     <th class="head0">Tên truy cập</th>                    
                     <th class="head0">Email</th>
+                    <th class="head0">Quyền</th>
                     <th class="head0">Trạng thái</th>
                     <th class="head0" width="60">&nbsp;</th>
                 </tr>
@@ -35,6 +36,7 @@
                     <th class="head1">Họ tên</th>
                     <th class="head0">Tên truy cập</th>                    
                     <th class="head0">Email</th>
+                    <th class="head0">Quyền</th>
                     <th class="head0">Trạng thái</th>
                     <th class="head0" width="60">&nbsp;</th>
                 </tr>
@@ -53,6 +55,14 @@
                     </td>
                     <td><?php echo $user->user_login;?></td>                    
                     <td><?php echo $user->user_email;?></td>   
+                    
+                                      
+                    <td><?php 
+                        $authitem = new Authitem();
+                        $activation = $user->authitem_id;
+                        $authitem->where('id',$activation)->get();
+                        echo $authitem->name;?></td>
+                        
                     <td><?php if($user->user_status == 1)
                                 {
                                     echo "<font color='green'> Active </font>";
@@ -61,7 +71,7 @@
                                     echo "<font color='red'> Pending... </font>";
                                 }
                         ?></td>                 
-                    <td class="center"><a class="edit" title="Sửa" href="<?php echo base_url();?>administrator/users/edit/<?php echo $user->id;?>">Sửa</a> &nbsp; <a class="delete" id="<?php echo $user->id;?>" name="delete" title="Xóa danh mục" href="<?php echo base_url();?>administrator/users/delete">Xóa</a></td>
+                    <td class="center"><a class="edit" title="Sửa" href="<?php echo base_url();?>administrator/users/edit/<?php echo $user->id;?>">Sửa</a> &nbsp; <a class="delete" id="<?php echo $user->id;?>" name="delete" title="Xóa" href="<?php echo base_url();?>administrator/users/delete/">Xóa</a></td>
                 </tr>  
                 <?php
                     }
