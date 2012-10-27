@@ -122,6 +122,16 @@
             $menu_id = $this->input->post('id');
             $menu = new Menu();
             $menu->get_by_id($menu_id);
+            
+            $list_child = $this->Menu_model->get($menu_id,1,$menu->object_id);
+            foreach( $list_child as $child)
+            {
+               $temp_menu =  new Menu();
+               $temp_menu->get_by_id($child->id);
+               $temp_menu->parent = $menu->parent;
+               $temp_menu->save();
+            }
+            
             $menu->delete();
         }   
         function delete_main_menu()
