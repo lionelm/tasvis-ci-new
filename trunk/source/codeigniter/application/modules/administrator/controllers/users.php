@@ -10,7 +10,52 @@
         }
         
         function index($row=0)
-        {
+        {   
+
+               $user1 = new User();
+               $authitem = new Authitem();
+               $data['lstrole'] = $authitem->where('type','role')->get();                              
+               
+               $data['role'] = '';
+               $data['keyword'] = '';               
+                                             
+               if($this->input->post('slrole')) 
+               {           
+                 $data['role'] = $this->input->post('slrole');
+               }
+               if($this->input->post('txtkeyword'))
+               {
+                 $data['keyword'] = $this->input->post('txtkeyword');
+               }           
+             //paging
+                include('paging.php');
+                $config['per_page'] = 5; // số bản ghi trên 1 trang
+                $config['base_url']= base_url()."/administrator/users/index/"; // trang để phân trang
+                $user1 = new User();
+                $config['total_rows']= $user1->count(); // tổng số bản ghi trong table
+                $config['cur_page']= $row; // trang hiện tại
+                $this->pagination->initialize($config);
+                $data['list_link'] = $this->pagination->create_links();	 // tạo link phân trang
+                 
+                $user1 = new User();
+                $user1->limit($config['per_page'], $row); 
+                        
+                 if($data['keyword'] != "")    
+                 {
+                    $user1->like('user_login',$data['keyword']);
+                 }
+                 if($data['role']!= 0)
+                 {
+                    $user1->where('authitem_id',$data['role']);
+                 }   
+                $data['lstuser'] = $user1->get();
+                $data['view'] = 'user_index';
+                $this->load->view('back_end/template_noright',$data);
+             
+             
+             
+             
+             /*
              //paging
                 include('paging.php');
                 $config['per_page'] = 3; // số bản ghi trên 1 trang
@@ -25,7 +70,7 @@
                 $data['lstuser'] = $user1->limit($config['per_page'], $row)->get(); 
                 $data['view'] = 'user_index';
                 $this->load->view('back_end/template_noright',$data);
-           
+           */
         }
         
          function add()

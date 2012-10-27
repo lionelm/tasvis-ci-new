@@ -9,7 +9,29 @@
             <h2 class="table"><span>Danh sách người dùng</span></h2>
         </div><!--contenttitle-->
         <div class="tableoptions">
-            <button class="deletebutton radius3" name="delete_term" value="<?php echo base_url();?>administrator/users/delete" title="table2">Delete Selected</button> &nbsp;                           
+           
+           
+           
+        <form name="frmfilter" method="post" action="<?php echo base_url();?>administrator/users/index/" >                        	
+            <button class="deletebutton radius3" name="delete_term" value="<?php echo base_url();?>administrator/users/delete" title="table2">Delete Selected</button> &nbsp;               
+                
+                               
+                <select name="slrole">
+                    <option value="0">-- Tất cả --</option>
+                    <?php foreach($lstrole as $role){ ?>
+                    <option value="<?php echo $role->id;  ?>"> <?php echo $role->name; ?></option>
+                    <?php } ?>
+                </select>
+            <input type="text" name="txtkeyword" class="input-keyword">&nbsp;
+           
+            <input type="submit" class="btn" value="Tìm kiếm"/>
+        </form>
+        
+        
+        
+    
+        
+        
         </div><!--tableoptions-->	
         <table id="table2" class="stdtable stdtablecb" border="0" cellpadding="0" cellspacing="0">
             <colgroup>
