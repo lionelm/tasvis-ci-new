@@ -9,20 +9,20 @@
             $this->load->library('email');
         }
         
-        function index($row=0)
+        function index($role='~',$keyword='~',$row=0)
         {   
 
                $user1 = new User();
                $authitem = new Authitem();
                $data['lstrole'] = $authitem->where('type','role')->get();                              
                
-               $data['role'] = '';
-               $data['keyword'] = '';               
-                                             
+               $data['role'] = $role;  
                if($this->input->post('slrole')) 
                {           
                  $data['role'] = $this->input->post('slrole');
                }
+               
+               $data['keyword'] = urldecode($keyword);  // giải mã chuỗi url 
                if($this->input->post('txtkeyword'))
                {
                  $data['keyword'] = $this->input->post('txtkeyword');
@@ -30,7 +30,7 @@
              //paging
                 include('paging.php');
                 $config['per_page'] = 5; // số bản ghi trên 1 trang
-                $config['base_url']= base_url()."/administrator/users/index/"; // trang để phân trang
+                $config['base_url']= base_url()."/administrator/users/index/".$data['role'].'/'.$data['keyword'].'/'; // trang để phân trang
                 $user1 = new User();
                 $config['total_rows']= $user1->count(); // tổng số bản ghi trong table
                 $config['cur_page']= $row; // trang hiện tại
@@ -40,11 +40,11 @@
                 $user1 = new User();
                 $user1->limit($config['per_page'], $row); 
                         
-                 if($data['keyword'] != "")    
+                 if($data['keyword'] != '~')    
                  {
                     $user1->like('user_login',$data['keyword']);
                  }
-                 if($data['role']!= 0)
+                 if($data['role'] > 0)
                  {
                     $user1->where('authitem_id',$data['role']);
                  }   
