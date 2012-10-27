@@ -35,6 +35,16 @@
                 <li><a href="<?php echo base_url();?>administrator/customs"><span>Custom field type</span></a></li>
                 <li><a href="<?php echo base_url();?>administrator/customs/list"><span>Custom field list</span></a></li>                
             </ul>
+        </li>
+                
+        <li><a href="<?php echo base_url();?>administrator/menus" class="tables"><span>Menu</span></a>            
+        </li> 
+        <li><a href="<?php echo base_url();?>administrator/setting" class="tables menudrop"><span>Setting</span></a>
+            <ul>                
+                <li><a href="<?php echo base_url();?>administrator/setting"><span>General Setting</span></a></li>     
+                <li><a href="<?php echo base_url();?>administrator/setting/email"><span>Email</span></a></li> 
+                <li><a href="<?php echo base_url();?>administrator/setting/seo"><span>Seo</span></a></li>               
+            </ul>
         </li>        
     </ul>
 
