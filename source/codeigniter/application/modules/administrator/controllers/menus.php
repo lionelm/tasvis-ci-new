@@ -11,8 +11,7 @@
             // load session library
             $this->load->library('pagination');   
             $this->load->model('Category_model');     
-            $this->load->model('Menu_model');             
-            $this->load->model('Authenticate_model');        
+            $this->load->model('Menu_model');                                 
         }
         function index()
         {
