@@ -125,6 +125,19 @@
             }
             
         }
+		
+		 function checkuser($login)
+        {
+            $user = new User();
+            $count = $user->where('user_login',$login)->count();
+            if($count > 0)
+            {
+                return true;
+                
+            }else{
+                return false;
+            }
+        }
         
         function delete()
         {
@@ -210,18 +223,7 @@
         
         
         
-        function checkuser($login)
-        {
-            $user = new User();
-            $count = $user->where('user_login',$login)->count();
-            if($count > 0)
-            {
-                return true;
-                
-            }else{
-                return false;
-            }
-        }
+       
         
     }
 ?>
