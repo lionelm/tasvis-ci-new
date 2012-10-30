@@ -106,5 +106,14 @@ class Post extends DataMapper {
         return $lstposts_all;             
         
     }
+    
+    function getpermalink($post_id)
+    {
+        $lstpermalink = new Post();
+        $lstpermalink->where('post_type','post'); 
+        $lstpermalink->where('id',$post_id);
+        $lstpermalink->get(); 
+        return $lstpermalink->guid;
+    }
 }
 ?>
