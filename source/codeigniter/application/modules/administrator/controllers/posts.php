@@ -40,7 +40,7 @@ class Posts extends MX_Controller
         
         //paging
         include('paging.php');
-        $config['per_page'] = 10;		
+        $config['per_page'] = 1;		
         $config['base_url']= base_url()."/administrator/posts/index/".$data['category'].'/'.$data['key_word'].'/'; 
         $lstPost->where('post_type','post')->group_by('root_lang');
         if($term_id>0)
