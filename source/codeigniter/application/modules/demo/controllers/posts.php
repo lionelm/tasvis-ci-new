@@ -45,6 +45,17 @@
         }
         
         
+        function listpermalink($id=1)
+        {
+            $post = new Post();            
+            $data['lstpermalink'] = $post->getpermalink($id);
+            
+            $link = 'posts_getpermalink';           
+            $this->getthem($link,$data);  
+                        
+        }
+        
+        
         function detail($id=0)
         {
             $post = new Post();
