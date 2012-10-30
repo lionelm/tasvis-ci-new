@@ -116,7 +116,7 @@
                    $user = new User();
                    $user->where('user_email',$session_email)->update(array('user_pass'=>md5($user_pass),'user_status'=>1)); 
                    
-                    $user->where('user_email',$session_email)->get();
+                    $user->where('user_email',$session_email)->get(); 
                    
                    
                         $this->email->from('dangky@butdanh.com','Bút Danh'); 
