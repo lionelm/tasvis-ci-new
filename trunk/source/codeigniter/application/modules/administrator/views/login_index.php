@@ -65,7 +65,8 @@ $(document).ready(function(){
                 	<button class="radius3 bebas">Sign in</button>
                  
                 </p>
-                <p> <a href="<?php echo base_url(); ?>administrator/login/forget" class="whitelink small">...Quên mật khẩu?</a></p>
+                <p> <a href="<?php echo base_url(); ?>administrator/login/forget" class="whitelink small">...Quên mật khẩu?</a> | 
+                <a href="<?php echo base_url(); ?>administrator/signup/index" class="whitelink small">Đăng ký!</a></p>
             </form>
         </div><!--loginform-->
     </div><!--loginboxinner-->
