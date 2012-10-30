@@ -24,8 +24,8 @@
                 {
                     $user2 = new User();
                     $user2->user_login = $user_login;
-                    $this->session->set_userdata('user_login',$user_login);
-                    $session_login = $this->session->userdata($user_login);
+                    //$this->session->set_userdata('user_login',$user_login);
+                    //$session_login = $this->session->userdata($user_login);
                     
                     $user2->user_pass = md5($user_pass);
                     $user2->user_confirmpas = md5($user_confirmpass);
@@ -39,9 +39,15 @@
                     $user2->save(); // validation tự động kiểm tra khi ta gọi save()
                     
                     $random_code = md5(uniqid(rand())); // tạo mã ngẫu nhiên
+                    $valid = new Validate();
+                    $valid->confim_code=$random_code;
+                    $valid->login=$user_login;
+                    $valid->email=$user_email;
+                    $valid->save();
                     
-                    $this->session->set_userdata('random_code',$random_code);
-                     $session_code = $this->session->userdata('random_code');
+                    
+                    //$this->session->set_userdata('random_code',$random_code);
+                     //$session_code = $this->session->userdata('random_code');
                     //sendmail
                         $this->email->from('dangky@butdanh.com','Bút Danh'); 
                         $this->email->to($user_email);                         
@@ -50,7 +56,7 @@
                         $this->email->subject('Đăng ký thành viên');
                         $email_msg='Chào mừng bạn đến với '.base_url().' <br/><br/>';
                         $email_msg.='Tài khoản của bạn đã được đăng ký. <br/>Vui lòng click vào liên kết bên dưới để có thể đăng nhập vào hệ thống:<br>';
-                        $email_msg.=base_url().'administrator/signup/validation/'.$session_code; // $email_msg.=base_url().'home/verify/';
+                        $email_msg.=base_url().'administrator/signup/validation/'.$random_code; // $email_msg.=base_url().'home/verify/';
                         $this->email->message($email_msg);  
                         $this->email->send();
                          //echo $this->email->print_debugger(); // in thông tin trên để dễ dàng gỡ lỗi
@@ -74,24 +80,37 @@
         function validation()
         {
             $code = $this->uri->segment(4);
-            if($code == $session_code)
+            $valid = new Validate();
+            $valid->get();
+            $login = $valid->login;
+            $email = $valid->email;
+          
+            if($valid->confim_code == $code)
             {
                 $user3 = new User();
-                $user3->where('user_login = ',$session_login)->update(array('user_status'=>1));
+                $user3->where('user_login',$login)->update('user_status','1');
+                
+                $user4 = new User();
+                $user4->where('user_login',$login)->get();
                 
                 $this->email->from('dangky@butdanh.com','Bút Danh'); 
-                $this->email->to($session_email);                         
+                $this->email->to($email);                         
                 //$this->email->cc('hoangdinh812@gmail.com'); 
                 //$this->email->bcc('hanhphuckhicoem_812@yahoo.com'); 
                 $this->email->subject('Đăng ký thành viên');
                 $email_msg='Chào mừng bạn đến với '.base_url().' <br/><br/>';
                 $email_msg.='Thông tin tài khoản của bạn: <br/>';
-                $email_msg.='Userlogin: '.$user->user_login; 
-                $email_msg.='Password:'.$user_pass;// $email_msg.=base_url().'home/verify/';
+                $email_msg.='Userlogin: '.$user4->user_login; 
+                $email_msg.='Password:'.$user3->user_pass;// $email_msg.=base_url().'home/verify/';
                 $this->email->message($email_msg);  
                 $this->email->send();
                  //echo $this->email->print_debugger(); // in thông tin trên để dễ dàng gỡ lỗi
         
+                $valid = new Validate();
+                $valid->get_by_confim_code($valid->confirm_code);
+                $valid->delete();
+
+                
                 $data['view'] = 'report4';
                 $this->load->view('back_end/template_change',$data);
                 //redirect('administrator/users');
