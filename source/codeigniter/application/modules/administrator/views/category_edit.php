@@ -1,7 +1,7 @@
 <ul class="maintabmenu multipletabmenu">        
     <li><a href="<?php echo base_url();?>administrator/posts">Tất cả bài viết</a></li>
     <li><a href="<?php echo base_url();?>administrator/posts/add">Thêm mới bài viết</a></li>
-    <li class="current"><a href="<?php echo base_url();?>administrator/category">Cập nhật danh mục bài viết</a></li>    
+    <li class="current"><a href="<?php echo base_url();?>administrator/category/edit/<?php echo $term->term_id;?>">Cập nhật danh mục bài viết</a></li>    
     <li><a href="<?php echo base_url();?>administrator/tags">Danh mục tag</a></li>
 </ul>
 <div class="content">                	
