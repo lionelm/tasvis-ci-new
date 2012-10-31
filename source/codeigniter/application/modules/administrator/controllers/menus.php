@@ -15,6 +15,9 @@
         }
         function index()
         {
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('menus.index'))))
+            redirect('administrator/index');
             // Lay ra danh sach menu
             $term = new Term();
             $term->where('term_group',1)->get();
@@ -24,6 +27,9 @@
         }
         function edit_main_menu($term_id = 0)
         {
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('menus.edit_main_menu'))))
+            redirect('administrator/index');
             if ($this->input->post('name'))
             {
                 $term = new Term();
@@ -46,6 +52,9 @@
         }
         function add_main_menu()
         {
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('menus.add_main_menu'))))
+            redirect('administrator/index');
             if($this->input->post('name_menu'))
             {
                 //add Term
@@ -59,7 +68,9 @@
         }
         function menu($object_id = 0)
         { 
-            
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('menus.menu'))))
+            redirect('administrator/index');
             // lay danh sach cac page
              $lstPost = new Post();                                       
             //paging
@@ -97,6 +108,10 @@
         } 
         function save_detail($object_id = 0 )
         {
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('menus.save_detail'))))
+            redirect('administrator/index');
+            
             $temp =  new Menu();
             $temp->where('id', $this->input->post('id'))->get();
             $temp->label = $this->input->post('label');                        
@@ -117,33 +132,38 @@
         }
                 
         function delete()
-        {
-            $menu_id = $this->input->post('id');
-            $menu = new Menu();
-            $menu->get_by_id($menu_id);
-            
-            $list_child = $this->Menu_model->get($menu_id,1,$menu->object_id);
-            foreach( $list_child as $child)
+        {            
+            if(($this->session->userdata('login')&& ($this->User_identity->check_acess('menus.delete'))))
             {
-               $temp_menu =  new Menu();
-               $temp_menu->get_by_id($child->id);
-               $temp_menu->parent = $menu->parent;
-               $temp_menu->save();
+                $menu_id = $this->input->post('id');
+                $menu = new Menu();
+                $menu->get_by_id($menu_id);
+                
+                $list_child = $this->Menu_model->get($menu_id,1,$menu->object_id);
+                foreach( $list_child as $child)
+                {
+                   $temp_menu =  new Menu();
+                   $temp_menu->get_by_id($child->id);
+                   $temp_menu->parent = $menu->parent;
+                   $temp_menu->save();
+                }
+                
+                $menu->delete();
             }
-            
-            $menu->delete();
         }   
         function delete_main_menu()
         {
-            $main_menu_id = $this->input->post('param');
-            
-            $menu = new Menu();
-            $menu->where('object_id',$main_menu_id)->get();
-            $menu->delete_all();
-            $term = new Term();
-            $term->get_by_id($main_menu_id);
-            $term->delete();
-        }
+            if(($this->session->userdata('login')&& ($this->User_identity->check_acess('menus.delete_main_menu'))))
+            {
+                $main_menu_id = $this->input->post('param');            
+                $menu = new Menu();
+                $menu->where('object_id',$main_menu_id)->get();
+                $menu->delete_all();
+                $term = new Term();
+                $term->get_by_id($main_menu_id);
+                $term->delete();
+            }
+        }       
    
     }
 ?>
