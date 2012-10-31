@@ -12,7 +12,10 @@ class Pages extends MX_Controller
     }
     
     public function index($keyword='~',$row=0)
-    {           
+    {    
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('pages.index'))))
+        redirect('administrator/index'); 
+        
         $lstPost = new Post();
                 
         $data['key_word'] = urldecode($keyword);
@@ -53,7 +56,10 @@ class Pages extends MX_Controller
     }
     
     public function add()
-    {         
+    {        
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('pages.add'))))
+        redirect('administrator/index'); 
+        
         $language = new Language();
         $language->where('status','enable')->get();
         $flag = FALSE;
@@ -78,6 +84,7 @@ class Pages extends MX_Controller
             {
                 if($this->input->post('txttitle'.$lang->code))
                 {
+                    echo $this->input->post('txttitle'.$lang->code);
                     $l_title = $this->input->post('txttitle'.$lang->code);      
                     $l_exerpt = $this->input->post('txtexcerpt'.$lang->code);		
                     $l_content = $this->input->post('txtcontent'.$lang->code);                       
@@ -140,14 +147,27 @@ class Pages extends MX_Controller
                         $post_seo_key->meta_key = 'seo_keyword';
                         $post_seo_key->meta_value = $seo_keywords;
                         $post_seo_key->save($post);
-                        redirect('administrator/pages');
+                        
+                        $custom = new Custom();
+                        $lstCustom = $custom->getCustomApply('page');
+                        foreach ($lstCustom as $item)
+                        {
+                            $postmeta = new Postmeta();
+                            $postmeta->meta_key = $item->name;
+                            $postmeta->meta_value = $this->input->post('txt_'.$item->name.'_'.$lang->code);
+                            $postmeta->custom_id = $item->id;
+                            $postmeta->save($post);
+                        }
+                        
+                        //redirect('administrator/pages');
 
                     }
                 }
             }
         }
         else{   
-            
+            $custom = new Custom();
+            $data['lstCustom'] = $custom->getCustomApply('page');
             $data['lstLang'] = $language;
             $page = new Post();
             $page->where('post_type', 'page')->get();
@@ -159,6 +179,9 @@ class Pages extends MX_Controller
     
     function delete()
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('pages.delete'))))
+        redirect('administrator/index');
+        
         $id = $this->input->post('param');
         $lstPost = new Post();
         $lstPostLang = $lstPost->getPostLang($id);
@@ -177,6 +200,9 @@ class Pages extends MX_Controller
 
     function edit($id=0)
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('pages.edit'))))
+        redirect('administrator/index');
+        
         $language = new Language();        
         $lstLang = $language->where('status','enable')->get();
         
@@ -359,9 +385,12 @@ class Pages extends MX_Controller
             $data['seoKey'] = $post->getPostMeta($id,'seo_keyword');            
             $data['post'] = $post;
             $data['term_post'] = $term_post;
-            $lstpage = new Post();
-            $lstpage->where('post_type', 'page')->get();
-            $data['lstPost'] = $lstpage;           
+            
+            $lstpage = $post->getPostLang($post->id);
+            $data['lstPost'] = $lstpage;    
+            
+            $page = new Post();
+            $data['lstPage'] = $page->where('post_type','page')->get();
             $data['view'] = 'page_edit';
             $this->load->view('back_end/template_noright',$data);
         }
@@ -371,6 +400,9 @@ class Pages extends MX_Controller
 
     public function excuteTerm()
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('pages.excuteTerm'))))
+        redirect('administrator/index');
+        
         $term_taxonomy = new Term_taxonomy();
         $term_taxonomy->where('parent_term',0)
                         ->where('taxonomy', 'category')
@@ -399,6 +431,9 @@ class Pages extends MX_Controller
     
     function checkSlug($slug)
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('pages.checkSlug'))))
+        redirect('administrator/index');
+        
         $post = new Post();           
         $check = $post->where('guid', $slug)->count();  
         if($check>0)
@@ -412,6 +447,9 @@ class Pages extends MX_Controller
 
     function checkSlugAjax()
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('pages.checkSlugAjax'))))
+        redirect('administrator/index');
+        
         $slug = $this->input->post('slug');
         if($this->checkSlug($slug))
         {
@@ -425,6 +463,9 @@ class Pages extends MX_Controller
 
     function generateSlug($slug)
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('pages.generateSlug'))))
+        redirect('administrator/index');
+        
         if ($this->checkSlug($slug)==false)
         {
             return $slug;

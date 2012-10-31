@@ -14,8 +14,9 @@
         }
         
         function index($row = 0)//+add category
+
         {               
-			if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('category.index'))))
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('category.index'))))
             redirect('administrator/index'); 
                         
             if($this->input->post('txttitle'))

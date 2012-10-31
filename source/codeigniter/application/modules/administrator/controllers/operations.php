@@ -14,6 +14,8 @@
         
         function index($row=0)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('operations.index'))))
+            redirect('administrator/index'); 
             if($this->input->post('txttitle'))
             {
                 $name = $this->input->post('txttitle');
@@ -52,6 +54,9 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('operations.delete'))))
+            redirect('administrator/index'); 
+            
             $id = $this->input->post('param');
             $auth = new Authitem();
             $auth->where('id', $id)->get();           
@@ -65,6 +70,8 @@
         
         function edit($id=0,$row=0)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('operations.edit'))))
+            redirect('administrator/index'); 
             if($this->input->post('txttitle'))
             {
                 $auth_id = $this->input->post('hdfID');
