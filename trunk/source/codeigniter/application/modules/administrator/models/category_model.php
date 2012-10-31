@@ -34,17 +34,21 @@
         }
         function get($parent_id = '0',$limit_depth = 5)
         {
+            $list_category = array();
             $cats = substr($this->show_categories($parent_id,$limit_depth),0,-1);
-            $cats =  explode('|',$cats);
-            $list_category = array();           
-            foreach($cats as $cat)
+            if ($cats != '')
             {
-                
-                $category = explode('-',$cat);
-                $temp = new Temp();
-                $temp->id = $category[1];
-                $temp->depth = $category[0];
-                $list_category[] = $temp;                                    
+                            
+                $cats =  explode('|',$cats);                         
+                foreach($cats as $cat)
+                {
+                    
+                    $category = explode('-',$cat);
+                    $temp = new Temp();
+                    $temp->id = $category[1];
+                    $temp->depth = $category[0];
+                    $list_category[] = $temp;                                    
+                }
             }
             return $list_category;
         }
