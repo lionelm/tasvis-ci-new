@@ -1,9 +1,9 @@
 <?php    
     class User_identity extends CI_Model
     {
+        
         function __construct() {
-            parent::__construct();            
-            $role = $this->session->userdata('user_activation_key');
+            parent::__construct();                       
         }    
         function get_id($auth_item = '')
         {
@@ -35,8 +35,17 @@
             return false;                                   
         }
         function check_acess($action = '')
-        {
-            return $this->check_parent_child($role,$action);
+        {       
+            $user_id = $this->session->userdata('id');
+            $user_authitem = new Users_authitem();
+            $user_authitem->include_related('authitem', array('id','name'))
+                          ->where('user_id',$user_id)->get();            
+            if ($user_authitem->count()>0)                                      
+            foreach( $user_authitem as $user)
+            {                
+                if ($this->check_parent_child($user->authitem_name,$action)) return true;
+            }
+            return false;
         }
            
     }
