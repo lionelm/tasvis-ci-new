@@ -16,7 +16,7 @@
         function index($row = 0)//+add category
         {   
             
-			if(!($this->session->userdata('logged_in') == 1 && ($this->user_identity->check_acess('category.index'))))
+			if(!($this->session->userdata('login') == 1 && ($this->User_identity->check_acess('category.index'))))
             redirect('administrator/index'); 
                         
             if($this->input->post('txttitle'))
@@ -61,7 +61,7 @@
         }   
         
         function delete()
-        {
+        { 
             $id = $this->input->post('param');                                    
             $term_taxonomy = new Term_taxonomy();
             $term_taxonomy->where('term_id',$id)->get();
