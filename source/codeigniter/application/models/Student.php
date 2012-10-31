@@ -1,8 +1,11 @@
 <?php
 class Student extends DataMapper
 {
-    $table = 'students';
-    public function
+    public $has_many = array("country");
+    public function __construct()
+    {
+        parent::__construct();
+    }
     
 }
 
