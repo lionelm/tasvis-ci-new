@@ -14,6 +14,11 @@
         
         function index($row=0)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('roles.index'))))
             redirect('administrator/index');
             if($this->input->post('txttitle'))
@@ -54,6 +59,11 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('roles.delete'))))
             redirect('administrator/index');
             
@@ -73,6 +83,11 @@
         
         function edit($id=0,$row=0)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('roles.edit'))))
             redirect('administrator/index');
             
@@ -123,6 +138,11 @@
         
         function addChild()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('roles.addChild'))))
             redirect('administrator/index');
             
@@ -148,6 +168,11 @@
         
         function deletechild()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('roles.deletechild'))))
             redirect('administrator/index');
             

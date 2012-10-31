@@ -14,6 +14,11 @@ class Posts extends MX_Controller
     
     public function index($term='~',$keyword='~',$row=0)
     {    
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.index'))))
         redirect('administrator/index'); 
         
@@ -85,7 +90,12 @@ class Posts extends MX_Controller
     }
     
     public function add()
-    {        
+    {      
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.add'))))
         redirect('administrator/index');
         
@@ -209,6 +219,11 @@ class Posts extends MX_Controller
     
     function delete()
     {
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.delete'))))
         redirect('administrator/index');
         
@@ -231,6 +246,11 @@ class Posts extends MX_Controller
 
     function edit($id=0)
     {
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.edit'))))
         redirect('administrator/index');
         
@@ -430,6 +450,11 @@ class Posts extends MX_Controller
 
     public function excuteTerm()
     {
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.excuteTerm'))))
         redirect('administrator/index');
         
@@ -461,6 +486,11 @@ class Posts extends MX_Controller
     
     function checkSlug($slug)
     {
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.checkSlug'))))
         redirect('administrator/index');
         
@@ -477,6 +507,11 @@ class Posts extends MX_Controller
 
     function checkSlugAjax()
     {
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.checkSlugAjax'))))
         redirect('administrator/index');
         
@@ -493,6 +528,11 @@ class Posts extends MX_Controller
 
     function generateSlug($slug)
     {
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.generateSlug'))))
         redirect('administrator/index');
         

@@ -14,6 +14,11 @@
         
         function index($row=0)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('operations.index'))))
             redirect('administrator/index'); 
             if($this->input->post('txttitle'))
@@ -54,6 +59,11 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('operations.delete'))))
             redirect('administrator/index'); 
             
@@ -70,6 +80,11 @@
         
         function edit($id=0,$row=0)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('operations.edit'))))
             redirect('administrator/index'); 
             if($this->input->post('txttitle'))

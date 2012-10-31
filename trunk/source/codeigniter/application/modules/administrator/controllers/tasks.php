@@ -14,6 +14,11 @@
         
         function index($row=0)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.index'))))
             redirect('administrator/index');
             
@@ -55,6 +60,11 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.delete'))))
             redirect('administrator/index');
             
@@ -74,6 +84,11 @@
         
         function edit($id=0,$row=0)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.edit'))))
             redirect('administrator/index');
             
@@ -120,6 +135,11 @@
         
         function addChild()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.addChild'))))
             redirect('administrator/index');
             
@@ -144,6 +164,11 @@
         
         function deletechild()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.deletechild'))))
             redirect('administrator/index');
             

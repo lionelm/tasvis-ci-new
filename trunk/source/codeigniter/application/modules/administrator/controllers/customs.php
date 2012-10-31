@@ -14,6 +14,11 @@ class Customs extends MX_Controller
     
     function index()
     {   
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('customs.index'))))
         redirect('administrator/index'); 
         $data['view'] = 'custom_index';
@@ -22,6 +27,11 @@ class Customs extends MX_Controller
     
     function text()
     {
+        if(!($this->session->userdata('login'))) 
+        {
+            redirect("administrator/login");
+        }
+        
         if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('customs.text'))))
         redirect('administrator/index'); 
         if($this->input->post('txtLabel'))

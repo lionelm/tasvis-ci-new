@@ -28,14 +28,14 @@
                         'user_activation_key'=>$user->user_activation_key                            
                     );
 			$this->session->set_userdata($userdata);
-                    redirect('administrator/users');
+                    redirect('administrator/index');
                 }else{
                     $data['view'] = 'login_status';
                     $this->load->view('back_end/template_change',$data);
                 }
             }else{
                 $this->session->set_userdata('login','0');
-               $this->load->view('login_index');
+                $this->load->view('login_index');
             }
         }
         

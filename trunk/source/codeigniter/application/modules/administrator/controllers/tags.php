@@ -17,6 +17,11 @@
         
         function index($row=0)
         {   
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.index'))))
             redirect('administrator/index');
             
@@ -92,6 +97,11 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.delete'))))
             redirect('administrator/index');
             
@@ -109,6 +119,11 @@
         
         function edit($id=0,$row=0)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.edit'))))
             redirect('administrator/index');
             
@@ -171,6 +186,11 @@
         
         function checkSlug($slug)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.checkSlug'))))
             redirect('administrator/index');
             
@@ -190,6 +210,11 @@
         
         function checkSlugAjax()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.checkSlugAjax'))))
             redirect('administrator/index');
             
@@ -205,6 +230,11 @@
         
         function checkTagNameAjax()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.checkTagNameAjax'))))
             redirect('administrator/index');
             
@@ -221,6 +251,11 @@
         
         function addTagAjax()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.addTagAjax'))))
             redirect('administrator/index');
             
@@ -266,6 +301,11 @@
 
         function generateSlug($slug)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.generateSlug'))))
             redirect('administrator/index');
             
