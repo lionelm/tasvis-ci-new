@@ -14,6 +14,11 @@
         
         public function index($status='~',$keyword='~',$row=0)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('comments.index'))))
             redirect('administrator/index'); 
             $comment = new Comment();
@@ -67,6 +72,10 @@
         
         function edit($id=0)
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('comments.edit'))))
             redirect('administrator/index'); 
             if($this->input->post('txttitle'))
@@ -97,6 +106,11 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
+            
             if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('comments.delete'))))
             redirect('administrator/index'); 
             
