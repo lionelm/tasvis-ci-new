@@ -13,7 +13,10 @@ class Posts extends MX_Controller
     
     
     public function index($term='~',$keyword='~',$row=0)
-    {           
+    {    
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.index'))))
+        redirect('administrator/index'); 
+        
         $lstPost = new Post();
         $data['category'] = $term;      
         if($this->input->post('ddlTerm'))
@@ -82,7 +85,10 @@ class Posts extends MX_Controller
     }
     
     public function add()
-    {              
+    {        
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.add'))))
+        redirect('administrator/index');
+        
         $language = new Language();
         $language->where('status','enable')->get();
         $flag = FALSE;
@@ -203,6 +209,9 @@ class Posts extends MX_Controller
     
     function delete()
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.delete'))))
+        redirect('administrator/index');
+        
         $id = $this->input->post('param');
         $lstPost = new Post();
         $lstPostLang = $lstPost->getPostLang($id);
@@ -222,6 +231,9 @@ class Posts extends MX_Controller
 
     function edit($id=0)
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.edit'))))
+        redirect('administrator/index');
+        
         $language = new Language();        
         $lstLang = $language->where('status','enable')->get();
         
@@ -418,6 +430,9 @@ class Posts extends MX_Controller
 
     public function excuteTerm()
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.excuteTerm'))))
+        redirect('administrator/index');
+        
         $term_taxonomy = new Term_taxonomy();
         $term_taxonomy->where('parent_term',0)
                         ->where('taxonomy', 'category')
@@ -446,6 +461,9 @@ class Posts extends MX_Controller
     
     function checkSlug($slug)
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.checkSlug'))))
+        redirect('administrator/index');
+        
         $post = new Post();           
         $check = $post->where('guid', $slug)->count();  
         if($check>0)
@@ -459,6 +477,9 @@ class Posts extends MX_Controller
 
     function checkSlugAjax()
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.checkSlugAjax'))))
+        redirect('administrator/index');
+        
         $slug = $this->input->post('slug');
         if($this->checkSlug($slug))
         {
@@ -472,6 +493,9 @@ class Posts extends MX_Controller
 
     function generateSlug($slug)
     {
+        if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.generateSlug'))))
+        redirect('administrator/index');
+        
         if ($this->checkSlug($slug)==false)
         {
             return $slug;

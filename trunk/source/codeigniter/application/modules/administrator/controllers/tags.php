@@ -17,6 +17,9 @@
         
         function index($row=0)
         {   
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.index'))))
+            redirect('administrator/index');
+            
             if($this->input->post('txttitle'))
             {
                 //add Term
@@ -89,6 +92,9 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.delete'))))
+            redirect('administrator/index');
+            
             $id = $this->input->post('param');
             
             $term_taxonomy = new Term_taxonomy();
@@ -103,6 +109,9 @@
         
         function edit($id=0,$row=0)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.edit'))))
+            redirect('administrator/index');
+            
             $name = trim($this->input->post('txttitle'));
             $slug = trim($this->input->post('txtslug'));		
             $description = $this->input->post('txtexcerpt');
@@ -162,6 +171,9 @@
         
         function checkSlug($slug)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.checkSlug'))))
+            redirect('administrator/index');
+            
             $lstTerms = new Term();           
             $check = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description')) 
                     ->where_in_join_field('term_taxonomy','taxonomy','tag')
@@ -178,6 +190,9 @@
         
         function checkSlugAjax()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.checkSlugAjax'))))
+            redirect('administrator/index');
+            
             $slug = $this->input->post('slug');
             if($this->checkSlug($slug))
             {
@@ -190,6 +205,9 @@
         
         function checkTagNameAjax()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.checkTagNameAjax'))))
+            redirect('administrator/index');
+            
             $name = $this->input->post('name');
             $tag = new Term();
             if($tag->checkExitTag($name))
@@ -203,6 +221,9 @@
         
         function addTagAjax()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.addTagAjax'))))
+            redirect('administrator/index');
+            
             $name = trim($this->input->post('name'));
             $slug = $this->Common_model->makeSlugs($name,255);
             $slug = $this->generateSlug($slug);
@@ -245,6 +266,9 @@
 
         function generateSlug($slug)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tags.generateSlug'))))
+            redirect('administrator/index');
+            
             if ($this->checkSlug($slug)==false)
             {
                 return $slug;

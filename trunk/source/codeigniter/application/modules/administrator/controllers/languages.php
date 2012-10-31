@@ -15,6 +15,8 @@
         
         function index()
         {   
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('languages.index'))))
+            redirect('administrator/index'); 
             if($this->input->post('txttitle'))
             {
                 $lang_name = $this->input->post('txttitle');
@@ -36,6 +38,9 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('languages.delete'))))
+            redirect('administrator/index'); 
+            
             $id = $this->input->post('param');
             $lang = new Language();
             $lang->where('id',$id)->get();
@@ -44,6 +49,8 @@
         
         function edit($id=0)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('languages.edit'))))
+            redirect('administrator/index'); 
             if($this->input->post('txttitle'))
             {
                 $lang_name = $this->input->post('txttitle');
@@ -80,6 +87,8 @@
         
         function checkexits($code)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('languages.checkexits'))))
+            redirect('administrator/index'); 
             $lang = new Language();
             $count = $lang->where('code',$code)->count();
             if($count>0)

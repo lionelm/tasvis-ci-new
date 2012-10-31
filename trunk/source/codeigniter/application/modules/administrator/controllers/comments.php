@@ -14,6 +14,8 @@
         
         public function index($status='~',$keyword='~',$row=0)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('comments.index'))))
+            redirect('administrator/index'); 
             $comment = new Comment();
             $data['status'] = $status;
             if($this->input->post('slstatus'))
@@ -65,6 +67,8 @@
         
         function edit($id=0)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('comments.edit'))))
+            redirect('administrator/index'); 
             if($this->input->post('txttitle'))
             {
                 $comment_id = $this->input->post('comment_id');
@@ -93,6 +97,9 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('comments.delete'))))
+            redirect('administrator/index'); 
+            
             $id = $this->input->post('param');
             $comment = new Comment();
             $comment->where('id',$id)->get();

@@ -14,6 +14,9 @@
         
         function index($row=0)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.index'))))
+            redirect('administrator/index');
+            
             if($this->input->post('txttitle'))
             {
                 $name = $this->input->post('txttitle');
@@ -52,6 +55,9 @@
         
         function delete()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.delete'))))
+            redirect('administrator/index');
+            
             $id = $this->input->post('param');
             $auth = new Authitem();
             $auth->where('id', $id)->get();            
@@ -68,6 +74,9 @@
         
         function edit($id=0,$row=0)
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.edit'))))
+            redirect('administrator/index');
+            
             if($this->input->post('txttitle'))
             {
                 $auth_id = $this->input->post('hdfID');
@@ -111,6 +120,9 @@
         
         function addChild()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.addChild'))))
+            redirect('administrator/index');
+            
             $parent = $this->input->post('parent');
             $child = $this->input->post('child');
             
@@ -132,6 +144,9 @@
         
         function deletechild()
         {
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('tasks.deletechild'))))
+            redirect('administrator/index');
+            
             $parent = $this->input->post('parent');
             $child = $this->input->post('child');
             
