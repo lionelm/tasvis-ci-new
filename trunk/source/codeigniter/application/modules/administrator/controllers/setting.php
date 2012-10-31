@@ -14,6 +14,9 @@
         
         function index()//General setting
         { 
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('setting.index'))))
+            redirect('administrator/index');
             
             $site_title = $this->input->post('site_title');
             $site_name = $this->input->post('site_name');
@@ -141,6 +144,10 @@
         
         function email() 
         { 
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('setting.email'))))
+            redirect('administrator/index');
+            
             $mail_server = $this->input->post('mail_server');
             $mail_server_name = $this->input->post('mail_server_name');
             $mail_server_host = $this->input->post('mail_server_host');
@@ -262,6 +269,10 @@
         }
         function seo()
         { 
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('setting.seo'))))
+            redirect('administrator/index');
+            
             $seo_title = $this->input->post('seo_title');
             $seo_description = $this->input->post('seo_description');
             $seo_keyword = $this->input->post('seo_keyword');
