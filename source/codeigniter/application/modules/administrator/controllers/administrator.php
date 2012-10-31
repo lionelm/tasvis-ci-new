@@ -16,16 +16,8 @@
         
         function index()
         {
-            $login = $this->session->userdata('login');
-            if($login == 1)
-            {   
-                //$this->session->sess_destroy();
-                $this->session->unset_userdata('login');
-                redirect('administrator/users');
-                
-            }else{
-                $this->load->view('login_index');
-            }
+            $data['view'] = 'administrator_index';
+            $this->load->view('back_end/template',$data);
         }
     }
 ?>
