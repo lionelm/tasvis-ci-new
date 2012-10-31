@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
 			lastname: "required",
 			email: {
 				required: true,
-				email: true,
+				email: true
 			},
 			location: "required",
 			selection: "required"
@@ -53,6 +53,7 @@ jQuery(document).ready(function(){
 		var t = jQuery(this);
 		t.wrap('<span class="checkbox"></span>');
 		t.click(function(){
+                    
 			if(jQuery(this).is(':checked')) {
 				t.attr('checked',true);
 				t.parent().addClass('checked');
