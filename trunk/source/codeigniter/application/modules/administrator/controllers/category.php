@@ -10,14 +10,14 @@
             parent::__construct();                               
             // load session library
             $this->load->library('pagination');  
-            $this->load->model('Category_model');              
+            $this->load->model('Category_model');  
         }
         
         function index($row = 0)//+add category
-
-        {               
-            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('category.index'))))
-            redirect('administrator/index'); 
+        {   
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+			if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('category.index'))))
+            redirect('administrator/index');
                         
             if($this->input->post('txttitle'))
             {
@@ -50,20 +50,20 @@
     		$data['list_link'] = $this->pagination->create_links();	
                       
             $data['lstTerms'] = $this->Category_model->get_categories(0,5,$row,$config['per_page']);
-            $data['term_option'] = $this->Category_model->get_categories(0,5,0,$config['total_rows'] );
-           
+            $data['term_option'] = $this->Category_model->get_categories(0,5,0,$config['total_rows'] );           
             $data['view'] = 'category_index';
             $this->load->view('back_end/template_noright',$data);
         }   
         
         function delete()
-        { 
+        {
             if(($this->session->userdata('login')&& ($this->User_identity->check_acess('category.delete'))))
             {
                 $id = $this->input->post('param');                                    
                 $term_taxonomy = new Term_taxonomy();
                 $term_taxonomy->where('term_id',$id)->get();
                 $list_child = $this->Category_model->get($id,1);
+                if (count($list_child)>0)            
                 foreach( $list_child as $child)
                 {
                    $temp_term =  new Term_taxonomy();
@@ -75,13 +75,15 @@
                 
                 $term = new Term();
                 $term->get_by_id($id);
-                $term->delete();
-            }          
-            
+                $term->delete();          
+            }
         }
         
         function edit($id = 0,$row = 0)
         {
+            if(!($this->session->userdata('login'))) redirect('administrator/login');
+            if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('category.edit'))))
+            redirect('administrator/index');
             $name = $this->input->post('txttitle');
             $slug = $this->input->post('txtslug');		
             $description = $this->input->post('txtexcerpt');
@@ -105,16 +107,7 @@
                 $term = new Term_taxonomy();
                 $term->include_related('term', array('id', 'name','slug'))->get_by_term_id($id);
                 $data['term'] = $term;
-               
-                /**
- * $lstTerms = new Term();           
- *                 $data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description')) 
- *                         ->where_in_join_field('term_taxonomy','taxonomy','category')
- *                         ->get();            
- *                 //$this->load->vars($data);
- *                 $data['view'] = 'category_edit';
- *                 $this->load->view('back_end/template_noright',$data);
- */
+             
             include('paging.php');
             $config['base_url']= base_url()."administrator/category/edit/".$id."/";
             $config['total_rows']=$this->Category_model->get_count_category(0,5);           		
@@ -125,11 +118,7 @@
                       
             $data['lstTerms'] = $this->Category_model->get_categories(0,5,$row,$config['per_page']);
             $data['term_option'] = $this->Category_model->get_categories(0,5,0,$config['total_rows'] );
-           // $lstTerms = new Term();           
-            //$data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
-              //                              ->where_in_join_field('term_taxonomy','taxonomy','category')
-                //                            ->get();            
-
+           
             $data['view'] = 'category_edit';
             $this->load->view('back_end/template_noright',$data);
             }
