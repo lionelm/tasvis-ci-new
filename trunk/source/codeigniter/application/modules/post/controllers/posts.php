@@ -11,6 +11,7 @@
         function __construct()
         {
             parent::__construct();
+            $this->load->model('Post');
         }
         
         function index()
@@ -35,13 +36,16 @@
         {
              $args1 = array(
                         'numberposts'     => 10, 
-                        'offset'          => 0,                        
+                        'offset'          => 0,     
+                        'category'        => '',           
                         'orderby'         => 'post_date',
+                        'meta_key'        => '',
+                        'meta_value'      => '',
                         'order'           => 'DESC',                        
                         'post_type'       => 'post',
                         'post_parent'     => 0,
                         'post_status'     => 'publish',
-                        'lang'            =>  2    
+                        'lang'            =>  1    
                         );
                     
             $post = new Post();
