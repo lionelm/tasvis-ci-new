@@ -20,11 +20,14 @@
                 $user = new User();
                 $user->where('user_login',$user_login)->get();
                 if($user->user_status == 1)
-                {                
-                    $this->session->set_userdata('login','1');
-                    $this->session->set_userdata('user',$user_login);
-                    $this->session->set_userdata('pass',$user_pass);
-                    $this->session->set_userdata('id',$user->id);
+                { 
+                    $userdata = array(
+                        'username'  => $user_login,
+                        'login' => TRUE,
+                        'user_id' => $user->id,
+                        'user_activation_key'=>$user->user_activation_key                            
+                    );
+			$this->session->set_userdata($userdata);
                     redirect('administrator/users');
                 }else{
                     $data['view'] = 'login_status';
