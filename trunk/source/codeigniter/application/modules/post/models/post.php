@@ -26,8 +26,7 @@ class Post extends DataMapper {
         // model constructor
         parent::__construct();
     }   
-    
-    
+       
     function getPost($post_id)
     {
         $lstpost = new Post();
@@ -39,15 +38,20 @@ class Post extends DataMapper {
     
     function getPosts($args = array(
                         'numberposts'     => '', 
-                        'offset'          => '',                                                
+                        'offset'          => '',
+                        'category'        => '',                                        
                         'orderby'         => '',
-                        'order'           => '',                                              
+                        'order'           => '',
+                        'meta_key'        => '' ,
+                        'meta_value'      => '',                                              
                         'post_type'       => '',
                         'post_parent'     => '',
                         'post_status'     => '',
                         'lang' => '' ))
     {
         $lstposts_all = new Post();
+        $postmeta = new Postmeta();
+        $temtaxanomy = new Term_taxonomy;
         
         
         if($args['post_type']!= '')
@@ -55,21 +59,51 @@ class Post extends DataMapper {
             $lstposts_all->where('post_type',$args['post_type']);
         }
         
+        
         if($args['lang'] != '' && $args['lang'] > 0)
         {
             $lstposts_all->where('language_id',$args['lang']);
         }
         
-         
+        
+         if($args['meta_key'] != '' && $args['meta_value'] != '')
+        {
+            $postmeta->where('meta_key', $args['meta_key'])
+                ->where('meta_value', $args['meta_value'])
+                ->get();
+            $post_id=  $postmeta->post_id;
+            $lstposts_all->where('id',$post_id);
+        }else{
+           if($args['meta_key'] = '' && $args['meta_value'] != '')
+           {
+                $postmeta->where('meta_value', $args['meta_value'])
+                        ->get();
+                $post_id=  $postmeta->post_id;
+                $lstposts_all->where('id',$post_id);
+           } 
+        }
+        
+        if($args['category'] != '')
+        {
+            $cat = $args['category'];
+            $termtaxanomypost = new Term_taxonomy_post();
+            $termtaxanomypost->where('term_taxonomy_id',$cat)
+                                ->get();  
+                             
+            $lstposts_all->where('id',$termtaxanomypost->post_id);                                       
+        }
+        
         if($args['post_parent']!='')
         {
             $lstposts_all->where('post_parent',$args['post_parent']);
         }
         
+        
         if($args['post_status']!='') 
         {
             $lstposts_all->where('post_status',$args['post_status']);
         } 
+        
         
         if(($args['numberposts']!='') && ($args['offset']!=''))
         {
@@ -78,8 +112,7 @@ class Post extends DataMapper {
             if(($args['offset']==''))
             {
                 $lstposts_all->limit($args['numberposts'],0);
-            }
-            
+            }          
         }  
        
         
