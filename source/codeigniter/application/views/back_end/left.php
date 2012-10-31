@@ -39,6 +39,14 @@
                 
         <li><a href="<?php echo base_url();?>administrator/menus" class="tables"><span>Menu</span></a>            
         </li> 
+        <li>
+            <a href="<?php echo base_url();?>administrator/roles" class="buttons menudrop"><span>Phân quyền người dùng</span></a>
+            <ul>
+                <li><a href="<?php echo base_url();?>administrator/roles"><span>Roles</span></a></li>
+                <li><a href="<?php echo base_url();?>administrator/tasks"><span>Tasks</span></a></li>    
+                <li><a href="<?php echo base_url();?>administrator/operations"><span>Operations</span></a></li>     
+            </ul>
+        </li>
         <li><a href="<?php echo base_url();?>administrator/setting" class="tables menudrop"><span>Setting</span></a>
             <ul>                
                 <li><a href="<?php echo base_url();?>administrator/setting"><span>General Setting</span></a></li>     
