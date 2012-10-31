@@ -28,7 +28,7 @@
         <div id="userPanel" class="headercolumn">
             <a href="" class="userinfo radius2">
                 <img src="<?php echo base_url(); ?>content-admin/images/avatar.png" alt="" class="radius2" />
-                <span><strong>Xin chào: <?php echo $this->session->userdata('user');  ?></strong></span>
+                <span><strong>Xin chào, <?php echo $this->session->userdata('username');  ?></strong></span>
             </a>
             <div class="userdrop">
                 <ul>
