@@ -47,6 +47,17 @@ jQuery(document).ready(function(){
 		);
 	}
         
+        if(jQuery(".datetimepicker2").length>0){
+		//alert("fadfsdaf");
+		jQuery(".datetimepicker2").datetimepicker(
+			{ 
+                            dateFormat: 'dd-mm-yy',
+                            timeFormat: 'hh:mm:ss',
+                            separator: ' '               
+			}
+		);
+	}
+        
         /******************************/
         var now = new Date();       
         var month=new Array();
@@ -63,7 +74,8 @@ jQuery(document).ready(function(){
         month[10]="11";
         month[11]="12";
         var n = month[now.getMonth()];
-        jQuery('#txtDatePublish').val(now.getDate()+'-'+n+'-'+now.getFullYear()+' '+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds());
+        jQuery('#txtDateEnd').val(now.getDate()+'-'+n+'-'+now.getFullYear()+' '+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds());
+        jQuery('#txtDateStart').val(now.getDate()+'-'+n+'-'+now.getFullYear()+' '+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds());
         /*******************************/
         
         jQuery('#addTagLink').click(function(){
@@ -142,7 +154,17 @@ jQuery(document).ready(function(){
                 }
             });
             return false;
-        });        
+        });   
+            jQuery('.checkbox input[type=checkbox]').click(function(){
+                    
+			if(jQuery(this).is(':checked')) {
+				jQuery(this).attr('checked',true);
+				jQuery(this).parent().addClass('checked');
+			} else {
+				jQuery(this).attr('checked',false);
+				jQuery(this).parent().removeClass('checked');
+			}
+		});
 /*---------------------End HungPV-------------------------------*/
 /*---------------------DucNN-------------------------------*/
        
