@@ -1,4 +1,11 @@
 <?php
+
+/*
+ * File name: posts.php
+ * Create by: Dinhhv
+ * Create date: 30/10/2012
+ */
+ 
     class Posts extends MX_Controller
     {
         function __construct()
@@ -26,20 +33,20 @@
         
         function list_limit()
         {
-             //$args1 = array( 'numberposts' => 2, 'order'=> 'ASC', 'orderby' => 'post_title' ); 
              
-             $args2 = array(
-                        'numberposts'     => '4', 
-                        'offset'          => '0',                        
+             $args = array(
+                        'numberposts'     => 10, 
+                        'offset'          => 0,                        
                         'orderby'         => 'post_date',
                         'order'           => 'DESC',                        
                         'post_type'       => 'post',
-                        'post_parent'     => '0',
-                        'post_status'     => 'publish'                    
+                        'post_parent'     => 0,
+                        'post_status'     => 'publish',
+                        'lang'            =>  2    
                         );
                     
             $post = new Post();
-            $data['lstpostall'] = $post->getPosts($args2);
+            $data['lstpostall'] = $post->getPosts($args);
             $link = 'posts_getposts';           
             $this->getthem($link,$data);                                
                 
