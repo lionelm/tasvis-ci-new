@@ -33,8 +33,7 @@
         
         function list_limit()
         {
-             
-             $args = array(
+             $args1 = array(
                         'numberposts'     => 10, 
                         'offset'          => 0,                        
                         'orderby'         => 'post_date',
@@ -46,7 +45,7 @@
                         );
                     
             $post = new Post();
-            $data['lstpostall'] = $post->getPosts($args);
+            $data['lstpostall'] = $post->getPosts($args1);
             $link = 'posts_getposts';           
             $this->getthem($link,$data);                                
                 
