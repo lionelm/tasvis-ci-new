@@ -80,7 +80,7 @@ class Post extends DataMapper {
     function getpermalink($post_id)
     {
         $lstpermalink = new Post();
-        $lstpermalink->where('post_type','post'); 
+        //$lstpermalink->where('post_type','post'); 
         $lstpermalink->where('id',$post_id);
         $lstpermalink->get(); 
         return $lstpermalink->guid;
