@@ -15,7 +15,10 @@
         
         function index($row = 0)//+add category
         {   
-			
+            
+			if(!($this->session->userdata('logged_in') == 1 && ($this->user_identity->check_acess('category.index'))))
+            redirect('administrator/index'); 
+                        
             if($this->input->post('txttitle'))
             {
                 //add Term
