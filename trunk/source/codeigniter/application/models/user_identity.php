@@ -36,13 +36,13 @@
         }
         function check_acess($action = '')
         {       
-            $user_id = $this->session->userdata('id');
+            $user_id = $this->session->userdata('user_id');           
             $user_authitem = new Users_authitem();
             $user_authitem->include_related('authitem', array('id','name'))
                           ->where('user_id',$user_id)->get();            
             if ($user_authitem->count()>0)                                      
             foreach( $user_authitem as $user)
-            {                
+            {                         
                 if ($this->check_parent_child($user->authitem_name,$action)) return true;
             }
             return false;
