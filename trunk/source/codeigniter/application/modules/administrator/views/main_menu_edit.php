@@ -1,6 +1,5 @@
 <ul class="maintabmenu">
-    <li class="current"><a href="<?php echo base_url();?>administrator/menus/index">Main Menu</a></li>
-	<li class=""><a href="<?php echo base_url();?>administrator/menus/menu">Menu Detail</a></li>
+    <li class="current"><a href="<?php echo base_url();?>administrator/menus/index">Main Menu</a></li>	
 </ul><!--maintabmenu-->
 
 <div class="content">
