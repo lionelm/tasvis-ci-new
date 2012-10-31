@@ -10,13 +10,12 @@
             parent::__construct();                               
             // load session library
             $this->load->library('pagination');  
-            $this->load->model('Category_model');  
+            $this->load->model('Category_model');              
         }
         
         function index($row = 0)//+add category
-        {   
-            
-			if(($this->session->userdata('login')&& ($this->User_identity->check_acess('category.index'))))
+        {               
+			if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('category.index'))))
             redirect('administrator/index'); 
                         
             if($this->input->post('txttitle'))
@@ -51,33 +50,32 @@
                       
             $data['lstTerms'] = $this->Category_model->get_categories(0,5,$row,$config['per_page']);
             $data['term_option'] = $this->Category_model->get_categories(0,5,0,$config['total_rows'] );
-           // $lstTerms = new Term();           
-            //$data['lstTerms'] = $lstTerms->include_related('term_taxonomy', array('id', 'taxonomy','description'))
-              //                              ->where_in_join_field('term_taxonomy','taxonomy','category')
-                //                            ->get();            
-
+           
             $data['view'] = 'category_index';
             $this->load->view('back_end/template_noright',$data);
         }   
         
         function delete()
         { 
-            $id = $this->input->post('param');                                    
-            $term_taxonomy = new Term_taxonomy();
-            $term_taxonomy->where('term_id',$id)->get();
-            $list_child = $this->Category_model->get($id,1);
-            foreach( $list_child as $child)
+            if(($this->session->userdata('login')&& ($this->User_identity->check_acess('category.delete'))))
             {
-               $temp_term =  new Term_taxonomy();
-               $temp_term->where('term_id', $child->id)->get();
-               $temp_term->parent_term = $term_taxonomy->parent_term;
-               $temp_term->save();
-            }
-            $term_taxonomy->delete();
-            
-            $term = new Term();
-            $term->get_by_id($id);
-            $term->delete();          
+                $id = $this->input->post('param');                                    
+                $term_taxonomy = new Term_taxonomy();
+                $term_taxonomy->where('term_id',$id)->get();
+                $list_child = $this->Category_model->get($id,1);
+                foreach( $list_child as $child)
+                {
+                   $temp_term =  new Term_taxonomy();
+                   $temp_term->where('term_id', $child->id)->get();
+                   $temp_term->parent_term = $term_taxonomy->parent_term;
+                   $temp_term->save();
+                }
+                $term_taxonomy->delete();
+                
+                $term = new Term();
+                $term->get_by_id($id);
+                $term->delete();
+            }          
             
         }
         
