@@ -11,6 +11,16 @@
         
         function index($role='~',$keyword='~',$row=0)
         {   
+            // ktra quyen truoc khi dang nhap
+             if(!($this->session->userdata('login'))) 
+                {
+                    redirect("administrator/login");
+                }
+                
+                if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.index'))))
+                redirect('administrator/index'); 
+                
+                
 
                $user1 = new User();
                $authitem = new Authitem();
@@ -48,6 +58,16 @@
                  {
                     $user1->where('authitem_id',$data['role']);
                  }   
+                 
+                 
+                   if($term_id>0)
+                    {
+                        $lstPost->include_related('term_taxonomy',array('id,term_id','taxonomy'))
+                                ->where_related('term_taxonomy', 'taxonomy', 'category')
+                                ->where_related('term_taxonomy', 'term_id', $term_id);            
+                    }
+                 
+                 
                 $data['lstuser'] = $user1->get();
                 $data['view'] = 'user_index';
                 $this->load->view('back_end/template_noright',$data);
