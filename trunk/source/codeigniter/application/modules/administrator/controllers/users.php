@@ -56,7 +56,9 @@
                  }
                  if($data['role'] > 0)
                  {
-                    $user1->where('authitem_id',$data['role']);
+                    $user1->include_related('authitem',array('id','name','type'))
+                            ->where_related('authitem', 'type', 'role')
+                                ->where_related('authitem', 'id', $data['role']);
                  }   
                  
                  
