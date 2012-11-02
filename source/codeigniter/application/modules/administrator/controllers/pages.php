@@ -94,7 +94,7 @@ class Pages extends MX_Controller
             {
                 if($this->input->post('txttitle'.$lang->code))
                 {
-                    echo $this->input->post('txttitle'.$lang->code);
+                    
                     $l_title = $this->input->post('txttitle'.$lang->code);      
                     $l_exerpt = $this->input->post('txtexcerpt'.$lang->code);		
                     $l_content = $this->input->post('txtcontent'.$lang->code);                       
