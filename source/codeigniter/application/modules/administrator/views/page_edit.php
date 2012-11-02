@@ -53,7 +53,7 @@
                         <p><span class="field">
                                 <input type="text" value="<?php 
                                                             foreach ($lstPost as $post_item) 
-                                                            {
+                                                            {                                                                
                                                                 if($lang->id == $post_item->language_id)
                                                                 {
                                                                     echo $post_item->post_title;

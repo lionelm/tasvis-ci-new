@@ -2,7 +2,8 @@
     <li><a href="<?php echo base_url();?>administrator/pages">Tất cả trang</a></li>
     <li class="current"><a href="<?php echo base_url();?>administrator/pages/add">Thêm mới trang</a></li>    
 </ul>
-<div class="content">                	
+<div class="content">
+    <?php $custom = new Custom(); $custom->getCustomApply()?>
     <form method="post" action="<?php echo base_url();?>administrator/pages/add" class="stdform" id="formID">
         <div class="edit-main"> 
             <?php 
@@ -79,6 +80,42 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="seo-packages widgetbox">
+                            <div class="contenttitle">
+                                <h2 class="form">
+                                    <span>Custom Field</span>
+                                </h2>
+                            </div>                
+                            <div class="widgetcontent">
+                                <?php foreach ($lstCustom as $custom){?>  
+                                    <?php if($custom->type=='text'){?>
+                                        <p>
+                                            <input type="hidden" name="hdfCustom_<?php echo $custom->name;?>_<?php echo $lang->code;?>" value="<?php echo $custom->name;?>">
+                                            <label><?php echo $custom->label;?></label>
+                                            <span class="field small-form">
+                                                <input class="mediuminput <?php                                                                             
+                                                                            $rule = $custom->rule;
+                                                                            if(($custom->required == 1)&($rule!=''))
+                                                                            {
+                                                                                echo "validate[required,custom[".$rule."]]";
+                                                                            }
+                                                                            elseif(($custom->required == 1)&($rule==''))
+                                                                            {
+                                                                                echo "validate[required]";
+                                                                            }
+                                                                            elseif(($custom->required == 0)&($rule!=''))
+                                                                            {
+                                                                                echo "validate[custom[".$rule."]]";
+                                                                            }
+                                                                            ?>" 
+                                                       type="text" value="<?php echo $custom->getCustomDefault($custom->id);?>" name="txt_<?php echo $custom->name;?>_<?php echo $lang->code;?>">
+                                            </span>                                            
+                                        </p>                                        
+                                    <?php }?>
+                                <?php }?>
+                            </div>
+                        </div>
+                        <br>
                     </div>
                     <?php }?>                          
                 </div>
@@ -98,7 +135,7 @@
                     </p>
                     <p class="status-ddl">
                         Thời gian xuất bản:
-                        <input type="text" id="txtDatePublish" class="datetimepicker validate[required]" name="txtDatePublish">
+                        <input type="text" id="txtDatePublish" class="datetimepicker validate[required]" name="txtDatePublish" value="<?php echo date("d-m-Y H:i:s")?>">
                     </p>
                     <p class="stdformbutton">
                         <button class="submit radius2">Xuất bản</button>
