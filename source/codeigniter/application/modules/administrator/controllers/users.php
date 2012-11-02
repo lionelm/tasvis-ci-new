@@ -82,7 +82,7 @@
                 $user_confirmpass = $this->input->post('txtconfirmpass');
                 $user_nicename = $this->input->post('txtnicename');
                 $user_email = $this->input->post('txtemail');
-                $authitem_id = $this->input->post('slrole');        
+                $l_arr_role = $this->input->post('slrole');        
                 $user_status = $this->input->post('rdtrangthai');         
                 
                 if( !$this->checkuser($user_login) )
@@ -94,25 +94,16 @@
                     $user2->user_nicename = $user_nicename;
                     $user2->user_email = $user_email;
                     $user2->user_registered = date('Y-m-d H:i:s');
-                    $user2->display_name = $user_nicename;
-                    $user2->authitem_id = $authitem_id;
+                    $user2->display_name = $user_nicename;               
                     $user2->user_status = $user_status;
                     
-                    $user2->save(); // validation tự động kiểm tra khi ta gọi save()
+                   // Save user với mối quan hệ n-n
+                    $authi = new Authitem();
+                    $authi->where_in('id',$l_arr_role)->get();
+                    
+                    $user2->save($authi->all); // validation tự động kiểm tra khi ta gọi save()
                     redirect('administrator/users');
                    
-                    /* if($user2->save() == false )
-                    {
-                        $data['lsterror'] = $user2->error->all; // lấy ra tất cả thông báo lỗi                                              
-                        $data['view'] = 'user_error';
-                        $this->load->view('back_end/template_noright',$data);   
-                                
-                        //$data['view'] = 'user_add';
-                        //$this->load->view('back_end/template_noright',$data);
-                        
-                    }else{
-                        redirect('administrator/users');
-                    } */
                 }
             }else{
                 
@@ -152,18 +143,36 @@
         function edit($id=0,$row=0)
         {
                        
-            if($this->input->post('txtpass') )
+            if($this->input->post('txtnicename')  or $this->input->post('ckrole') or $this->input->post('txtemail') )
             {
                 $user_id = $this->input->post('txtid');
-                $user_login = $this->input->post('txtlogin');
-                $user_pass = md5($this->input->post('txtpass'));
+                //$user_login = $this->input->post('txtlogin'); // login bị disable(ko cho sửa) nên ko sử dụng post để nhận dữ liệu
+                //$user_pass = md5($this->input->post('txtpass'));
                 $user_nicename = $this->input->post('txtnicename');
-                $authitem_id = $this->input->post('slrole'); 
+                $l_arr_role = $this->input->post('ckrole'); 
                 $user_email = $this->input->post('txtemail');
                 
                 $user3 = new User();
-                $user3->where('id = ',$user_id)->update(array('id'=>$user_id,'user_pass'=>$user_pass,'user_nicename'=>$user_nicename,'authitem_id'=>$authitem_id,'user_email'=>$user_email));
-                redirect('administrator/users');
+                $user3->where('id',$user_id)->get();
+                //$user3->user_login = $user_login;
+                //$user3->user_pass = $user_pass;
+                $user3->user_email = $user_email;
+                $user3->user_nicename = $user_nicename;
+                $user3->user_display = $user_nicename;
+                
+                // nếu ko checkbox ko được check(tích) thì ta xóa bản ghi đó đi(xóa trong bảng được sinh ra(trong quan hệ n-n))
+                    if($this->input->post('ckrole') != 'on')
+                    {
+                        $user_authitem = new User_authitem();
+                        $user_authitem->where('user_id',$user_id)->get();
+                        $user_authitem->delete_all();
+                    }
+                                       
+                    // nếu user chưa tồn tại thì sẽ save, tồn tại rối thì sẽ update 
+                    $authi = new Authitem();
+                    $authi->where_in('id',$l_arr_role)->get();                    
+                    $user3->save($authi->all); // validation tự động kiểm tra khi ta gọi save()                      
+                    redirect('administrator/users');
                            
             }else{ 
                 $id = $this->uri->segment(4);
