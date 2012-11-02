@@ -28,14 +28,22 @@
             <p><span class="field"><input class="longinput validate[required,custom[email]" name="txtemail" type="text"></span></p>
             <br>
             
+            <!--
             <p><label>Quyền[ Roles ]</label></p>
              <p>   <select name="slrole">
-                    
-                    <?php foreach($lstrole as $role){ ?>
-                    <option value="<?php echo $role->id;  ?>"> <?php echo $role->name; ?></option>
-                    <?php } ?>
+                   
+                    <?php //foreach($lstrole as $role){ ?>
+                    <option value="<?php //echo $role->id;  ?>"> <?php //echo $role->name; ?></option>
+                    <?php //} ?>
                 </select> </p>
             <br>
+            -->
+            
+              <p><label>Quyền[ Roles ]</label></p>
+              <?php foreach($lstrole as $role){?>
+               <input type="checkbox" name="slrole[]" value="<?php echo $role->id; ?>"/> <?php echo $role->name ?>
+              <?php } ?>
+              
                 
             <p><label>Trạng thái</label></p>
             <p><span class="field"><input type="radio" name="rdtrangthai" value="1" checked="checked" />Active  
