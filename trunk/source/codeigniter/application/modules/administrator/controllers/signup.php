@@ -33,7 +33,7 @@
                     $user2->user_email = $user_email;
                     $user2->user_registered = date('Y-m-d H:i:s');
                     $user2->display_name = $user_nicename;
-                    $user2->authitem_id = 22;
+                    //$user2->authitem_id = 22;
                     $user2->user_status = $user_status;
                     
                     $user2->save(); // validation tự động kiểm tra khi ta gọi save()
