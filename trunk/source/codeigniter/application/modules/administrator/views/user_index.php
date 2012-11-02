@@ -78,12 +78,18 @@
                     <td><?php echo $user->user_login;?></td>                    
                     <td><?php echo $user->user_email;?></td>   
                     
-                                      
+                          
+                          <!-- dạng checkbox -->            
                     <td><?php 
-                        $authitem = new Authitem();
-                        $activation = $user->authitem_id;
-                        $authitem->where('id',$activation)->get();
-                        echo $authitem->name;?></td>
+                    
+                        // lấy tất cả role cho user này.
+                     $user->authitem->include_join_fields()->get();
+                     foreach($user->authitem as $authitem_role)
+                     {
+                        echo "<a href=''>".$authitem_role->name."</a>";
+                        echo "&nbsp; &nbsp; &nbsp;";
+                     }
+                     ?></td>
                         
                     <td><?php if($user->user_status == 1)
                                 {
