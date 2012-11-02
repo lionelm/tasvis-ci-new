@@ -101,7 +101,7 @@
                     </p>
                     <p class="status-ddl">
                         Thời gian xuất bản:
-                        <input type="text" id="txtDatePublish" class="datetimepicker validate[required]" name="txtDatePublish">
+                        <input type="text" id="txtDatePublish" class="datetimepicker validate[required]" name="txtDatePublish" value="<?php echo date("d-m-Y H:i:s")?>">
                     </p>
                     <p class="stdformbutton">
                         <button class="submit radius2">Xuất bản</button>
