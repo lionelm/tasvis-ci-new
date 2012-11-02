@@ -58,6 +58,33 @@ class Users extends MX_Controller
                 $valid->save();
                 
                 //sendmail
+                $option = new Option();
+                $option->where('option_name','mail_server_host')->get();
+                $host = $option->option_value; 
+                
+                $option = new Option();
+                $option->where('option_name','mail_server_port')->get();
+                $port = $option->option_value;  
+                
+                $option = new Option();
+                $option->where('option_name','mail_server_username')->get();
+                $usermail = $option->option_value;  
+                
+                $option = new Option();
+                $option->where('option_name','mail_server_password')->get();
+                $passmail = $option->option_value; 
+                
+                $config['protocol']='smtp';
+                $config['smtp_host']=$host;
+                $config['smtp_port']=$port;
+                $config['smtp_timeout']='30';
+                $config['smtp_user']=$usermail;
+                $config['smtp_pass']=$passmail;
+                $config['charset']='utf-8';
+                $config['newline']="\r\n";
+                $config['mailtype'] = 'html';
+                $this->email->initialize($config);
+                
                 $this->email->from('dangky@tasvis.com','Đăng ký thú cưng'); 
                 $this->email->to($user_email);                                             
                 $this->email->subject('Đăng ký thành viên');
@@ -121,15 +148,100 @@ class Users extends MX_Controller
      * registersuccess
      * 
      * @author HungPV
-     * @deprecated return view for register success
-     * 
-     * @param String $username for Username
-     * @param String $email for Email
-     * @return boolean return true if exist, or return false if not.
+     * @deprecated return view for register success     
      */
     function registersuccess()
     {
-        
+        //get theme
+        $option = new Option();
+        $option->where('option_name','template')->get();
+        $theme = $option->option_value;        
+
+        if(get_file_info('application/views/front_end/'.$theme.'/users_registersuccess.php'))
+        {
+            $data['view'] = "front_end/".$theme."/users_registersuccess";
+        }
+        else {
+            $data['view'] = "front_end/base/users_registersuccess";
+        }
+
+        if(get_file_info('application/views/front_end/'.$theme.'/template.php'))
+        {            
+            $this->load->view('front_end/'.$theme.'/template',$data);
+        }
+        else {
+            $this->load->view('front_end/base/template');
+        }
+    }
+    
+    /**
+     * validation
+     * 
+     * @author HungPV
+     * @deprecated validate for user has registered.
+     */
+    function validation($username,$code)
+    {
+        $validate = new Validate();
+        $count = $validate->where('confim_code',$code)
+                         ->where('login',$username)
+                        ->count();
+        if($count>0)
+        {
+            //Update Status for User
+            $user = new User();
+            $user->where('user_login',$username)->get();
+            $user->user_status = 1;
+            $user->save();
+            
+            //get theme
+            $option = new Option();
+            $option->where('option_name','template')->get();
+            $theme = $option->option_value;        
+
+            if(get_file_info('application/views/front_end/'.$theme.'/users_validation.php'))
+            {
+                $data['view'] = "front_end/".$theme."/users_validation";
+            }
+            else {
+                $data['view'] = "front_end/base/users_validation";
+            }
+
+            if(get_file_info('application/views/front_end/'.$theme.'/template.php'))
+            {            
+                $this->load->view('front_end/'.$theme.'/template',$data);
+            }
+            else {
+                $this->load->view('front_end/base/template');
+            }
+        }
+        else {
+            //Update Status for User
+            $user = new User();
+            $user->where('user_login',$username)->get();
+            $user->user_status = 1;
+            
+            //get theme
+            $option = new Option();
+            $option->where('option_name','template')->get();
+            $theme = $option->option_value;        
+
+            if(get_file_info('application/views/front_end/'.$theme.'/users_registerfalse.php'))
+            {
+                $data['view'] = "front_end/".$theme."/users_registerfalse";
+            }
+            else {
+                $data['view'] = "front_end/base/users_registerfalse";
+            }
+
+            if(get_file_info('application/views/front_end/'.$theme.'/template.php'))
+            {            
+                $this->load->view('front_end/'.$theme.'/template',$data);
+            }
+            else {
+                $this->load->view('front_end/base/template');
+            }
+        }        
     }
     
     /**
@@ -145,7 +257,7 @@ class Users extends MX_Controller
     function checkExistUser($username,$email)
     {
         $user = new User();
-        echo $user->checkExistUser($username, $email);
+        return $user->checkExistUser($username, $email);
     }
     
     /**
