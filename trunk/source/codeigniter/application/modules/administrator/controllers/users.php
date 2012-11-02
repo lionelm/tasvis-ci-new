@@ -90,6 +90,16 @@
         
          function add()
         {
+            // ktra quyen truoc khi dang nhap (nho xem lai)
+             if(!($this->session->userdata('login'))) 
+                {
+                    redirect("administrator/login");
+                }
+                
+                if(!($this->session->userdata('login')&& ($this->User_identity->check_acess('posts.add'))))
+                redirect('administrator/index'); 
+                
+                
             if( $this->input->post('txtlogin'))
             {
                 $user_login = $this->input->post('txtlogin');
