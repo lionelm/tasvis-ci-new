@@ -60,13 +60,6 @@
                  }   
                  
                  
-                   if($term_id>0)
-                    {
-                        $lstPost->include_related('term_taxonomy',array('id,term_id','taxonomy'))
-                                ->where_related('term_taxonomy', 'taxonomy', 'category')
-                                ->where_related('term_taxonomy', 'term_id', $term_id);            
-                    }
-                 
                  
                 $data['lstuser'] = $user1->get();
                 $data['view'] = 'user_index';
