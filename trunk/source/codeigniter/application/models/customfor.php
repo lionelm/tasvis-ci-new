@@ -8,6 +8,7 @@
 
 class Customfor extends DataMapper
 {
+    public  $has_one = array("custom");
     function __construct() {
         parent::__construct();
     }  
