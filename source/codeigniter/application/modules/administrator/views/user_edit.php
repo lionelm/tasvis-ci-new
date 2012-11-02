@@ -15,30 +15,58 @@
                 <p><span class="field"><input value="<?php echo $user4->user_login;?>" class="longinput validate[required]" disabled="disable" name="txtlogin" type="text"></span></p>
                 <br>     
                 
-                 <p><label>Mật khẩu</label></p>
-                <p><span class="field"><input value="<?php echo $user4->user_pass;?>" class="longinput validate[required]" name="txtpass" type="password"></span></p>
+                 <p><label>Mật khẩu[ Không được thay đổi ]</label></p>
+                <p><span class="field"><input value="<?php echo $user4->user_pass;?>" class="longinput validate[required]" disabled="disable"  name="txtpass" type="password"></span></p>
                 <br>  
                 
                 <p><label>Email</label></p>
                 <p><span class="field"><input value="<?php echo $user4->user_email;?>" class="longinput validate[required,custom[email]]" name="txtemail" type="text"></span></p>
                 <br> 
                 
+                
+                <!--dạng select
+                 
                   <p><label>Quyền[ Roles ]</label></p>
                 <p>   <select name="slrole">                    
                             <?php 
-                             foreach($lstrole as $role)
-                             {
+                             //foreach($lstrole as $role)
+                             //{
                              ?>
                              
-                            <option value="<?php echo $role->id; ?>" 
-                            <?php if($user4->authitem_id == $role->id ){ echo " selected " ; } ?> >
-                                <?php echo $role->name; ?> 
+                            <option value="<?php //echo $role->id; ?>" 
+                            <?php //if($user4->authitem_id == $role->id ){ echo " selected " ; } ?> >
+                                <?php //echo $role->name; ?> 
                             </option>
                             
-                            <?php } ?>
+                            <?php //} ?>
                     
                     </select> </p>
                 <br> 
+                
+                -->
+                
+                <!-- dạng checkbox -->
+                <td><?php                     
+                        // lấy tất cả role cho user này.
+                      $user4->authitem->include_join_fields()->get();
+                      $flag = false;
+                      foreach($lstrole as $role){   
+                        $flag = false;
+                          foreach($user4->authitem as $authitem_role){ 
+                      ?>
+                               <?php if($authitem_role->id == $role->id) { $flag = true;}
+                               }
+                               if($flag == true){ ?>
+                                <input type="checkbox" name="ckrole[]" value="<?php echo $role->id; ?>" checked="checked"  />  <?php echo $role->name; ?> 
+                                 
+                                <?php }else{ ?>
+                                     <input type="checkbox" name="ckrole[]" value="<?php echo $role->id; ?>"  />  <?php echo $role->name; ?>
+                              
+                          <?php }}?>
+                      
+                     
+                     </td>
+                     
                    
                 <p class="stdformbutton">
                     <input name="submit" value="Cập nhật" class="submit radius2" type="submit">                                
@@ -97,13 +125,16 @@
                     </td>
                     <td><?php echo $user->user_login;?></td>
                     <td><?php echo $user->user_email;?></td>   
-                    <td>
-                        <?php 
-                        $authitem = new Authitem();
-                        $activation = $user->authitem_id;
-                        $authitem->where('id',$activation)->get();
-                        echo $authitem->name;?>
-                    </td>   
+                    <td><?php 
+                    
+                        // lấy tất cả role cho user này.
+                     $user->authitem->include_join_fields()->get();
+                     foreach($user->authitem as $authitem_role)
+                     {
+                        echo "<a href=''>".$authitem_role->name."</a>";
+                        echo "&nbsp; &nbsp; &nbsp;";
+                     }
+                     ?></td>   
                     <td><?php if($user->user_status == 1)
                                 {
                                     echo "<font color='green'> Active </font>";
