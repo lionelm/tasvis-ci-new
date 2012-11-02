@@ -39,7 +39,7 @@
                }           
              //paging
                 include('paging.php');
-                $config['per_page'] = 5; // số bản ghi trên 1 trang
+                $config['per_page'] = 3; // số bản ghi trên 1 trang
                 $config['base_url']= base_url()."/administrator/users/index/".$data['role'].'/'.$data['keyword'].'/'; // trang để phân trang
                 $user1 = new User();
                 $config['total_rows']= $user1->count(); // tổng số bản ghi trong table
