@@ -15,7 +15,7 @@
                 <p><span class="field"><input value="<?php echo $user4->user_login;?>" class="longinput validate[required]" disabled="disable" name="txtlogin" type="text"></span></p>
                 <br>     
                 
-                 <p><label>Mật khẩu[ Không được thay đổi ]</label></p>
+                 <p><label>Mật khẩu</label></p>
                 <p><span class="field"><input value="<?php echo $user4->user_pass;?>" class="longinput validate[required]" disabled="disable"  name="txtpass" type="password"></span></p>
                 <br>  
                 
