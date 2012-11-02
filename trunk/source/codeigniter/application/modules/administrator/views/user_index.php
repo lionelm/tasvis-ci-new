@@ -18,11 +18,11 @@
                                
                 <select name="slrole">
                     <option value="0">-- Tất cả --</option>
-                    <?php foreach($lstrole as $role){ ?>
-                    <option value="<?php echo $role->id;  ?>"> <?php echo $role->name; ?></option>
+                    <?php foreach($lstrole as $rl){ ?>
+                    <option value="<?php echo $rl->id;  ?>" <?php if($rl->id == $role) echo "selected='selected'";?> > <?php echo $rl->name; ?></option>
                     <?php } ?>
                 </select>
-            <input type="text" name="txtkeyword" class="input-keyword">&nbsp;
+            <input type="text" name="txtkeyword" value="<?php if($keyword != '~') echo $keyword; ?>" class="input-keyword">&nbsp;
            
             <input type="submit" class="btn" value="Tìm kiếm"/>
         </form>
