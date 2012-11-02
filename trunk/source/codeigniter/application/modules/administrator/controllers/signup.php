@@ -59,6 +59,7 @@
                         $email_msg.=base_url().'administrator/signup/validation/'.$random_code; // $email_msg.=base_url().'home/verify/';
                         $this->email->message($email_msg);  
                         $this->email->send();
+                        
                          //echo $this->email->print_debugger(); // in thông tin trên để dễ dàng gỡ lỗi
                         // end sendmail
                         $data['view'] = 'report3';

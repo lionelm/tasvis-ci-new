@@ -17,12 +17,13 @@ class Demo extends MX_Controller
         $option->where('option_name','template')->get();
         $theme = $option->option_value;        
         
-        if(get_file_info('application/views/front_end/'.$theme.'/demo_index.php'))
+        if(get_file_info('application/views/front_end/'.$theme.'/template.php'))
         {
-            $this->load->view('front_end/'.$theme.'/demo_index');
+            $data['view'] = "front_end/thucung/left";
+            $this->load->view('front_end/'.$theme.'/template',$data);
         }
         else {
-            $this->load->view('front_end/base/demo_index');
+            $this->load->view('front_end/base/template');
         }
     }
 }
