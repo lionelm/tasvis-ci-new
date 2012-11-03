@@ -50,7 +50,9 @@
                 -->
                 
                 <!-- dạng checkbox -->
-                <td><?php                     
+                <p><label>Quyền[ Roles ]</label></p>
+                <p>
+                <?php                     
                         // lấy tất cả role trong bảng authitem cho user hiện tại này.
                       $user4->authitem->include_join_fields()->get();
                       $flag = false;
@@ -67,10 +69,9 @@
                                      <input type="checkbox" name="ckrole[]" value="<?php echo $role->id; ?>"  />  <?php echo $role->name; ?>
                               
                           <?php }}?>
-                      
-                     
-                     </td>
-                     
+                    </p>
+                     <br>
+                    
                    
                 <p class="stdformbutton">
                     <input name="submit" value="Cập nhật" class="submit radius2" type="submit">                                
