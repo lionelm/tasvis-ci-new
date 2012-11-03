@@ -16,8 +16,12 @@
                 <br>     
                 
                  <p><label>Mật khẩu</label></p>
-                <p><span class="field"><input value="<?php echo $user4->user_pass;?>" class="longinput validate[required]" disabled="disable"  name="txtpass" type="password"></span></p>
+                <p><span class="field"><input  class="longinput validate[]" id="txtpass" name="txtpass" type="password"></span></p>
                 <br>  
+                
+                 <p><label>Xác nhận mật khẩu</label></p>
+                <p><span class="field"><input class="longinput validate[equals[txtpass]" name="txtconfirmpass" type="password"></span></p>
+                <br>
                 
                 <p><label>Email</label></p>
                 <p><span class="field"><input value="<?php echo $user4->user_email;?>" class="longinput validate[required,custom[email]]" name="txtemail" type="text"></span></p>
@@ -47,7 +51,7 @@
                 
                 <!-- dạng checkbox -->
                 <td><?php                     
-                        // lấy tất cả role cho user này.
+                        // lấy tất cả role trong bảng authitem cho user hiện tại này.
                       $user4->authitem->include_join_fields()->get();
                       $flag = false;
                       foreach($lstrole as $role){   
