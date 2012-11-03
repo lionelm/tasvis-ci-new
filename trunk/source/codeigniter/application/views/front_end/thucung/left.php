@@ -15,31 +15,31 @@
                                     <div class="clear">
                                         <ul class="menu">
                                             <li id="current" class="active item1">
-                                                <a href="http://osc.template-help.com/joomla_23492/"><span>Home</span></a>
+                                                <a href="<?php echo base_url();?>"><span>Home</span></a>
                                             </li>
                                             <li class="item60">
-                                                <a href="/joomla_23492/index.php?option=com_content&amp;view=article&amp;id=5&amp;Itemid=60"><span>Joomla License</span></a>
+                                                <a id="link-login" href="#login-form"><span>Login</span></a>
                                             </li>
                                             <li class="item61">
-                                                <a href="/joomla_23492/index.php?option=com_content&amp;view=category&amp;id=1&amp;Itemid=61"><span>News</span></a>
+                                                <a href="#"><span>News</span></a>
                                             </li>
                                             <li class="item62">
-                                                <a href="/joomla_23492/index.php?option=com_content&amp;view=category&amp;layout=blog&amp;id=29&amp;Itemid=62"><span>Blog</span></a>
+                                                <a href="#"><span>Blog</span></a>
                                             </li>
                                             <li class="item63">
-                                                <a href="/joomla_23492/index.php?option=com_newsfeeds&amp;view=category&amp;id=4&amp;Itemid=63"><span>News Feeds</span></a>
+                                                <a href="#"><span>News Feeds</span></a>
                                             </li>
                                             <li class="item64">
-                                                <a href="/joomla_23492/index.php?option=com_wrapper&amp;view=wrapper&amp;Itemid=64"><span>Wrapper</span></a>
+                                                <a href="#"><span>Wrapper</span></a>
                                             </li>
                                             <li class="item65">
-                                                <a href="/joomla_23492/index.php?option=com_search&amp;view=search&amp;Itemid=65"><span>Advanced Search</span></a>
+                                                <a href="#"><span>Advanced Search</span></a>
                                             </li>
                                             <li class="item66">
-                                                <a href="/joomla_23492/index.php?option=com_content&amp;view=category&amp;id=31&amp;Itemid=66"><span>FAQ's</span></a>
+                                                <a href="#"><span>FAQ's</span></a>
                                             </li>
                                             <li class="item67">
-                                                <a href="/joomla_23492/index.php?option=com_contact&amp;view=contact&amp;id=1&amp;Itemid=67"><span>Contact Us</span></a>
+                                                <a href="#"><span>Contact Us</span></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -123,3 +123,4 @@
         </div>
     </div>
 </div>
+

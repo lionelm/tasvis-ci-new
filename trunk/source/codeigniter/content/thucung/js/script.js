@@ -3,6 +3,20 @@ jQuery(document).ready(function(){
     //Validate function
     jQuery("#formID").validationEngine();
     
+    //Login Form    
+    jQuery("#link-login").colorbox({
+        rel: 'colorbox',
+        inline:true,
+        html: true,        
+        maxWidth:'780px',        
+        opacity:0.8,
+        open:false,
+        returnFocus:false,
+        fixed: false,
+        title: false,
+        transition:'elastic',
+        overlayClose:true
+    });
     
 });
 
