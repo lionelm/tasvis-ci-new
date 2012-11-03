@@ -32,7 +32,7 @@
             </a>
             <div class="userdrop">
                 <ul>
-                    <li><a href="<?php echo base_url(); ?>administrator/users/profile/<?php echo $this->session->userdata('id');?>">Edit Profile</a></li>
+                    <li><a href="<?php echo base_url(); ?>administrator/users/profile/<?php echo $this->session->userdata('user_id');?>">Edit Profile</a></li>
                     <li><a href="">Account Settings</a></li>
                     <li><a href="<?php echo base_url(); ?>administrator/login/logout/">Logout</a></li>
                 </ul>
