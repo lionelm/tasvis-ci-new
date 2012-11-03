@@ -1,4 +1,11 @@
 <?php
+
+/*
+ * Create by: DinhHV
+ * Description: 
+ * Date Create: 24/10/2012
+ */
+ 
     class Login extends MX_Controller
     {
         public function __construct()
