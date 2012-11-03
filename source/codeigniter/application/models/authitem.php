@@ -11,11 +11,11 @@
              
         public $has_many = array(
                 'user' => array(			
-                'class' => 'user',			
-                'other_field' => 'authitem',		
-                'join_self_as' => 'authitem',		
-                'join_other_as' => 'user',		
-                'join_table' => 'hd_users_authitems'
+                    'class' => 'user',			
+                    'other_field' => 'authitem',		
+                    'join_self_as' => 'authitem',		
+                    'join_other_as' => 'user',		
+                    'join_table' => 'hd_users_authitems'
                         ));
         
         function __construct() {
