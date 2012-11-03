@@ -1,4 +1,11 @@
 <?php
+
+/*
+ * Create by: DinhHV
+ * Description: 
+ * Date Create: 23/10/2012
+ */
+ 
     class Users extends MX_Controller
     {
         function __construct()
