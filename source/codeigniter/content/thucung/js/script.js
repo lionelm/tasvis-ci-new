@@ -29,7 +29,8 @@ function checkExitUser(inputString)
 
 function checkExitEmail(inputString)
 {
-    var url = jQuery("#txtemail").attr("urllink");
+    var url = jQuery("#txtEmail").attr("urllink");
+    
     if(inputString.length>0)
     {
         jQuery.post(url,{email:inputString},function(data) {
