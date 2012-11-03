@@ -54,35 +54,35 @@
                     $valid->save();
                     
                     //sendmail
-                    //sendmail
-                $option = new Option();
-                $option->where('option_name','mail_server_host')->get();
-                $host = $option->option_value; 
+                    /*
+                        $option = new Option();
+                        $option->where('option_name','mail_server_host')->get();
+                        $host = $option->option_value; 
+                        
+                        $option = new Option();
+                        $option->where('option_name','mail_server_port')->get();
+                        $port = $option->option_value;  
+                        
+                        $option = new Option();
+                        $option->where('option_name','mail_server_username')->get();
+                        $usermail = $option->option_value;  
+                        
+                        $option = new Option();
+                        $option->where('option_name','mail_server_password')->get();
+                        $passmail = $option->option_value; 
+                        
+                        $config['protocol']='smtp';
+                        $config['smtp_host']=$host;
+                        $config['smtp_port']=$port;
+                        $config['smtp_timeout']='30';
+                        $config['smtp_user']=$usermail;
+                        $config['smtp_pass']=$passmail;
+                        $config['charset']='utf-8';
+                        $config['newline']="\r\n";
+                        $config['mailtype'] = 'html';
+                        $this->email->initialize($config);
                 
-                $option = new Option();
-                $option->where('option_name','mail_server_port')->get();
-                $port = $option->option_value;  
-                
-                $option = new Option();
-                $option->where('option_name','mail_server_username')->get();
-                $usermail = $option->option_value;  
-                
-                $option = new Option();
-                $option->where('option_name','mail_server_password')->get();
-                $passmail = $option->option_value; 
-                
-                $config['protocol']='smtp';
-                $config['smtp_host']=$host;
-                $config['smtp_port']=$port;
-                $config['smtp_timeout']='30';
-                $config['smtp_user']=$usermail;
-                $config['smtp_pass']=$passmail;
-                $config['charset']='utf-8';
-                $config['newline']="\r\n";
-                $config['mailtype'] = 'html';
-                $this->email->initialize($config);
-                
-                
+                */
                         $this->email->from('dangky@butdanh.com','Bút Danh'); 
                         $this->email->to($user_email);                         
                         //$this->email->cc('hoangdinh812@gmail.com'); 
