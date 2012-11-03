@@ -196,7 +196,7 @@
                 //$user3->user_login = $user_login;
                 if($user_pass != '')
                 {
-                    $user3->user_pass = $user_pass;
+                    $user3->user_pass = md5($user_pass);
                 }else{
                     $user3->user_pass = $user3->user_pass;
                 }
@@ -250,16 +250,31 @@
         function profile()
         {
             
-            if($this->input->post('txtpass') ) // xem lai
+            if($this->input->post('txtnicename')  or $this->input->post('txtemail')  ) // xem lai
             {
                 $user_id = $this->input->post('txtid');
                 $user_login = $this->input->post('txtlogin');
-                $user_pass = md5($this->input->post('txtpass'));
+                $user_pass = $this->input->post('txtpass');
+                $user_confirmpass = $this->input->post('txtconfirmpass');
                 $user_nicename = $this->input->post('txtnicename');
                 $user_email = $this->input->post('txtemail');
                 
+                
                 $user3 = new User();
-                $user3->where('id = ',$user_id)->update(array('id'=>$user_id,'user_pass'=>$user_pass,'user_nicename'=>$user_nicename,'user_email'=>$user_email));
+                $user3->where('id',$user_id)->get();
+                //$user3->user_login = $user_login;
+                if($user_pass != '')
+                {
+                    $user3->user_pass = md5($user_pass);
+                }else{
+                    $user3->user_pass = $user3->user_pass;
+                }
+                $user3->user_email = $user_email;
+                $user3->user_nicename = $user_nicename;
+                $user3->user_display = $user_nicename;
+                
+                $user3->save();    
+                
                 redirect('administrator/users');
                            
             }else{ 
