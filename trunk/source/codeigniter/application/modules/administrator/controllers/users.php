@@ -50,9 +50,9 @@
                  }
                  if($data['role'] > 0)
                  {
-                    $user1->include_related('authitem',array('id','name','type'))
-                            ->where_related('authitem', 'type', 'role')
-                                ->where_related('authitem', 'id', $data['role']);
+                    $user1->include_related('authitem',array('id','name','type')) // mảng chứa các field trong bảng authitem liên quan với bảng user
+                            ->where_related('authitem', 'type', 'role')             //đk: type = role
+                                ->where_related('authitem', 'id', $data['role']);   // .....
                  }   
                 
                 $config['total_rows']= $user1->count(); // tổng số bản ghi trong table
@@ -101,7 +101,7 @@
            */
         }
         
-         function add()
+        function add()
         {
             // ktra quyen truoc khi dang nhap (nho xem lai)
              if(!($this->session->userdata('login'))) 
@@ -120,7 +120,7 @@
                 $user_confirmpass = $this->input->post('txtconfirmpass');
                 $user_nicename = $this->input->post('txtnicename');
                 $user_email = $this->input->post('txtemail');
-                $l_arr_role = $this->input->post('slrole');        
+                $l_arr_role = $this->input->post('slrole');     //array   
                 $user_status = $this->input->post('rdtrangthai');         
                 
                 if( !$this->checkuser($user_login) )
@@ -198,7 +198,7 @@
                 $user3->user_nicename = $user_nicename;
                 $user3->user_display = $user_nicename;
                 
-                // nếu ko checkbox ko được check(tích) thì ta xóa bản ghi đó đi(xóa trong bảng được sinh ra(trong quan hệ n-n))
+                // nếu ko checkbox ko được check(tích) thì ta xóa bản ghi đó đi(xóa trong bảng được sinh ra bởi quan hệ n-n))
                     if($this->input->post('ckrole') != 'on')
                     {
                         $user_authitem = new User_authitem();
@@ -206,9 +206,9 @@
                         $user_authitem->delete_all();
                     }
                                        
-                    // nếu user chưa tồn tại thì sẽ save, tồn tại rối thì sẽ update 
+                // nếu user chưa tồn tại thì sẽ save, tồn tại rối thì sẽ update 
                     $authi = new Authitem();
-                    $authi->where_in('id',$l_arr_role)->get();                    
+                    $authi->where_in('id',$l_arr_role)->get(); // lấy ra các role với id nằm trong mảng: $l_arr_role                  
                     $user3->save($authi->all); // validation tự động kiểm tra khi ta gọi save()                      
                     redirect('administrator/users');
                            
@@ -223,6 +223,7 @@
                 
                 //paging
                 include('paging.php');
+                
                 $config['per_page'] = 3; // số bản ghi trên 1 trang
                 $config['base_url']= base_url()."/administrator/users/edit/".$id.'/'; // (ve nha xem lai dong nay)trang để phân trang
                 $user5 = new User();  
@@ -232,7 +233,7 @@
                 $data['list_link'] = $this->pagination->create_links();	 // tạo link phân trang
                  
                 $user1 = new User();
-                $data['lstuser'] = $user1->limit($config['per_page'], $row)->get(); 
+                $data['lstuser'] = $user1->limit($config['per_page'], $row)->get(); // limit(so ban ghi, vi tri bat dau)
                 $data['view'] = 'user_edit';
                 $this->load->view('back_end/template_noright',$data);
                 
