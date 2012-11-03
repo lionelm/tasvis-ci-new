@@ -18,12 +18,11 @@ class Users extends MX_Controller
     }
     
     
-    /*
-     * Create by: HungPV
-     * Function name: register()
-     * Input: no values
-     * Return: view for action
-     * Description: register for users
+    /**
+     * register
+     * 
+     * @author HungPV
+     * @deprecated return view for register  
      */
     function register()
     {
@@ -121,6 +120,7 @@ class Users extends MX_Controller
             
         }else
         {
+            
             //get theme
             $option = new Option();
             $option->where('option_name','template')->get();
