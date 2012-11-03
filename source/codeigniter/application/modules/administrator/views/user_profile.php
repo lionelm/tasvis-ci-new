@@ -20,8 +20,12 @@
                 <br> 
                 
                 <p><label>Mật khẩu</label></p>
-                <p><span class="field"><input value="<?php echo $user4->user_pass;?>" class="longinput validate[required]" name="txtpass" type="password"></span></p>
+                <p><span class="field"><input  class="longinput validate[]" id="txtpass" name="txtpass" type="password"></span></p>
                 <br>  
+                
+                 <p><label>Xác nhận mật khẩu</label></p>
+                <p><span class="field"><input class="longinput validate[equals[txtpass]" name="txtconfirmpass" type="password"></span></p>
+                <br>
               
                        
                 <p class="stdformbutton">
