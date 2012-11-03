@@ -44,7 +44,8 @@
               <?php foreach($lstrole as $role){?>
                <input type="checkbox" name="slrole[]" value="<?php echo $role->id; ?>"/> <?php echo $role->name ?>
               <?php } ?>
-              
+              <br>
+              <br>
                 
             <p><label>Trạng thái</label></p>
             <p><span class="field"><input type="radio" name="rdtrangthai" value="1" checked="checked" />Active  
