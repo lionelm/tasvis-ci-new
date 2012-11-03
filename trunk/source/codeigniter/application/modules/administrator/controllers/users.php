@@ -128,7 +128,7 @@
                     $user2 = new User();
                     $user2->user_login = $user_login;
                     $user2->user_pass = md5($user_pass);
-                    $user2->user_confirmpas = md5($user_confirmpass);
+                    $user2->user_confirmpass = md5($user_confirmpass);
                     $user2->user_nicename = $user_nicename;
                     $user2->user_email = $user_email;
                     $user2->user_registered = date('Y-m-d H:i:s');
@@ -185,7 +185,8 @@
             {
                 $user_id = $this->input->post('txtid');
                 //$user_login = $this->input->post('txtlogin'); // login bị disable(ko cho sửa) nên ko sử dụng post để nhận dữ liệu
-                //$user_pass = md5($this->input->post('txtpass'));
+                $user_pass = $this->input->post('txtpass');
+                $user_confirmpass = $this->input->post('txtconfirmpass');
                 $user_nicename = $this->input->post('txtnicename');
                 $l_arr_role = $this->input->post('ckrole'); 
                 $user_email = $this->input->post('txtemail');
@@ -193,7 +194,12 @@
                 $user3 = new User();
                 $user3->where('id',$user_id)->get();
                 //$user3->user_login = $user_login;
-                //$user3->user_pass = $user_pass;
+                if($user_pass != '')
+                {
+                    $user3->user_pass = $user_pass;
+                }else{
+                    $user3->user_pass = $user3->user_pass;
+                }
                 $user3->user_email = $user_email;
                 $user3->user_nicename = $user_nicename;
                 $user3->user_display = $user_nicename;
