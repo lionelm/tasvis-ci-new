@@ -17,6 +17,7 @@
                     'join_other_as' => 'user',		
                     'join_table' => 'hd_users_authitems'
                         ));
+                        
         
         function __construct() {
             parent::__construct();
