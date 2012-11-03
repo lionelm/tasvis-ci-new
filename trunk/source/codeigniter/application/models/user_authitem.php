@@ -8,7 +8,7 @@
     class User_authitem extends DataMapper
     {
         var $table = 'users_authitems';    
-            
+        public  $has_one = array("authitem");     
         function __construct() {
             parent::__construct();
         }
