@@ -28,7 +28,7 @@
             <p><span class="field"><input class="longinput validate[required,custom[email]" name="txtemail" type="text"></span></p>
             <br>
             
-            <!--
+            <!-- dạng select
             <p><label>Quyền[ Roles ]</label></p>
              <p>   <select name="slrole">
                    
@@ -39,6 +39,7 @@
             <br>
             -->
             
+            <!-- dạng checkbox -->
               <p><label>Quyền[ Roles ]</label></p>
               <?php foreach($lstrole as $role){?>
                <input type="checkbox" name="slrole[]" value="<?php echo $role->id; ?>"/> <?php echo $role->name ?>
