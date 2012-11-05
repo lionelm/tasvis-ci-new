@@ -72,7 +72,9 @@ class Users extends MX_Controller
                 $option = new Option();
                 $option->where('option_name','mail_server_password')->get();
                 $passmail = $option->option_value; 
-                
+               
+               
+               // cấu hình gửi mail 
                 $config['protocol']='smtp';
                 $config['smtp_host']=$host;
                 $config['smtp_port']=$port;
