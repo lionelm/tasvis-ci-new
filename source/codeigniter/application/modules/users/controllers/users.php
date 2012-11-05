@@ -247,6 +247,47 @@ class Users extends MX_Controller
     }
     
     /**
+     * login()
+     * @name Login function
+     * @author HungPV <hungpv@tasvis.com.vn>
+     * @deprecated Login action Ajax for user
+     * 
+     */
+    function login()
+    {
+        $user_login = $this->input->post('username');
+        $user_pass = $this->input->post('password');
+        
+        if($this->checklogin($user_login,md5($user_pass)))
+        {
+            $user = new User();
+            $user->where('user_login',$user_login)->get();
+            if($user->user_status == 1)
+            { 
+                $userdata = array(
+                    'username'  => $user_login,
+                    'login' => TRUE,
+                    'user_id' => $user->id,
+                    'user_activation_key'=>$user->user_activation_key                            
+                );
+                $this->session->set_userdata($userdata);  
+                echo true;                
+            }else{
+                echo false;
+            }
+        }else{
+            echo false;
+        }
+    }
+    
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect("home/index");
+    }
+
+
+    /**
      * checkExistUser
      * 
      * @author HungPV
@@ -292,6 +333,29 @@ class Users extends MX_Controller
         $user = new User();
         $email = $this->input->post("email");
         echo $user->checkExistUserEmail($email);
+    }
+    
+    
+    /**
+     * checklogin
+     * @author HungPV <hungpv@tasvis.com.vn>
+     * @param type $username
+     * @param type $password
+     * @return boolean
+     * @deprecated Check User if exist, return true if exist, or false if not.
+     */
+    function checklogin($username,$password)
+    {
+        $user = new User();            
+        $array = array('user_login'=>$username, 'user_pass'=>$password);
+        $count = $user->where($array)->count();
+        if($count == 0)
+        {
+            return false;
+        }else{
+            return true;
+
+        }
     }
 }
 ?>

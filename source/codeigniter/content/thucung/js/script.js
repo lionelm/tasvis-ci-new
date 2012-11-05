@@ -4,18 +4,58 @@ jQuery(document).ready(function(){
     jQuery("#formID").validationEngine();
     
     //Login Form    
-    jQuery("#link-login").colorbox({
-        rel: 'colorbox',
-        inline:true,
-        html: true,        
-        maxWidth:'780px',        
-        opacity:0.8,
-        open:false,
-        returnFocus:false,
-        fixed: false,
-        title: false,
-        transition:'elastic',
-        overlayClose:true
+    jQuery("#link-login").click(function(){
+        // Getting the variable's value from a link 
+        var loginBox = jQuery(this).attr('href');
+        
+        //Fade in the Popup and add close button
+        jQuery(loginBox).fadeIn(300);
+
+        //Set the center alignment padding + border
+        var popMargTop = (jQuery(loginBox).height() + 24) / 2; 
+        var popMargLeft = (jQuery(loginBox).width() + 24) / 2; 
+
+        jQuery(loginBox).css({ 
+                'margin-top' : -popMargTop,
+                'margin-left' : -popMargLeft
+        });
+
+        // Add the mask to body
+        jQuery('body').append('<div id="mask"></div>');
+        jQuery('#mask').fadeIn(300);
+
+        return false;
+    });
+    
+    // When clicking on the button close or the mask layer the popup closed
+    jQuery('a.close, #mask').live('click', function() { 
+        jQuery('#mask , .login-popup').fadeOut(300 , function() {
+              jQuery('#mask').remove();  
+        }); 
+        return false;
+    });
+    
+    jQuery(".button-login").click(function(){
+        var username = jQuery("#username").attr("value");
+        var pass = jQuery("#password").attr("value");
+        var url = jQuery("#login-form").attr("action");
+        var outlink = jQuery(this).attr("outlink");
+        jQuery.post(url, {username:username,password:pass}, function(data){
+            if(data==1)
+            {
+                jQuery('#mask , .login-popup').fadeOut(300 , function() {
+                    jQuery('#mask').remove();  
+                }); 
+                jQuery("#link-login").attr("href",outlink);
+                jQuery("#link-login").text("Logout");
+            }
+            else
+            {
+                jQuery("#p-message").slideDown();
+            }
+        });
+        
+        return false;
     });
     
 });

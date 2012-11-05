@@ -586,3 +586,71 @@ td {
     width: 84px;
 }
 .article_indent input{height: 25px;}
+.login-popup {
+    background: none repeat scroll 0 0 #333333;
+    border: 2px solid #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 20px #999999;
+    display: none;
+    float: left;
+    font-size: 1.2em;
+    left: 50%;
+    padding: 25px;
+    position: fixed;
+    top: 50%;
+    z-index: 99999;
+}
+    
+img.btn_close {
+    float: right;
+    margin: -44px -44px 0 0;
+}
+
+fieldset {
+    border: medium none;
+}
+form.signin .textbox label {
+    display: block;
+    padding-bottom: 7px;
+}
+form.signin .textbox span {
+    display: block;
+}
+form.signin p, form.signin span {
+    color: #999999;
+    font-size: 11px;
+    line-height: 18px;
+}
+form.signin input:-moz-placeholder {
+    color: #BBBBBB;
+    text-shadow: 0 0 2px #000000;
+}
+form.signin .textbox input {
+    background: none repeat scroll 0 0 #666666;
+    border-color: #000000 #333333 #333333 #000000;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    color: #FFFFFF;
+    font: 13px Arial,Helvetica,sans-serif;
+    padding: 6px 6px 4px;
+    width: 200px;
+}
+.signin .button-login {
+    background: -moz-linear-gradient(center top , #F3F3F3, #DDDDDD) repeat scroll 0 0 transparent;
+    border-color: #000000;
+    border-radius: 4px 4px 4px 4px;
+    border-width: 1px;
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 6px 4px;
+    width: 214px;
+}
+form.signin p, form.signin span {
+    color: #999999;
+    font-size: 12px;
+    line-height: 25px;
+}
+#p-message{display: none;color: sandybrown;}

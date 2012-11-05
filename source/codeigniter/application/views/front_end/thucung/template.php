@@ -37,11 +37,9 @@
                                     <?php $this->load->view('front_end/thucung/left');?>
                                 </div>    
                                 <div id="container" class="equal">
-                                    <div style="display: none;">
-                                        <div id="login-form" class="preview" style="width: 600px;height: 600px;">
-                                            aaaaaaaaaaaaa
-                                        </div>
-                                    </div>
+                                    
+                                    <?php $this->load->view('front_end/thucung/login');?>
+                                    
                                     <?php $this->load->view($view);?>                                    
                                 </div>    
                             </div>
