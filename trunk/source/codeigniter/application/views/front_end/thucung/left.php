@@ -18,7 +18,11 @@
                                                 <a href="<?php echo base_url();?>"><span>Home</span></a>
                                             </li>
                                             <li class="item60">
-                                                <a id="link-login" href="#login-form"><span>Login</span></a>
+                                                <?php if($this->session->userdata("login")!=1){?>
+                                                <a id="link-login" href=".login-popup"><span>Login</span></a>
+                                                <?php }else{?>
+                                                <a href="<?php echo base_url();?>users/logout"><span>Logout</span></a>
+                                                <?php }?>
                                             </li>
                                             <li class="item61">
                                                 <a href="#"><span>News</span></a>
