@@ -82,7 +82,7 @@
                           <!-- dạng checkbox -->            
                     <td><?php 
                     
-                        // lấy tất cả role cho user này.
+                        // lấy tất cả authitem(role) cho user này.
                      $user->authitem->include_join_fields()->get();
                      foreach($user->authitem as $authitem_role)
                      {

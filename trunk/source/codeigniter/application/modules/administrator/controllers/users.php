@@ -58,7 +58,7 @@
                  if($data['role'] > 0)
                  {
                     $user1->include_related('authitem',array('id','name','type')) // mảng chứa các field trong bảng authitem liên quan với bảng user
-                            ->where_related('authitem', 'type', 'role')             //đk: type = role
+                            ->where_related('authitem', 'type', 'role')             //$object->{query}_related($model, $field, $value); // lấy ra tất cả các user với có quyền(role) la $data['role']
                                 ->where_related('authitem', 'id', $data['role']);   // .....
                  }   
                 
