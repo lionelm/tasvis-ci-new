@@ -42,6 +42,9 @@ class Campaigns extends MX_Controller
             $name = $this->input->post("txttitle");
             $summary = $this->input->post("txtexcerpt");
             $description = $this->input->post("txtcontent");
+            $contestform = $this->input->post("txtcontent1");
+            $awardmethod = $this->input->post('txtcontent2');
+            $award = $this->input->post("txtcontent3");
             $image = $this->input->post("hdffeatured_image");
             $date_start = date('Y-m-d H:i:s');
             $post_date_start = $this->input->post('txtDateStart');
@@ -72,6 +75,9 @@ class Campaigns extends MX_Controller
             $campaign->name = $name;
             $campaign->summary = $summary;
             $campaign->description = $description;
+            $campaign->contestform = $contestform;
+            $campaign->awardmethod = $awardmethod;
+            $campaign->award = $award;
             $campaign->image = $image;
             $campaign->start_date = $date_start;
             $campaign->end_date = $date_end;
@@ -108,6 +114,9 @@ class Campaigns extends MX_Controller
             $name = $this->input->post("txttitle");
             $summary = $this->input->post("txtexcerpt");
             $description = $this->input->post("txtcontent");
+            $contestform = $this->input->post("txtcontent1");
+            $awardmethod = $this->input->post('txtcontent2');
+            $award = $this->input->post("txtcontent3");
             $image = $this->input->post("hdffeatured_image");
             $date_start = date('Y-m-d H:i:s');
             $post_date_start = $this->input->post('txtDateStart');
@@ -138,6 +147,9 @@ class Campaigns extends MX_Controller
             $campaign->name = $name;
             $campaign->summary = $summary;
             $campaign->description = $description;
+            $campaign->contestform = $contestform;
+            $campaign->awardmethod = $awardmethod;
+            $campaign->award = $award;
             $campaign->image = $image;
             $campaign->start_date = $date_start;
             $campaign->end_date = $date_end;

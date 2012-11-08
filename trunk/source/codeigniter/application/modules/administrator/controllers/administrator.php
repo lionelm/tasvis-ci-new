@@ -16,6 +16,10 @@
         
         function index()
         {
+            if(!($this->session->userdata('login'))) 
+            {
+                redirect("administrator/login");
+            }
             $data['view'] = 'administrator_index';
             $this->load->view('back_end/template',$data);
         }

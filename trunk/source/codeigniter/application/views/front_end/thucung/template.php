@@ -9,6 +9,7 @@
         <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content/thucung/js/jquery.validationEngine-vi.js"></script>
         <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content/thucung/js/jquery.validationEngine.js"></script>        
         <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content/thucung/js/jquery.colorbox.js"></script>        
+        <script language="javascript" type="text/javascript" src="<?php echo base_url();?>content/thucung/js/jquery.smartTab.js"></script>        
         <script type="text/javascript" language="javascript" src="<?php echo base_url()?>content/thucung/js/script.js"></script>
     </head>
     <body id="body">

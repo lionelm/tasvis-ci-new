@@ -28,7 +28,7 @@
                                                 <a href="#"><span>News</span></a>
                                             </li>
                                             <li class="item62">
-                                                <a href="#"><span>Blog</span></a>
+                                                <a href="<?php echo base_url(); ?>campaigns"><span>Danh sách cuộc thi</span></a>
                                             </li>
                                             <li class="item63">
                                                 <a href="#"><span>News Feeds</span></a>

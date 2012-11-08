@@ -14,7 +14,16 @@
             </br>
             <p><label>Nội dung:</label></p>                            
             <p><textarea name="txtcontent" id="editor_content" class="validate[required]"><?php echo $campaign->description;?></textarea></p>            
-            </br>              
+            </br>   
+            <p><label>Hình thức dự thi:</label></p>                            
+            <p><textarea name="txtcontent1" id="editor_content1" class="validate[required]"><?php echo $campaign->contestform;?></textarea></p>            
+            </br>
+            <p><label>Phương thức tính giải:</label></p>                            
+            <p><textarea name="txtcontent2" id="editor_content2" class="validate[required]"><?php echo $campaign->awardmethod;?></textarea></p>            
+            </br>
+            <p><label>Hệ thống giải thưởng:</label></p>                            
+            <p><textarea name="txtcontent3" id="editor_content3" class="validate[required]"><?php echo $campaign->award;?></textarea></p>            
+            </br>
         </div>
         <div class="edit-right">
             <div class="widgetbox">
@@ -54,6 +63,42 @@
 </div><!--content-->
 <script type="text/javascript">    
     var editor = CKEDITOR.replace( 'editor_content',
+    {			
+        filebrowserBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=file',
+        filebrowserImageBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=image',
+        filebrowserFlashBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=flash',
+        filebrowserImageUploadUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=image',
+        filebrowserFlashUploadUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=flash',
+        filebrowserImageWindowWidth : '950',
+        filebrowserImageWindowHeight : '490',
+        filebrowserWindowWidth : '950',
+        filebrowserWindowHeight : '490'
+    });
+    var editor = CKEDITOR.replace( 'editor_content1',
+    {			
+        filebrowserBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=file',
+        filebrowserImageBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=image',
+        filebrowserFlashBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=flash',
+        filebrowserImageUploadUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=image',
+        filebrowserFlashUploadUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=flash',
+        filebrowserImageWindowWidth : '950',
+        filebrowserImageWindowHeight : '490',
+        filebrowserWindowWidth : '950',
+        filebrowserWindowHeight : '490'
+    });
+    var editor = CKEDITOR.replace( 'editor_content2',
+    {			
+        filebrowserBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=file',
+        filebrowserImageBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=image',
+        filebrowserFlashBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=flash',
+        filebrowserImageUploadUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=image',
+        filebrowserFlashUploadUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=flash',
+        filebrowserImageWindowWidth : '950',
+        filebrowserImageWindowHeight : '490',
+        filebrowserWindowWidth : '950',
+        filebrowserWindowHeight : '490'
+    });
+    var editor = CKEDITOR.replace( 'editor_content3',
     {			
         filebrowserBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=file',
         filebrowserImageBrowseUrl : '<?php echo base_url();?>elfinder/elfinder.php?mode=image',
