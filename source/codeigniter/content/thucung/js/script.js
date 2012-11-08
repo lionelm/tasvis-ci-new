@@ -58,6 +58,12 @@ jQuery(document).ready(function(){
         return false;
     });
     
+    //Tab
+    jQuery(".tab").smartTab({
+        transitionEffect:'fade'
+       
+    });    
+    
 });
 
 function checkExitUser(inputString)

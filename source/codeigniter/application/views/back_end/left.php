@@ -54,6 +54,9 @@
                 <li><a href="<?php echo base_url();?>administrator/setting/seo"><span>Seo</span></a></li>               
             </ul>
         </li>        
+        <li>
+            <a href="<?php echo base_url();?>administrator/donors" class="buttons"><span>Nhà tài trợ</span></a>            
+        </li>
     </ul>
 
 </div><!--leftmenu-->

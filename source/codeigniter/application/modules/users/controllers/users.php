@@ -280,6 +280,11 @@ class Users extends MX_Controller
         }
     }
     
+    /**
+     * logout
+     * @author HungPV <hungpv@tasvis.com.vn>
+     * @deprecated Logout for user.
+     */
     public function logout()
     {
         $this->session->sess_destroy();
