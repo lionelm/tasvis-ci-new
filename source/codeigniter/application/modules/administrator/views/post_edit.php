@@ -263,6 +263,20 @@
                 </div>
             </div>
             <div class="widgetbox">
+                <div class="title"><h2 class="general"><span>Cuộc thi</span></h2></div>
+                <div class="widgetcontent" style="display: block;">
+                    <select name="ddlCampaign" style="width: 100%;">
+                        <?php 
+                        foreach ($lstCampaign as $campaign)
+                        {
+                        ?>     
+                        <option value="<?php echo $campaign->id;?>" <?php if($campaign->id==$post->campaign_id) echo "selected='selected'"?>><?php echo $campaign->name;?></option>
+                        <?php }?>
+                    </select>
+                    
+                </div>
+            </div>
+            <div class="widgetbox">
                 <div class="title"><h2 class="general"><span>Ảnh đại diện</span></h2></div>
                 <div class="widgetcontent" style="display: block;">
                     <input type="hidden" id="featured_image" name="hdffeatured_image" value="<?php echo $featured_image;?>" >
