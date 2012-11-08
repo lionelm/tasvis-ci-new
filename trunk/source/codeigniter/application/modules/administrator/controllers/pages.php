@@ -117,7 +117,8 @@ class Pages extends MX_Controller
                     $post_status = $this->input->post('ddlTrangThai');
                     $slug = $this->Common_model->makeSlugs($l_title,255);
                     $slug = $this->generateSlug($slug);
-
+                    $campaign_id = $this->input->post("ddlCampaign");
+                    
 
                     $post = new Post();
                     $post->post_date = date('Y-m-d H:i:s');
@@ -131,7 +132,7 @@ class Pages extends MX_Controller
                     $post->post_parent = $page_parent;
                     $post->language_id = $lang->id;
                     $post->root_lang = $root;
-
+                    $post->campaign_id = $campaign_id;
                     if($post->save())
                     {
                         //add featured images
@@ -176,6 +177,9 @@ class Pages extends MX_Controller
             }
         }
         else{   
+            $campaign = new Campaign();
+            $lstCampaign = $campaign->get();
+            $data['lstCampaign'] = $lstCampaign;
             $custom = new Custom();
             $data['lstCustom'] = $custom->getCustomApply('page');
             $data['lstLang'] = $language;
@@ -259,7 +263,7 @@ class Pages extends MX_Controller
                     $seo_title = $this->input->post('txtTitleSeo'.$lang->code);
                     $seo_desc = $this->input->post('txtDescSeo'.$lang->code);
                     $seo_keywords = $this->input->post('txtKeywordSeo'.$lang->code);
-
+                    $campaign_id = $this->input->post("ddlCampaign");
                     $post = new Post();
                     if($post->where('id', $l_id)->count()>0)
                     {
@@ -286,7 +290,7 @@ class Pages extends MX_Controller
                     $post->post_status = $post_status;
                     $post->language_id = $lang->id;
                     $post->root_lang = $root;
-                    
+                    $post->campaign_id = $campaign_id;
                     //add term_taxonomy_post
                     $arrTag = explode(',',$lstTag);            
                     $countTag = count($arrTag);
@@ -375,6 +379,10 @@ class Pages extends MX_Controller
             redirect('administrator/pages');
         }   
         else {
+            $campaign = new Campaign();
+            $lstCampaign = $campaign->get();
+            $data['lstCampaign'] = $lstCampaign;
+            
             $post = new Post();
         
             $post->get_by_id($id);            

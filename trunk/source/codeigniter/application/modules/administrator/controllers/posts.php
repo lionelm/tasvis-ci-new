@@ -148,6 +148,8 @@ class Posts extends MX_Controller
                     $slug = $this->Common_model->makeSlugs($l_title,255);
                     $slug = $this->generateSlug($slug);
 
+                    $campaign_id = $this->input->post("ddlCampaign");
+                    
                     $post = new Post();
                     $post->post_date = date('Y-m-d H:i:s');
                     $post->post_date_gmt = $date_publish;
@@ -159,7 +161,8 @@ class Posts extends MX_Controller
                     $post->guid = $slug;
                     $post->language_id = $lang->id;
                     $post->root_lang = $root;
-
+                    $post->campaign_id = $campaign_id;
+                    
                     //add term_taxonomy_post
                     $arrTag = explode(',',$lstTag);            
                     $countTag = count($arrTag);
@@ -207,8 +210,9 @@ class Posts extends MX_Controller
             }
             redirect('administrator/posts');
         }else{
-            
-            
+            $campaign = new Campaign();
+            $lstCampaign = $campaign->get();
+            $data['lstCampaign'] = $lstCampaign;
             $data['lstLang'] = $language;
             $data['term_option'] = $this->Category_model->get_categories(0,5,0,$this->Category_model->get_count_category(0,5) );
             $data['lstTag'] = $this->Tag_model->ListPopularTag(20);
@@ -294,7 +298,7 @@ class Posts extends MX_Controller
                     $seo_title = $this->input->post('txtTitleSeo'.$lang->code);
                     $seo_desc = $this->input->post('txtDescSeo'.$lang->code);
                     $seo_keywords = $this->input->post('txtKeywordSeo'.$lang->code);
-            
+                    $campaign_id = $this->input->post("ddlCampaign");
                     $post = new Post();
                     if($post->where('id', $l_id)->count()>0)
                     {
@@ -320,6 +324,7 @@ class Posts extends MX_Controller
                     $post->post_status = $post_status;
                     $post->language_id = $lang->id;
                     $post->root_lang = $root;
+                    $post->campaign_id = $campaign_id;
                     //add term_taxonomy_post
                     $arrTag = explode(',',$lstTag);            
                     $countTag = count($arrTag);
@@ -404,6 +409,9 @@ class Posts extends MX_Controller
             redirect('administrator/posts');
         }        
         else {
+            $campaign = new Campaign();
+            $lstCampaign = $campaign->get();
+            $data['lstCampaign'] = $lstCampaign;
             $post = new Post();
         
             $post->get_by_id($id);            
