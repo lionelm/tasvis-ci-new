@@ -29,26 +29,27 @@ class Home extends MX_Controller
         
         
         //get theme
-        $option = new Option();
-        $option->where('option_name','template')->get();
-        $theme = $option->option_value;       
-
-        
-        if(get_file_info('application/views/front_end/'.$theme.'/home_index.php'))
-        {
-            $data['view'] = "front_end/".$theme."/home_index";
-        }
-        else {
-            $data['view'] = "front_end/base/home_index";
-        }
-
-        if(get_file_info('application/views/front_end/'.$theme.'/template.php'))
-        {            
-            $this->load->view('front_end/'.$theme.'/template',$data);
-        }
-        else {
-            $this->load->view('front_end/base/template');
-        }
+        //$option = new Option();
+//        $option->where('option_name','template')->get();
+//        $theme = 'thucung';       
+//
+//        
+//        if(get_file_info('application/views/front_end/'.$theme.'/home_index.php'))
+//        {
+//            $data['view'] = "front_end/".$theme."/home_index";
+//        }
+//        else {
+//            $data['view'] = "front_end/base/home_index";
+//        }
+//
+//        if(get_file_info('application/views/front_end/'.$theme.'/template.php'))
+//        {            
+//            $this->load->view('front_end/'.$theme.'/template',$data);
+//        }
+//        else {
+//            $this->load->view('front_end/base/template');
+//        }
+        $this->common->load_template('home_index');
     }
 }
 ?>
