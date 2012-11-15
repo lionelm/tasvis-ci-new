@@ -9,8 +9,7 @@
     <div class="one_half menu_add_new">
         <h2><?php  echo $name_main_menu;?></h2>
         <br />
-        <?php if (count($child_menu)>0)  foreach ($child_menu as $menu) {
-            
+        <?php if (count($child_menu)>0)  foreach ($child_menu as $menu) {            
             if ($menu->type == 'custom'){
         ?>                    	                              
     	<div class="widgetbox" id="menu_item_<?php echo $menu->id; ?>" >
@@ -40,16 +39,17 @@
                             <?php 
                                 foreach ($parent_option as $term)
                                 {
-                                    if($term->id != $menu->id){
+                                    if($term->id != $menu->id)
+                                    {
                             ?>
-                            <option value="<?php echo $term->id;?>"><?php echo $term->label_display;?></option>
-                            <?php } else
-                                {?>
+                                    <option value="<?php echo $term->id;?>"><?php echo $term->label_display;?></option>
+                            <?php   } else
+                                    {
+                            ?>
                                     <option value="<?php echo $menu->parent;?>"><?php echo $term->label_display;?></option>
-                                <?php }
-                            
-                            
-                            }?>                    
+                            <?php   }                                                        
+                                }
+                            ?>                    
                         </select>
                     </p>
                     <p>
@@ -72,10 +72,8 @@
                         <button id="btn_delete_menu" value="<?php echo $menu->id; ?>" class="stdbtn btn_red">Delete</button>
                         
                     </p>
-                </div><!--widgetcontent-->
-                                
+                </div><!--widgetcontent-->                                
             </form>
-
         </div><!--widgetbox-->
         <?php } elseif ($menu->type == 'page'){?>
         <div class="widgetbox" id="menu_item_<?php echo $menu->id; ?>">
@@ -150,8 +148,7 @@
                 <span><?php echo $menu->label_display; ?>
             	   <input type="text" name="order" class="order_menu" size="1" value="<?php echo $menu->order; ?>"/>                    
                 </span>
-                </h2>
-                
+                </h2>                
             </div>
             <div class="widgetcontent menu_detail">
                <p>
@@ -167,9 +164,6 @@
                             echo $temp_cat->name; 
                         ?></b>
                     </label>
-                    
-                        
-                                     
                 </p>   
                 <p>
                 	<label>Label:</label>
@@ -189,14 +183,15 @@
                                     if($term->id != $menu->id)
                                     {
                             ?>
-                            <option value="<?php echo $term->id;?>"><?php echo $term->label_display;?></option>
-                            <?php   }
-                                else
-                                    {?>
-                                        <option value="<?php echo $menu->parent;?>"><?php echo $term->label_display;?></option>
-                                    <?php 
+                                    <option value="<?php echo $term->id;?>"><?php echo $term->label_display;?></option>
+                            <?php   } else
+                                    {
+                            ?>
+                                    <option value="<?php echo $menu->parent;?>"><?php echo $term->label_display;?></option>
+                            <?php 
                                     }
-                            }?>                    
+                                }
+                            ?>                    
                         </select>
                     </p>
                 <p>
@@ -218,8 +213,7 @@
                         <input type="reset" class="reset radius2" value="Reset" />
                         <button id="btn_delete_menu" value="<?php echo $menu->id; ?>" class="stdbtn btn_red">Delete</button>
                     </p>
-                </div><!--widgetcontent-->
-                                
+                </div><!--widgetcontent-->                                
             </form>
         </div><!--widgetbox-->
             <?php } ?>
