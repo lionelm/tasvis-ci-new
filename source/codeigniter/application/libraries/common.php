@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Common extends MX_Controller{        
-    function load_template($view = '')
+    function load_template($view = '',$data)
     {          	
         $option = new Option();
         $option->where('option_name','template')->get();
